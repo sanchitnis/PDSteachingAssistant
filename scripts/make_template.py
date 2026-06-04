@@ -97,8 +97,8 @@ def main() -> None:
  * CONSTRAINTS:
 {constraints}
  *
- * HELP:  ./scripts/help.sh {filename}
- * GRADE: ./scripts/grade.sh {filename}
+ * HELP:  Run VS Code Task "REVA: Get Help" to prepare context
+ * GRADE: Run VS Code Task "REVA: Grade My Code" to check correctness
  * ============================================================
  */
 

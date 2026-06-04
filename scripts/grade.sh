@@ -52,10 +52,16 @@ if [ -f /tmp/reva_tutor_bin ]; then
             FAIL_COUNT=$((FAIL_COUNT + 1))
         fi
     done < <(
-        # Search library.json first, then lab_programs.json as fallback
+        # Search practice, prerequisites, advanced, and lab programs
         jq -c --arg eid "$EXERCISE_ID" \
             '.topics[$eid | split("_")[0]].exercises[] | select(.id == $eid) | .test_cases[]' \
-            "$PROJECT_ROOT/exercises/library.json" 2>/dev/null \
+            "$PROJECT_ROOT/exercises/practice.json" 2>/dev/null \
+        || jq -c --arg eid "$EXERCISE_ID" \
+            '.topics[$eid | split("_")[0]].exercises[] | select(.id == $eid) | .test_cases[]' \
+            "$PROJECT_ROOT/exercises/prerequisites.json" 2>/dev/null \
+        || jq -c --arg eid "$EXERCISE_ID" \
+            '.topics[$eid | split("_")[0]].exercises[] | select(.id == $eid) | .test_cases[]' \
+            "$PROJECT_ROOT/exercises/advanced.json" 2>/dev/null \
         || jq -c --arg eid "$EXERCISE_ID" \
             '.topics[$eid | split("_")[0]].exercises[] | select(.id == $eid) | .test_cases[]' \
             "$PROJECT_ROOT/exercises/lab_programs.json" 2>/dev/null
@@ -65,19 +71,23 @@ else
     TEST_RESULTS_LINES+=("  (binary not available — compile failed)")
 fi
 
-# ── Print grade context block ─────────────────────────────────────────────────
-printf '%s\n'  "---REVA-TUTOR-GRADE-CONTEXT---"
-printf 'student_id:    %s\n' "$STUDENT_ID"
-printf 'exercise_id:   %s\n' "$EXERCISE_ID"
-printf '%s\n' "$COMPILE_OUT"
-printf '%s\n' "$STYLE_OUT"
-printf 'test_results: |\n'
-for line in "${TEST_RESULTS_LINES[@]}"; do
-    printf '%s\n' "$line"
-done
-printf 'student_code: |\n'
-sed 's/^/  /' "$FILE"
-printf '%s\n'  "---END-REVA-TUTOR-GRADE-CONTEXT---"
+# ── Save grade context block to student_data/grade_context.txt ─────────────────
+CONTEXT_FILE="$PROJECT_ROOT/student_data/grade_context.txt"
+{
+  printf '%s\n'  "---REVA-TUTOR-GRADE-CONTEXT---"
+  printf 'student_id:    %s\n' "$STUDENT_ID"
+  printf 'exercise_id:   %s\n' "$EXERCISE_ID"
+  printf '%s\n' "$COMPILE_OUT"
+  printf '%s\n' "$STYLE_OUT"
+  printf 'test_results: |\n'
+  for line in "${TEST_RESULTS_LINES[@]}"; do
+      printf '%s\n' "$line"
+  done
+  printf 'student_code: |\n'
+  sed 's/^/  /' "$FILE"
+  printf '%s\n'  "---END-REVA-TUTOR-GRADE-CONTEXT---"
+} > "$CONTEXT_FILE"
 
 echo ""
-echo "✅ Grade context ready. Paste the above into your Claude/agent chat."
+echo "✅ Grade context successfully saved to: student_data/grade_context.txt"
+echo "👉 In the agent/chat window, attach this file (type '@grade_context.txt' or click '+') and ask the agent to grade your code!"

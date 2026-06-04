@@ -618,42 +618,46 @@ All exercises are graded out of **10 marks**:
 ### 12.1 Full Workflow
 
 ```
-Student                   Scripts                   Agent (LLM)
+Student                   VS Code Task Runner         Agent (LLM)
   |                          |                           |
-  | ./scripts/next.sh sid    |                           |
+  | Run: REVA: Next Exercise |                           |
   |------------------------->|                           |
   |                          | Read progress/sid.json    |
   |                          | Select exercise_id        |
-  |                          | Create TOPIC_Ln_v_sid.c   |
-  |<-------------------------|  (template with problem   |
-  |  Exercise file created   |   in comments)            |
+  |                          | Create exercise file      |
+  |<-------------------------|  in student_data/         |
+  |  Exercise file created   |                           |
   |                          |                           |
-  | [Student writes code in VS Code]                     |
+  | [Student writes code in active editor]               |
   |                          |                           |
-  | ./scripts/help.sh file   |                           |
+  | Run: REVA: Get Help      |                           |
   |------------------------->|                           |
   |                          | compile_check.sh          |
   |                          | check_style.sh            |
   |                          | Build context block       |
-  |                          | Print context block       |
+  |                          | Write to help_context.txt |
   |<-------------------------|                           |
-  | [Student pastes context  |                           |
-  |  into agent chat]        |                           |
+  | [Student attaches        |                           |
+  |  help_context.txt]       |                           |
+  |----------------------------------------------------->|
   |                          |                    Route via SKILL.md
   |                          |                    Load help_agent.md
   |                          |                    Apply Socratic protocol
   |<----------------------------------------------------|
   | Socratic questions        |                           |
-  | [Student reflects, edits, calls help again]          |
+  | [Student reflects, edits, calls task again]          |
   |                           |                          |
-  | ./scripts/grade.sh file   |                          |
+  | Run: REVA: Grade My Code  |                          |
   |-------------------------->|                          |
   |                           | compile_check.sh         |
   |                           | check_style.sh           |
   |                           | run test_cases           |
   |                           | Build grade context      |
+  |                           | Write grade_context.txt  |
   |<--------------------------|                          |
-  | [Paste grade context]     |                          |
+  | [Student attaches         |                          |
+  |  grade_context.txt]       |                          |
+  |----------------------------------------------------->|
   |                           |                 Route via SKILL.md
   |                           |                 Load grade_agent.md
   |                           |                 Apply rubric (§11)
@@ -681,7 +685,7 @@ The `.c` file created by `next.sh` contains this structure in its comment header
 | Sample Output | Expected output for example |
 | Constraints | Rules the solution must follow |
 | Function Prototypes | Required signatures (for lab programs) |
-| Help / Grade commands | `./scripts/help.sh <filename>` and `./scripts/grade.sh <filename>` |
+| Help / Grade instructions | Run VS Code tasks **`REVA: Get Help`** and **`REVA: Grade My Code`** |
 
 The body of the file contains only a minimal `#include <stdio.h>` and an empty `main()` with a `/* Your code here */` comment.
 

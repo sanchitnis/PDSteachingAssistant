@@ -49,7 +49,13 @@ STYLE_OUT=$(bash "$SCRIPT_DIR/check_style.sh" "$FILE")
 # ── Load problem statement from library ───────────────────────────────────────
 PROBLEM=$(jq -r --arg eid "$EXERCISE_ID" \
     '.topics[$eid | split("_")[0]].exercises[] | select(.id == $eid) | .problem_statement' \
-    "$PROJECT_ROOT/exercises/library.json" 2>/dev/null \
+    "$PROJECT_ROOT/exercises/practice.json" 2>/dev/null \
+  || jq -r --arg eid "$EXERCISE_ID" \
+    '.topics[$eid | split("_")[0]].exercises[] | select(.id == $eid) | .problem_statement' \
+    "$PROJECT_ROOT/exercises/prerequisites.json" 2>/dev/null \
+  || jq -r --arg eid "$EXERCISE_ID" \
+    '.topics[$eid | split("_")[0]].exercises[] | select(.id == $eid) | .problem_statement' \
+    "$PROJECT_ROOT/exercises/advanced.json" 2>/dev/null \
   || jq -r --arg eid "$EXERCISE_ID" \
     '.topics[$eid | split("_")[0]].exercises[] | select(.id == $eid) | .problem_statement' \
     "$PROJECT_ROOT/exercises/lab_programs.json" 2>/dev/null \
@@ -60,20 +66,24 @@ ASSIGNED_LEVEL=$(jq -r --arg t "$TOPIC" \
     '.topics[$t].assigned_level // "?"' \
     "$PROGRESS_FILE")
 
-# ── Print context block ───────────────────────────────────────────────────────
-printf '%s\n'   "---REVA-TUTOR-CONTEXT---"
-printf 'student_id:        %s\n' "$STUDENT_ID"
-printf 'exercise_id:       %s\n' "$EXERCISE_ID"
-printf 'assigned_level:    %s\n' "$ASSIGNED_LEVEL"
-printf 'help_request_n:    %s\n' "$HELP_N"
-printf '%s\n' "$COMPILE_OUT"
-printf '%s\n' "$STYLE_OUT"
-printf 'student_code: |\n'
-sed 's/^/  /' "$FILE"
-printf 'problem_statement: |\n'
-echo "$PROBLEM" | sed 's/^/  /'
-printf '%s\n'   "---END-REVA-TUTOR-CONTEXT---"
+# ── Save context block to student_data/help_context.txt ────────────────────────
+CONTEXT_FILE="$PROJECT_ROOT/student_data/help_context.txt"
+{
+  printf '%s\n'   "---REVA-TUTOR-CONTEXT---"
+  printf 'student_id:        %s\n' "$STUDENT_ID"
+  printf 'exercise_id:       %s\n' "$EXERCISE_ID"
+  printf 'assigned_level:    %s\n' "$ASSIGNED_LEVEL"
+  printf 'help_request_n:    %s\n' "$HELP_N"
+  printf '%s\n' "$COMPILE_OUT"
+  printf '%s\n' "$STYLE_OUT"
+  printf 'student_code: |\n'
+  sed 's/^/  /' "$FILE"
+  printf 'problem_statement: |\n'
+  echo "$PROBLEM" | sed 's/^/  /'
+  printf '%s\n'   "---END-REVA-TUTOR-CONTEXT---"
+} > "$CONTEXT_FILE"
 
 echo ""
-echo "✅ Context block ready. Paste the above into your Claude/agent chat."
+echo "✅ Help context successfully saved to: student_data/help_context.txt"
+echo "👉 In the agent/chat window, attach this file (type '@help_context.txt' or click '+') and ask the agent for help!"
 echo "   Help request #${HELP_N} for ${EXERCISE_ID}"

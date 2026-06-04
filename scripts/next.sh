@@ -17,7 +17,7 @@ if [ -z "$STUDENT_ID" ]; then
 fi
 
 PROGRESS_FILE="$PROJECT_ROOT/student_data/progress/${STUDENT_ID}.json"
-LIBRARY_FILE="$PROJECT_ROOT/exercises/library.json"
+LIBRARY_FILE="$PROJECT_ROOT/exercises/practice.json"
 
 if [ ! -f "$PROGRESS_FILE" ]; then
     echo "ERROR: No progress file for '$STUDENT_ID'."
@@ -92,7 +92,7 @@ fi
 
 # ── Create the exercise file from template ────────────────────────────────────
 FILENAME="${TOPIC}_L${LEVEL}_${VARIANT}_${STUDENT_ID}.c"
-FILEPATH="$PROJECT_ROOT/$FILENAME"
+FILEPATH="$PROJECT_ROOT/student_data/$FILENAME"
 
 jq -r --arg eid "$EXERCISE_ID" \
     '.topics[$eid | split("_")[0]].exercises[] | select(.id == $eid) | .problem_statement' \
@@ -101,8 +101,7 @@ jq -r --arg eid "$EXERCISE_ID" \
 
 echo ""
 echo "📝 Exercise assigned: $EXERCISE_ID"
-echo "   File created:      $FILENAME"
-echo "   Open in VS Code:   code $FILENAME"
+echo "   File created:      student_data/$FILENAME"
+echo "   Open in VS Code:   code student_data/$FILENAME"
 echo ""
-echo "When ready for help:  ./scripts/help.sh $FILENAME"
-echo "When ready to grade:  ./scripts/grade.sh $FILENAME"
+echo "Use the VS Code Tasks runner (REVA: Get Help / REVA: Grade My Code) to get support."

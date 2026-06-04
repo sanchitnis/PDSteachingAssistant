@@ -58,35 +58,12 @@ reva-c-tutor/
 
 ## Quick Start (Students)
 
-See **`docs/how_to_use.md`** for the full guide. Short version:
+See **`docs/how_to_use.md`** for the full guide. The recommended workflow is:
 
-```bash
-# 1. Install tools (Ubuntu/WSL)
-sudo apt install gcc cppcheck jq python3
-chmod +x scripts/*.sh
-
-# 2. Register yourself
-./scripts/init_student.sh raj22cs045 "Raj Kumar" "BTech-CS-2B"
-
-# 3. Get your first exercise
-./scripts/next.sh raj22cs045
-# → creates INTRO_L1_a_raj22cs045.c
-
-# 4. Write your solution, then get help
-./scripts/help.sh INTRO_L1_a_raj22cs045.c
-# → paste the output into Claude chat
-
-# 5. Submit for grading
-./scripts/grade.sh INTRO_L1_a_raj22cs045.c
-# → paste the output into Claude chat
-```
-
----
-
-## Agent Architecture
-
-```
-Student pastes context block
+1. **Register Yourself** (once): Run VS Code task **`REVA: Register Student`** and follow the prompts.
+2. **Get Exercise**: Run VS Code task **`REVA: Next Exercise`** and input your Student ID. This creates your exercise file under `student_data/` (e.g. `student_data/INTRO_L1_a_raj22cs045.c`).
+3. **Get Help**: Open your active exercise `.c` file and run VS Code task **`REVA: Get Help`**. In your agent chat, attach the file `student_data/help_context.txt` (type `@help_context.txt` or click `+`) and ask for support.
+4. **Submit for Grading**: Run VS Code task **`REVA: Grade My Code`** with the exercise file open. Attach the generated file `student_data/grade_context.txt` in your chat and ask the agent to grade your code.
           │
           ▼
     SKILL.md (router)
