@@ -1,0 +1,19 @@
+# ── Student data (mutable at runtime — git-ignored) ───────────────────────────
+
+# Student progress files — contain personal data
+student_data/progress/*.json
+
+# Session logs — per-student, large
+student_data/sessions/*/
+
+# ── Compiled binaries and temp files ──────────────────────────────────────────
+*.o
+a.out
+
+# Student exercise files (committed only if faculty review is needed)
+# Uncomment to track student files:
+# *_L[0-9]_[a-z]_*.c
+
+# ── OS files ───────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db

@@ -1,0 +1,79 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "REVA: Get Help",
+      "type": "shell",
+      "command": "bash",
+      "args": ["scripts/help.sh", "${file}"],
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "REVA: Grade My Code",
+      "type": "shell",
+      "command": "bash",
+      "args": ["scripts/grade.sh", "${file}"],
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "REVA: Next Exercise",
+      "type": "shell",
+      "command": "bash",
+      "args": ["scripts/next.sh", "${input:studentId}"],
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "REVA: Register Student",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "scripts/init_student.sh",
+        "${input:studentId}",
+        "${input:studentName}",
+        "${input:studentSection}"
+      ],
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "clear": true
+      },
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "studentId",
+      "description": "Your REVA student ID (e.g. raj22cs045)",
+      "type": "promptString"
+    },
+    {
+      "id": "studentName",
+      "description": "Your full name (e.g. Raj Kumar)",
+      "type": "promptString"
+    },
+    {
+      "id": "studentSection",
+      "description": "Your section (e.g. BTech-CS-2B)",
+      "type": "promptString"
+    }
+  ]
+}

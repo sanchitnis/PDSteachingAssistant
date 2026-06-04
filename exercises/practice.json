@@ -1,0 +1,1863 @@
+{
+  "schema_version": "1.2",
+  "file_type": "practice",
+  "last_updated": "2026-06-04",
+  "description": "Extra practice exercises aligned to the ACP syllabus COs (CO1-CO5). Same schema as lab_programs.json. Use these for additional reinforcement after completing the mandatory lab programs.",
+  "institution": "REVA University",
+  "department": "School of Computer Science and Engineering",
+  "course": "Advanced C Programming with Generative AI",
+  "co_descriptions": {
+    "CO1": "Develop modular and reusable code using functions (call by value and call by reference), arrays and structures.",
+    "CO2": "Apply modular programming to manage complex data collections using Arrays of Structures.",
+    "CO3": "Develop modular and reusable code using pointers and dynamic memory allocation.",
+    "CO4": "Develop modular and reusable code utilizing Strings by implementing user-defined logic for processing text-based data.",
+    "CO5": "Develop a modular application for file handling in C.",
+    "CO6": "Leverage generative AI to design and build a mini-project application."
+  },
+  "topics": {
+    "FUNC": {
+      "name": "Functions",
+      "category": "practice",
+      "acp_unit": 1,
+      "syllabus_unit": 10,
+      "co_mapping": [
+        "CO1"
+      ],
+      "description": "ACP Unit 1 — Function definition, prototypes, call by value, call by reference, scope. Additional practice beyond the lab programs.",
+      "exercises": [
+        {
+          "id": "FUNC_L1_a",
+          "level": 1,
+          "variant": "a",
+          "category": "practice",
+          "co_mapping": [
+            "CO1"
+          ],
+          "title": "Factorial using a function (iterative)",
+          "concept_under_test": "function definition, return value, function call, call by value",
+          "prerequisite_topics": [
+            "LOOP"
+          ],
+          "function_prototypes": [
+            "long long factorial(int n);"
+          ],
+          "problem_statement": "Write a function long long factorial(int n) that returns n! (0 <= n <= 20) using a loop. Call it from main for a user-supplied n.",
+          "sample_input": "5",
+          "sample_output": "120",
+          "test_cases": [
+            {
+              "label": "5!",
+              "input": "5",
+              "expected_output": "120"
+            },
+            {
+              "label": "0!",
+              "input": "0",
+              "expected_output": "1"
+            },
+            {
+              "label": "1!",
+              "input": "1",
+              "expected_output": "1"
+            },
+            {
+              "label": "10!",
+              "input": "10",
+              "expected_output": "3628800"
+            },
+            {
+              "label": "20!",
+              "input": "20",
+              "expected_output": "2432902008176640000"
+            }
+          ],
+          "constraints": [
+            "No recursion for this exercise",
+            "Use a loop inside the function",
+            "Return type must be long long"
+          ],
+          "forbidden_patterns": [
+            "recursion"
+          ],
+          "mental_model_checkpoints": [
+            "Can state where the function's return value goes when called",
+            "Can trace the function execution for n=0"
+          ],
+          "common_mistakes": [
+            {
+              "mistake": "Returns int instead of long long — overflow for n >= 13",
+              "socratic_probe": "What is 13! as a number? What is the maximum value an int can hold on a 32-bit system?"
+            }
+          ],
+          "style_requirements": [
+            "Function comment block required"
+          ],
+          "grading_notes": "Return type is a common mistake. 0! = 1 edge case must be handled.",
+          "estimated_time_minutes": 20,
+          "tags": [
+            "functions",
+            "CO1",
+            "syllabus",
+            "Level1"
+          ]
+        },
+        {
+          "id": "FUNC_L1_b",
+          "level": 1,
+          "variant": "b",
+          "category": "practice",
+          "co_mapping": [
+            "CO1"
+          ],
+          "title": "Power function (integer exponent)",
+          "concept_under_test": "function definition, return value, loop inside function, call by value",
+          "prerequisite_topics": [
+            "LOOP"
+          ],
+          "function_prototypes": [
+            "long long power(int base, int exp);"
+          ],
+          "problem_statement": "Write a function long long power(int base, int exp) that returns base^exp for exp >= 0. Do not use pow() from math.h.",
+          "sample_input": "2 10",
+          "sample_output": "1024",
+          "test_cases": [
+            {
+              "label": "2^10",
+              "input": "2 10",
+              "expected_output": "1024"
+            },
+            {
+              "label": "5^0",
+              "input": "5 0",
+              "expected_output": "1"
+            },
+            {
+              "label": "3^3",
+              "input": "3 3",
+              "expected_output": "27"
+            },
+            {
+              "label": "1^100",
+              "input": "1 100",
+              "expected_output": "1"
+            }
+          ],
+          "constraints": [
+            "Do not use pow() from math.h",
+            "Handle exp=0 (any base^0 = 1)"
+          ],
+          "forbidden_patterns": [
+            "pow(",
+            "#include <math.h>"
+          ],
+          "mental_model_checkpoints": [
+            "Can state the loop invariant: what is accumulated in result after each iteration",
+            "Can explain why base^0 = 1 and how the loop handles it"
+          ],
+          "common_mistakes": [
+            {
+              "mistake": "Initialises result to 0 instead of 1",
+              "socratic_probe": "What is the identity element for multiplication? If you start your accumulator at 0 and multiply, what will result always be?"
+            }
+          ],
+          "style_requirements": [
+            "Function comment block required"
+          ],
+          "grading_notes": "",
+          "estimated_time_minutes": 20,
+          "tags": [
+            "functions",
+            "CO1",
+            "syllabus",
+            "Level1"
+          ]
+        },
+        {
+          "id": "FUNC_L2_a",
+          "level": 2,
+          "variant": "a",
+          "category": "practice",
+          "co_mapping": [
+            "CO1"
+          ],
+          "title": "GCD and LCM using Euclid's algorithm",
+          "concept_under_test": "function with loop, Euclidean algorithm, call by value",
+          "prerequisite_topics": [
+            "FUNC",
+            "LOOP"
+          ],
+          "function_prototypes": [
+            "int gcd(int a, int b);",
+            "long long lcm(int a, int b);"
+          ],
+          "problem_statement": "Write a function int gcd(int a, int b) that returns the GCD of two positive integers using Euclid's algorithm (iterative, not recursive). Use it to compute and print LCM = (a*b)/gcd(a,b).",
+          "sample_input": "48 18",
+          "sample_output": "GCD: 6\nLCM: 144",
+          "test_cases": [
+            {
+              "label": "48 and 18",
+              "input": "48 18",
+              "expected_output": "GCD: 6\nLCM: 144"
+            },
+            {
+              "label": "prime pair",
+              "input": "7 13",
+              "expected_output": "GCD: 1\nLCM: 91"
+            },
+            {
+              "label": "equal",
+              "input": "12 12",
+              "expected_output": "GCD: 12\nLCM: 12"
+            }
+          ],
+          "constraints": [
+            "Use the iterative version of Euclid's algorithm",
+            "No recursion",
+            "Implement gcd() as a separate function"
+          ],
+          "forbidden_patterns": [
+            "recursion"
+          ],
+          "mental_model_checkpoints": [
+            "Can trace gcd(48, 18) step by step showing remainders",
+            "Can explain why LCM product requires long long for intermediate result"
+          ],
+          "common_mistakes": [
+            {
+              "mistake": "Integer overflow in a*b for large inputs",
+              "socratic_probe": "If a=100000 and b=100000, what is a*b? Can that fit in a regular int?"
+            }
+          ],
+          "style_requirements": [
+            "Function comment block required"
+          ],
+          "grading_notes": "",
+          "estimated_time_minutes": 30,
+          "tags": [
+            "functions",
+            "CO1",
+            "syllabus",
+            "Level2"
+          ]
+        },
+        {
+          "id": "FUNC_L2_b",
+          "level": 2,
+          "variant": "b",
+          "category": "practice",
+          "co_mapping": [
+            "CO1"
+          ],
+          "title": "Call by value vs. call by reference — increment demonstration",
+          "concept_under_test": "call by value, call by reference using pointers, difference in effect on caller",
+          "prerequisite_topics": [
+            "FUNC",
+            "PTR"
+          ],
+          "function_prototypes": [
+            "void increment_by_value(int n);",
+            "void increment_by_reference(int *n);"
+          ],
+          "problem_statement": "Write two functions: increment_by_value(int n) increments n inside the function but the caller's variable is unchanged. increment_by_reference(int *n) increments *n and the caller sees the change. Read an integer x, call both functions, and print x after each call to demonstrate the difference.",
+          "sample_input": "10",
+          "sample_output": "After call by value: 10\nAfter call by reference: 11",
+          "test_cases": [
+            {
+              "label": "x=10",
+              "input": "10",
+              "expected_output": "After call by value: 10\nAfter call by reference: 11"
+            },
+            {
+              "label": "x=0",
+              "input": "0",
+              "expected_output": "After call by value: 0\nAfter call by reference: 1"
+            }
+          ],
+          "constraints": [
+            "increment_by_value must not use pointers",
+            "increment_by_reference must use a pointer parameter",
+            "Print x (not a return value) after each call"
+          ],
+          "forbidden_patterns": [],
+          "mental_model_checkpoints": [
+            "Can draw a memory diagram showing why the by-value call does not modify x in main",
+            "Can explain what &x passes to increment_by_reference"
+          ],
+          "common_mistakes": [
+            {
+              "mistake": "increment_by_value also modifies caller via return value — misses the point",
+              "socratic_probe": "If increment_by_value returns n+1 and main does x = increment_by_value(x), have you demonstrated call by value or call by value with assignment? Are those the same?"
+            }
+          ],
+          "style_requirements": [
+            "Function comment block required for each function"
+          ],
+          "grading_notes": "The printed output must show that x is unchanged after by-value and changed after by-reference.",
+          "estimated_time_minutes": 25,
+          "tags": [
+            "functions",
+            "call-by-value",
+            "call-by-reference",
+            "CO1",
+            "syllabus",
+            "Level2"
+          ]
+        }
+      ]
+    },
+    "SCOPE": {
+      "name": "Scope and Lifetime",
+      "category": "practice",
+      "acp_unit": 1,
+      "syllabus_unit": 11,
+      "co_mapping": [
+        "CO1"
+      ],
+      "description": "ACP Unit 1 — Local vs. global scope, function prototype scope, static variables.",
+      "exercises": [
+        {
+          "id": "SCOPE_L1_a",
+          "level": 1,
+          "variant": "a",
+          "category": "practice",
+          "co_mapping": [
+            "CO1"
+          ],
+          "title": "Demonstrate local vs global scope",
+          "concept_under_test": "local variable, global variable, scope rules",
+          "prerequisite_topics": [
+            "FUNC"
+          ],
+          "problem_statement": "Declare a global int counter. Write a function increment() that increments it by 1 and a function reset() that sets it to 0. Call them from main and print counter after each call to demonstrate scope.",
+          "sample_input": "(none)",
+          "sample_output": "counter = 1\ncounter = 2\ncounter = 0",
+          "test_cases": [
+            {
+              "label": "standard",
+              "input": "",
+              "expected_output": "counter = 1\ncounter = 2\ncounter = 0"
+            }
+          ],
+          "constraints": [
+            "counter must be a global variable",
+            "Do not pass counter as a parameter"
+          ],
+          "forbidden_patterns": [],
+          "mental_model_checkpoints": [
+            "Can explain why counter retains its value between increment() calls",
+            "Can explain the difference between a local and a global variable's lifetime"
+          ],
+          "common_mistakes": [
+            {
+              "mistake": "Declaring counter as local in main — increment() can't see it",
+              "socratic_probe": "Where is counter visible? Can a function see a variable declared inside another function?"
+            }
+          ],
+          "style_requirements": [],
+          "grading_notes": "",
+          "estimated_time_minutes": 20,
+          "tags": [
+            "scope",
+            "global",
+            "CO1",
+            "syllabus",
+            "Level1"
+          ]
+        }
+      ]
+    },
+    "ARRAY": {
+      "name": "Arrays",
+      "category": "practice",
+      "acp_unit": 1,
+      "syllabus_unit": 12,
+      "co_mapping": [
+        "CO1"
+      ],
+      "description": "ACP Unit 1 — Arrays, passing arrays to functions. Additional practice beyond the lab programs.",
+      "exercises": [
+        {
+          "id": "ARRAY_L1_a",
+          "level": 1,
+          "variant": "a",
+          "category": "practice",
+          "co_mapping": [
+            "CO1"
+          ],
+          "title": "Reverse an array in-place",
+          "concept_under_test": "array indexing, in-place swap, loop bounds",
+          "prerequisite_topics": [
+            "LOOP"
+          ],
+          "problem_statement": "Read N integers into an array (N <= 100). Reverse the array in-place (no second array) and print it, space-separated on one line.",
+          "sample_input": "5\n1 2 3 4 5",
+          "sample_output": "5 4 3 2 1",
+          "test_cases": [
+            {
+              "label": "5 elements",
+              "input": "5\n1 2 3 4 5",
+              "expected_output": "5 4 3 2 1"
+            },
+            {
+              "label": "1 element",
+              "input": "1\n42",
+              "expected_output": "42"
+            },
+            {
+              "label": "2 elements",
+              "input": "2\n7 3",
+              "expected_output": "3 7"
+            }
+          ],
+          "constraints": [
+            "No second array",
+            "N <= 100"
+          ],
+          "forbidden_patterns": [
+            "second array",
+            "int temp_arr"
+          ],
+          "mental_model_checkpoints": [
+            "Can state which two indices are swapped in the first iteration",
+            "Can state the correct loop termination condition (why N/2 and not N)"
+          ],
+          "common_mistakes": [
+            {
+              "mistake": "Loop runs to N instead of N/2 — array reversed twice (back to original)",
+              "socratic_probe": "For a 4-element array, how many swaps do you need? Trace your loop — how many times does it actually swap?"
+            }
+          ],
+          "style_requirements": [],
+          "grading_notes": "The N/2 loop bound is the primary teaching point.",
+          "estimated_time_minutes": 20,
+          "tags": [
+            "arrays",
+            "in-place",
+            "swap",
+            "CO1",
+            "syllabus",
+            "Level1"
+          ]
+        },
+        {
+          "id": "ARRAY_L1_b",
+          "level": 1,
+          "variant": "b",
+          "category": "practice",
+          "co_mapping": [
+            "CO1"
+          ],
+          "title": "Linear search in an array",
+          "concept_under_test": "array traversal, linear search, return index vs -1",
+          "prerequisite_topics": [
+            "LOOP"
+          ],
+          "problem_statement": "Read N integers into an array (N <= 100), then read a target value K. Print the index of the first occurrence of K, or -1 if not found.",
+          "sample_input": "5\n3 7 1 9 4\n7",
+          "sample_output": "1",
+          "test_cases": [
+            {
+              "label": "found",
+              "input": "5\n3 7 1 9 4\n7",
+              "expected_output": "1"
+            },
+            {
+              "label": "not found",
+              "input": "4\n1 2 3 4\n9",
+              "expected_output": "-1"
+            },
+            {
+              "label": "first index",
+              "input": "3\n5 5 5\n5",
+              "expected_output": "0"
+            }
+          ],
+          "constraints": [
+            "Stop searching as soon as the target is found",
+            "Return/print -1 if not found"
+          ],
+          "forbidden_patterns": [],
+          "mental_model_checkpoints": [
+            "Can explain why the loop must stop after the first match",
+            "Can state what the function returns if the array is exhausted without a match"
+          ],
+          "common_mistakes": [
+            {
+              "mistake": "Continues searching after finding the target",
+              "socratic_probe": "If you find K at index 2, should you keep looking at index 3? What does 'first occurrence' mean for your loop?"
+            }
+          ],
+          "style_requirements": [],
+          "grading_notes": "",
+          "estimated_time_minutes": 15,
+          "tags": [
+            "arrays",
+            "search",
+            "CO1",
+            "syllabus",
+            "Level1"
+          ]
+        },
+        {
+          "id": "ARRAY_L2_a",
+          "level": 2,
+          "variant": "a",
+          "category": "practice",
+          "co_mapping": [
+            "CO1"
+          ],
+          "title": "Bubble sort",
+          "concept_under_test": "nested loops, comparison-based sorting, early termination",
+          "prerequisite_topics": [
+            "ARRAY"
+          ],
+          "problem_statement": "Read N integers (N <= 20). Sort them in ascending order using bubble sort and print the sorted array.",
+          "sample_input": "5\n64 34 25 12 22",
+          "sample_output": "12 22 25 34 64",
+          "test_cases": [
+            {
+              "label": "unsorted 5",
+              "input": "5\n64 34 25 12 22",
+              "expected_output": "12 22 25 34 64"
+            },
+            {
+              "label": "already sorted",
+              "input": "4\n1 2 3 4",
+              "expected_output": "1 2 3 4"
+            },
+            {
+              "label": "reverse",
+              "input": "3\n3 2 1",
+              "expected_output": "1 2 3"
+            }
+          ],
+          "constraints": [
+            "Implement bubble sort (not a library sort)",
+            "Add early termination when no swaps occur in a pass"
+          ],
+          "forbidden_patterns": [
+            "qsort",
+            "sort("
+          ],
+          "mental_model_checkpoints": [
+            "Can trace one full pass of bubble sort on [5,3,1] showing each comparison and swap",
+            "Can explain why the inner loop bound decreases by 1 after each outer pass"
+          ],
+          "common_mistakes": [
+            {
+              "mistake": "Inner loop bound does not shrink — does redundant comparisons on already-sorted tail",
+              "socratic_probe": "After the first pass of bubble sort, what is guaranteed about the last element? Does it need to be compared again in the second pass?"
+            }
+          ],
+          "style_requirements": [],
+          "grading_notes": "Early termination flag required for full efficiency marks.",
+          "estimated_time_minutes": 35,
+          "tags": [
+            "arrays",
+            "sorting",
+            "nested-loops",
+            "CO1",
+            "syllabus",
+            "Level2"
+          ]
+        }
+      ]
+    },
+    "STRUCT": {
+      "name": "Structures",
+      "category": "practice",
+      "acp_unit": 2,
+      "syllabus_unit": 20,
+      "co_mapping": [
+        "CO1",
+        "CO2"
+      ],
+      "description": "ACP Unit 2 — struct definition, typedef, member access, struct as function parameter.",
+      "exercises": [
+        {
+          "id": "STRUCT_L1_a",
+          "level": 1,
+          "variant": "a",
+          "category": "practice",
+          "co_mapping": [
+            "CO1",
+            "CO2"
+          ],
+          "title": "Student record with struct — find top student",
+          "concept_under_test": "struct definition, member access with dot operator, struct passed to function",
+          "prerequisite_topics": [
+            "ARRAY",
+            "STRING"
+          ],
+          "function_prototypes": [
+            "void input(Student students[], int n);",
+            "int find_top(Student students[], int n);",
+            "void output(Student students[], int top_idx);"
+          ],
+          "problem_statement": "Define a struct Student with fields: char name[50], int roll_no, float gpa. Read 3 students. Print the name and GPA of the student with the highest GPA.",
+          "sample_input": "Alice 101 8.5\nBob 102 9.1\nCarol 103 7.8",
+          "sample_output": "Top student: Bob (GPA: 9.10)",
+          "test_cases": [
+            {
+              "label": "standard 3 students",
+              "input": "Alice 101 8.5\nBob 102 9.1\nCarol 103 7.8",
+              "expected_output": "Top student: Bob (GPA: 9.10)"
+            },
+            {
+              "label": "tie (first wins)",
+              "input": "A 1 9.0\nB 2 9.0\nC 3 8.0",
+              "expected_output": "Top student: A (GPA: 9.00)"
+            }
+          ],
+          "constraints": [
+            "Use an array of struct Student",
+            "Do not use dynamic memory"
+          ],
+          "forbidden_patterns": [
+            "malloc"
+          ],
+          "mental_model_checkpoints": [
+            "Can state how to access the name field of students[1]",
+            "Can explain the difference between students[i].gpa and students->gpa"
+          ],
+          "common_mistakes": [
+            {
+              "mistake": "Uses -> instead of . for non-pointer struct",
+              "socratic_probe": "Is students[i] a pointer to a struct or a struct value? When do you use . vs ->?"
+            }
+          ],
+          "style_requirements": [],
+          "grading_notes": "",
+          "estimated_time_minutes": 35,
+          "tags": [
+            "structs",
+            "CO1",
+            "CO2",
+            "syllabus",
+            "Level1"
+          ]
+        }
+      ]
+    },
+    "ARRAYSTRUCT": {
+      "name": "Array of Structures",
+      "category": "practice",
+      "acp_unit": 2,
+      "syllabus_unit": 21,
+      "co_mapping": [
+        "CO2"
+      ],
+      "description": "ACP Unit 2 — Passing arrays of structures to functions. Additional practice beyond the mandatory lab programs.",
+      "exercises": [
+        {
+          "id": "ARRAYSTRUCT_L1_a",
+          "level": 1,
+          "variant": "a",
+          "category": "practice",
+          "co_mapping": [
+            "CO2"
+          ],
+          "title": "Employee salary records — average and highest paid",
+          "concept_under_test": "array of structures, passing to functions, averaging over struct field",
+          "prerequisite_topics": [
+            "STRUCT",
+            "ARRAY",
+            "FUNC"
+          ],
+          "function_prototypes": [
+            "void readEmployees(int n, Employee emp[]);",
+            "float averageSalary(int n, Employee emp[]);",
+            "int highestPaidIndex(int n, Employee emp[]);",
+            "void printSummary(int n, Employee emp[], float avg, int hi);"
+          ],
+          "problem_statement": "Define:\n\ntypedef struct {\n    char name[50];\n    int emp_id;\n    float salary;\n} Employee;\n\nRead n employees. Compute and print the average salary and the name of the highest-paid employee.",
+          "sample_input": "3\nAlice 101 55000\nBob 102 72000\nCarol 103 61000",
+          "sample_output": "Average salary: 62666.67\nHighest paid: Bob (72000.00)",
+          "test_cases": [
+            {
+              "label": "3 employees",
+              "input": "3\nAlice 101 55000\nBob 102 72000\nCarol 103 61000",
+              "expected_output": "Average salary: 62666.67\nHighest paid: Bob (72000.00)"
+            },
+            {
+              "label": "single",
+              "input": "1\nRaj 999 50000",
+              "expected_output": "Average salary: 50000.00\nHighest paid: Raj (50000.00)"
+            }
+          ],
+          "constraints": [
+            "n must be read from user (not hardcoded)",
+            "Use separate functions for each operation",
+            "averageSalary() must return float, not print"
+          ],
+          "forbidden_patterns": [
+            "global array",
+            "hardcoded n"
+          ],
+          "mental_model_checkpoints": [
+            "Can state how to access emp[i].salary inside a function",
+            "Can explain why averageSalary returns a float rather than printing directly"
+          ],
+          "common_mistakes": [
+            {
+              "mistake": "Integer division when computing average — float truncated",
+              "socratic_probe": "If total_salary is a float and n is int, what type does total_salary / n produce? How can you ensure float division?"
+            }
+          ],
+          "style_requirements": [
+            "Function comment block required"
+          ],
+          "grading_notes": "",
+          "estimated_time_minutes": 45,
+          "tags": [
+            "array-of-structs",
+            "functions",
+            "CO2",
+            "syllabus",
+            "Level1"
+          ]
+        },
+        {
+          "id": "ARRAYSTRUCT_L2_a",
+          "level": 2,
+          "variant": "a",
+          "category": "practice",
+          "co_mapping": [
+            "CO2"
+          ],
+          "title": "Inventory management — search, sort, display",
+          "concept_under_test": "array of structures, search by field, sort by field, modular design",
+          "prerequisite_topics": [
+            "ARRAYSTRUCT",
+            "STRING"
+          ],
+          "function_prototypes": [
+            "void readInventory(int n, Product products[]);",
+            "int searchByName(int n, Product products[], char name[]);",
+            "void sortByPrice(int n, Product products[]);",
+            "void printInventory(int n, Product products[]);"
+          ],
+          "problem_statement": "Define:\n\ntypedef struct {\n    char name[50];\n    int quantity;\n    float price;\n} Product;\n\nRead n products. Implement: search by product name (print details if found, 'Not found' otherwise), sort by price (ascending) using bubble sort on structs, and display the sorted list.",
+          "sample_input": "3\nApple 100 0.50\nBanana 50 0.30\nCherry 200 1.20\nBanana",
+          "sample_output": "Found: Banana, Qty: 50, Price: 0.30\nSorted inventory:\nBanana 50 0.30\nApple 100 0.50\nCherry 200 1.20",
+          "test_cases": [
+            {
+              "label": "found and sorted",
+              "input": "3\nApple 100 0.50\nBanana 50 0.30\nCherry 200 1.20\nBanana",
+              "expected_output": "Found: Banana, Qty: 50, Price: 0.30\nSorted inventory:\nBanana 50 0.30\nApple 100 0.50\nCherry 200 1.20"
+            },
+            {
+              "label": "not found",
+              "input": "2\nRice 10 50.00\nWheat 20 40.00\nMaize",
+              "expected_output": "Not found: Maize\nSorted inventory:\nWheat 20 40.00\nRice 10 50.00"
+            }
+          ],
+          "constraints": [
+            "Use strcmp() for name comparison",
+            "Sort must swap entire struct, not just one field",
+            "All operations in separate functions"
+          ],
+          "forbidden_patterns": [
+            "qsort",
+            "global array"
+          ],
+          "mental_model_checkpoints": [
+            "Can explain why swapping entire structs (temp = products[i]; products[i] = products[j]; ...) is needed for sort",
+            "Can state what strcmp returns for equal vs. different strings"
+          ],
+          "common_mistakes": [
+            {
+              "mistake": "Sorts only one field (e.g., price) but leaves name and quantity in original positions",
+              "socratic_probe": "After your sort swaps products[i].price and products[j].price, what is products[i].name? Is that consistent with the new price?"
+            }
+          ],
+          "style_requirements": [
+            "Function comment block required for each function"
+          ],
+          "grading_notes": "Struct swap (whole struct, not field-by-field) is the key teaching point.",
+          "estimated_time_minutes": 60,
+          "tags": [
+            "array-of-structs",
+            "sort",
+            "search",
+            "CO2",
+            "syllabus",
+            "Level2"
+          ]
+        }
+      ]
+    },
+    "PTR": {
+      "name": "Pointers",
+      "category": "practice",
+      "acp_unit": 3,
+      "syllabus_unit": 30,
+      "co_mapping": [
+        "CO3"
+      ],
+      "description": "ACP Unit 3 — Pointer declaration, address-of, dereference, pointer arithmetic. Additional practice.",
+      "exercises": [
+        {
+          "id": "PTR_L1_a",
+          "level": 1,
+          "variant": "a",
+          "category": "practice",
+          "co_mapping": [
+            "CO3"
+          ],
+          "title": "Swap two integers using pointers",
+          "concept_under_test": "pointer declaration, address-of operator, dereference operator",
+          "prerequisite_topics": [
+            "FUNC"
+          ],
+          "function_prototypes": [
+            "void swap(int *a, int *b);"
+          ],
+          "problem_statement": "Write a function void swap(int *a, int *b) that swaps the values at the two addresses. Call it from main and verify with two user-supplied integers.",
+          "sample_input": "3 7",
+          "sample_output": "After swap: 7 3",
+          "test_cases": [
+            {
+              "label": "3 and 7",
+              "input": "3 7",
+              "expected_output": "After swap: 7 3"
+            },
+            {
+              "label": "equal",
+              "input": "5 5",
+              "expected_output": "After swap: 5 5"
+            },
+            {
+              "label": "negative",
+              "input": "-1 10",
+              "expected_output": "After swap: 10 -1"
+            }
+          ],
+          "constraints": [
+            "Must use a function, not inline swap in main",
+            "Temporary variable allowed"
+          ],
+          "forbidden_patterns": [],
+          "mental_model_checkpoints": [
+            "Can draw a memory diagram showing a, b, and what *a and *b point to",
+            "Can state what &x gives when x is an int"
+          ],
+          "common_mistakes": [
+            {
+              "mistake": "Swapping the pointers themselves instead of the values they point to",
+              "socratic_probe": "After your swap function, if I print *a in main, will I see 7 or 3? Draw the memory layout and walk me through it."
+            }
+          ],
+          "style_requirements": [
+            "Function comment block required"
+          ],
+          "grading_notes": "Swapping pointers vs dereferenced values is the core teaching point.",
+          "estimated_time_minutes": 25,
+          "tags": [
+            "pointers",
+            "dereference",
+            "CO3",
+            "syllabus",
+            "Level1"
+          ]
+        },
+        {
+          "id": "PTR_L2_a",
+          "level": 2,
+          "variant": "a",
+          "category": "practice",
+          "co_mapping": [
+            "CO3"
+          ],
+          "title": "Find maximum in array using pointer arithmetic",
+          "concept_under_test": "pointer arithmetic, traversal without subscript operator",
+          "prerequisite_topics": [
+            "PTR",
+            "ARRAY"
+          ],
+          "function_prototypes": [
+            "int find_max(int *arr, int n);"
+          ],
+          "problem_statement": "Read N integers into an array. Write a function int find_max(int *arr, int n) that finds the maximum using only pointer arithmetic (no arr[i] subscript notation inside the function).",
+          "sample_input": "5\n3 9 1 7 2",
+          "sample_output": "Maximum: 9",
+          "test_cases": [
+            {
+              "label": "5 elements",
+              "input": "5\n3 9 1 7 2",
+              "expected_output": "Maximum: 9"
+            },
+            {
+              "label": "single",
+              "input": "1\n42",
+              "expected_output": "Maximum: 42"
+            },
+            {
+              "label": "all negative",
+              "input": "3\n-5 -1 -9",
+              "expected_output": "Maximum: -1"
+            }
+          ],
+          "constraints": [
+            "No subscript notation inside find_max",
+            "arr[i] allowed in main for reading input"
+          ],
+          "forbidden_patterns": [],
+          "mental_model_checkpoints": [
+            "Can state what (arr + 2) evaluates to in terms of memory address",
+            "Can state what *(arr + 2) evaluates to in value"
+          ],
+          "common_mistakes": [
+            {
+              "mistake": "Incrementing the original pointer — array base is lost",
+              "socratic_probe": "If you do arr++ inside the function, can you still access the first element? What would arr point to after the loop?"
+            }
+          ],
+          "style_requirements": [
+            "Function comment block required"
+          ],
+          "grading_notes": "",
+          "estimated_time_minutes": 30,
+          "tags": [
+            "pointers",
+            "pointer-arithmetic",
+            "CO3",
+            "syllabus",
+            "Level2"
+          ]
+        },
+        {
+          "id": "PTR_L3_a",
+          "level": 3,
+          "variant": "a",
+          "category": "practice",
+          "co_mapping": [
+            "CO3",
+            "CO4"
+          ],
+          "title": "String tokeniser using pointers",
+          "concept_under_test": "char pointers, pointer-based string traversal, static local pointer, null terminator manipulation",
+          "prerequisite_topics": [
+            "PTR",
+            "STRING"
+          ],
+          "function_prototypes": [
+            "char* my_strtok(char *str, char delim);"
+          ],
+          "problem_statement": "Implement char* my_strtok(char *str, char delim) that returns a pointer to the start of the next token each time it is called. Demonstrate by splitting a CSV line 'apple,banana,cherry' into fields, printing each on a new line.",
+          "sample_input": "apple,banana,cherry",
+          "sample_output": "apple\nbanana\ncherry",
+          "test_cases": [
+            {
+              "label": "CSV",
+              "input": "apple,banana,cherry",
+              "expected_output": "apple\nbanana\ncherry"
+            },
+            {
+              "label": "two tokens",
+              "input": "hello,world",
+              "expected_output": "hello\nworld"
+            },
+            {
+              "label": "single token",
+              "input": "alone",
+              "expected_output": "alone"
+            }
+          ],
+          "constraints": [
+            "No strtok from string.h",
+            "May modify the input string (replace delimiters with null bytes)"
+          ],
+          "forbidden_patterns": [
+            "strtok"
+          ],
+          "mental_model_checkpoints": [
+            "Can trace exactly what happens to the string in memory after the first call",
+            "Can explain why the function must remember its position between calls (static pointer)"
+          ],
+          "common_mistakes": [
+            {
+              "mistake": "Not handling trailing delimiter or single-token string",
+              "socratic_probe": "What does your function return if the string is 'a,,b'? Trace through the characters one by one."
+            }
+          ],
+          "style_requirements": [
+            "Function comment block required",
+            "Comment explaining static pointer role"
+          ],
+          "grading_notes": "The static local pointer is the key concept. Students who use a global instead lose style marks.",
+          "estimated_time_minutes": 60,
+          "tags": [
+            "pointers",
+            "strings",
+            "static",
+            "CO3",
+            "CO4",
+            "syllabus",
+            "Level3"
+          ]
+        }
+      ]
+    },
+    "PTRARR": {
+      "name": "Pointer Arithmetic and Arrays",
+      "category": "practice",
+      "acp_unit": 3,
+      "syllabus_unit": 31,
+      "co_mapping": [
+        "CO3"
+      ],
+      "description": "ACP Unit 3 — Pointers and arrays, equivalence, pointer traversal.",
+      "exercises": [
+        {
+          "id": "PTRARR_L1_a",
+          "level": 1,
+          "variant": "a",
+          "category": "practice",
+          "co_mapping": [
+            "CO3"
+          ],
+          "title": "Print array using pointer arithmetic only",
+          "concept_under_test": "pointer increment, dereference, pointer-to-array equivalence",
+          "prerequisite_topics": [
+            "PTR",
+            "ARRAY"
+          ],
+          "problem_statement": "Read N integers. Print them using a pointer variable p that traverses the array — no arr[i] subscript allowed anywhere in the printing loop.",
+          "sample_input": "4\n10 20 30 40",
+          "sample_output": "10 20 30 40",
+          "test_cases": [
+            {
+              "label": "4 elements",
+              "input": "4\n10 20 30 40",
+              "expected_output": "10 20 30 40"
+            }
+          ],
+          "constraints": [
+            "No subscript notation in the printing loop",
+            "Must use pointer increment (p++)"
+          ],
+          "forbidden_patterns": [],
+          "mental_model_checkpoints": [
+            "Can state what *p gives vs *(p+1)",
+            "Can draw the pointer advancing through the array in memory"
+          ],
+          "common_mistakes": [
+            {
+              "mistake": "Uses arr[i] in the loop despite the constraint",
+              "socratic_probe": "What is arr[i] equivalent to in pointer notation? Can you write the same expression using * and +?"
+            }
+          ],
+          "style_requirements": [],
+          "grading_notes": "",
+          "estimated_time_minutes": 20,
+          "tags": [
+            "pointers",
+            "arithmetic",
+            "CO3",
+            "syllabus",
+            "Level1"
+          ]
+        }
+      ]
+    },
+    "PTRF": {
+      "name": "Pointers and Functions",
+      "category": "practice",
+      "acp_unit": 3,
+      "syllabus_unit": 32,
+      "co_mapping": [
+        "CO1",
+        "CO3"
+      ],
+      "description": "ACP Units 1 & 3 — Passing by reference, output parameters via pointers.",
+      "exercises": [
+        {
+          "id": "PTRF_L1_a",
+          "level": 1,
+          "variant": "a",
+          "category": "practice",
+          "co_mapping": [
+            "CO1",
+            "CO3"
+          ],
+          "title": "Min and max by reference",
+          "concept_under_test": "pass by reference, output parameters via pointers",
+          "prerequisite_topics": [
+            "PTR",
+            "ARRAY"
+          ],
+          "function_prototypes": [
+            "void find_min_max(int *arr, int n, int *min, int *max);"
+          ],
+          "problem_statement": "Write a function void find_min_max(int *arr, int n, int *min, int *max) that sets *min and *max to the minimum and maximum values in the array. Call it from main and print both.",
+          "sample_input": "5\n3 9 1 7 2",
+          "sample_output": "Min: 1\nMax: 9",
+          "test_cases": [
+            {
+              "label": "5 elements",
+              "input": "5\n3 9 1 7 2",
+              "expected_output": "Min: 1\nMax: 9"
+            },
+            {
+              "label": "single",
+              "input": "1\n42",
+              "expected_output": "Min: 42\nMax: 42"
+            },
+            {
+              "label": "all same",
+              "input": "3\n5 5 5",
+              "expected_output": "Min: 5\nMax: 5"
+            }
+          ],
+          "constraints": [
+            "Function must return void and use pointer output parameters",
+            "Do not use global variables"
+          ],
+          "forbidden_patterns": [],
+          "mental_model_checkpoints": [
+            "Can explain why *min must be initialised to arr[0] (not 0 or INT_MAX)",
+            "Can trace what happens at main when find_min_max writes through the min/max pointers"
+          ],
+          "common_mistakes": [
+            {
+              "mistake": "Initialises *min to 0 — fails for arrays of all-positive numbers",
+              "socratic_probe": "If all values are between 10 and 100, and you initialise *min to 0, what will your function report as the minimum?"
+            }
+          ],
+          "style_requirements": [
+            "Function comment block required"
+          ],
+          "grading_notes": "",
+          "estimated_time_minutes": 25,
+          "tags": [
+            "pointers",
+            "functions",
+            "output-params",
+            "CO1",
+            "CO3",
+            "syllabus",
+            "Level1"
+          ]
+        }
+      ]
+    },
+    "DYNMEM": {
+      "name": "Dynamic Memory Allocation",
+      "category": "practice",
+      "acp_unit": 3,
+      "syllabus_unit": 33,
+      "co_mapping": [
+        "CO3"
+      ],
+      "description": "ACP Unit 3 — malloc, calloc, realloc, free, dangling pointers, memory leaks.",
+      "exercises": [
+        {
+          "id": "DYNMEM_L1_a",
+          "level": 1,
+          "variant": "a",
+          "category": "practice",
+          "co_mapping": [
+            "CO3"
+          ],
+          "title": "Dynamic integer array with malloc — average",
+          "concept_under_test": "malloc, free, NULL check, dynamic array access",
+          "prerequisite_topics": [
+            "PTR",
+            "ARRAY"
+          ],
+          "problem_statement": "Read N from the user (N <= 1000). Allocate an integer array of size N with malloc. Read N integers, compute and print their average (as a float to 2 decimal places). Free the array before exiting.",
+          "sample_input": "4\n10 20 30 40",
+          "sample_output": "Average: 25.00",
+          "test_cases": [
+            {
+              "label": "4 elements",
+              "input": "4\n10 20 30 40",
+              "expected_output": "Average: 25.00"
+            },
+            {
+              "label": "single",
+              "input": "1\n7",
+              "expected_output": "Average: 7.00"
+            }
+          ],
+          "constraints": [
+            "Must use malloc (not a fixed-size array)",
+            "Must check malloc return for NULL",
+            "Must call free before exit"
+          ],
+          "forbidden_patterns": [
+            "int arr[",
+            "int a[100]"
+          ],
+          "mental_model_checkpoints": [
+            "Can state what malloc returns if allocation fails",
+            "Can explain what happens if free is never called (memory leak)"
+          ],
+          "common_mistakes": [
+            {
+              "mistake": "No NULL check after malloc",
+              "socratic_probe": "What does malloc return if it cannot allocate the requested memory? What would happen if your program tried to write to that address?"
+            },
+            {
+              "mistake": "Forgets to call free",
+              "socratic_probe": "After your program exits, does the OS reclaim that memory? What about a long-running program that allocates repeatedly?"
+            }
+          ],
+          "style_requirements": [
+            "NULL check on malloc",
+            "free() called before return"
+          ],
+          "grading_notes": "NULL check and free are non-negotiable for full robustness marks.",
+          "estimated_time_minutes": 30,
+          "tags": [
+            "dynamic-memory",
+            "malloc",
+            "free",
+            "CO3",
+            "syllabus",
+            "Level1"
+          ]
+        },
+        {
+          "id": "DYNMEM_L2_a",
+          "level": 2,
+          "variant": "a",
+          "category": "practice",
+          "co_mapping": [
+            "CO3"
+          ],
+          "title": "calloc and realloc — growable integer buffer",
+          "concept_under_test": "calloc, realloc, free, zero-initialisation, buffer growth",
+          "prerequisite_topics": [
+            "DYNMEM"
+          ],
+          "function_prototypes": [
+            "int* init_buffer(int initial_size);",
+            "int* grow_buffer(int *buf, int old_size, int new_size);",
+            "void free_buffer(int **buf);"
+          ],
+          "problem_statement": "Write a program that:\n1. Allocates an int array of size 4 using calloc (verify all zeros).\n2. Reads 4 integers into it.\n3. Reallocates it to size 8 with realloc.\n4. Reads 4 more integers into positions 4–7.\n5. Prints all 8 elements.\n6. Frees and sets to NULL.",
+          "sample_input": "1 2 3 4\n5 6 7 8",
+          "sample_output": "Initial (calloc): 0 0 0 0\nAfter first fill: 1 2 3 4\nAfter realloc and second fill: 1 2 3 4 5 6 7 8",
+          "test_cases": [
+            {
+              "label": "standard 8 ints",
+              "input": "1 2 3 4\n5 6 7 8",
+              "expected_output": "Initial (calloc): 0 0 0 0\nAfter first fill: 1 2 3 4\nAfter realloc and second fill: 1 2 3 4 5 6 7 8"
+            }
+          ],
+          "constraints": [
+            "Use calloc (not malloc) for initial allocation — verify zero-initialisation",
+            "Use realloc (not malloc + memcpy) for growth",
+            "Check realloc return value for NULL before overwriting original pointer",
+            "Free and NULL the pointer at the end"
+          ],
+          "forbidden_patterns": [
+            "malloc(4",
+            "malloc(8"
+          ],
+          "mental_model_checkpoints": [
+            "Can explain the difference between malloc and calloc output (uninitialised vs zero)",
+            "Can state why realloc's return value must not immediately overwrite the original pointer (risk of losing memory on failure)",
+            "Can explain when realloc moves memory vs. extends in place"
+          ],
+          "common_mistakes": [
+            {
+              "mistake": "ptr = realloc(ptr, ...) — if realloc fails and returns NULL, original memory is lost (leak)",
+              "socratic_probe": "If realloc returns NULL because of out-of-memory, what happens to the memory that ptr was pointing to? How can you avoid losing that pointer?"
+            }
+          ],
+          "style_requirements": [
+            "Function comment block required",
+            "NULL check on realloc"
+          ],
+          "grading_notes": "Safe realloc pattern (temp pointer) is required for full robustness marks.",
+          "estimated_time_minutes": 45,
+          "tags": [
+            "dynamic-memory",
+            "calloc",
+            "realloc",
+            "CO3",
+            "syllabus",
+            "Level2"
+          ]
+        }
+      ]
+    },
+    "LINKEDLIST": {
+      "name": "Self-Referential Structures and Linked Lists",
+      "category": "practice",
+      "acp_unit": 3,
+      "syllabus_unit": 34,
+      "co_mapping": [
+        "CO3"
+      ],
+      "description": "ACP Unit 3 — Self-referential structures, singly linked list as an application of pointers.",
+      "exercises": [
+        {
+          "id": "LINKEDLIST_L1_a",
+          "level": 1,
+          "variant": "a",
+          "category": "practice",
+          "co_mapping": [
+            "CO3"
+          ],
+          "title": "Create and traverse a singly linked list",
+          "concept_under_test": "self-referential struct, malloc for nodes, traversal with pointer, NULL termination",
+          "prerequisite_topics": [
+            "DYNMEM",
+            "STRUCT"
+          ],
+          "function_prototypes": [
+            "Node* create_node(int data);",
+            "Node* append(Node *head, int data);",
+            "void traverse(Node *head);",
+            "void free_list(Node *head);"
+          ],
+          "problem_statement": "Define:\n\ntypedef struct Node {\n    int data;\n    struct Node *next;\n} Node;\n\nWrite functions to: create a node (malloc + data + next=NULL), append a node to the end of the list, traverse and print all nodes, and free all nodes. Build a list from N user-supplied integers and print it.",
+          "sample_input": "4\n10 20 30 40",
+          "sample_output": "10 -> 20 -> 30 -> 40 -> NULL",
+          "test_cases": [
+            {
+              "label": "4 nodes",
+              "input": "4\n10 20 30 40",
+              "expected_output": "10 -> 20 -> 30 -> 40 -> NULL"
+            },
+            {
+              "label": "1 node",
+              "input": "1\n5",
+              "expected_output": "5 -> NULL"
+            },
+            {
+              "label": "3 nodes",
+              "input": "3\n1 2 3",
+              "expected_output": "1 -> 2 -> 3 -> NULL"
+            }
+          ],
+          "constraints": [
+            "Every node must be allocated with malloc",
+            "append() must traverse to the end — no tail pointer",
+            "free_list() must free every node in order",
+            "No fixed-size arrays"
+          ],
+          "forbidden_patterns": [
+            "int arr["
+          ],
+          "mental_model_checkpoints": [
+            "Can draw a box-and-arrow diagram for a 3-node list showing data and next pointers",
+            "Can trace append() for an empty list (head == NULL) vs. a non-empty list",
+            "Can explain why free_list must save next before freeing the current node"
+          ],
+          "common_mistakes": [
+            {
+              "mistake": "free_list does: free(curr); curr = curr->next — accesses freed memory",
+              "socratic_probe": "After you call free(curr), is curr->next still valid? What do you need to save before calling free?"
+            },
+            {
+              "mistake": "append traverses with head pointer — modifies head — list broken",
+              "socratic_probe": "Inside append, if you do head = head->next to traverse, what does main's head variable point to after append returns?"
+            }
+          ],
+          "style_requirements": [
+            "Function comment block required for each function",
+            "Comment explaining NULL-termination invariant"
+          ],
+          "grading_notes": "Save-next-before-free in free_list is mandatory. Robustness: empty list (n=0) should print 'NULL'.",
+          "estimated_time_minutes": 60,
+          "tags": [
+            "linked-list",
+            "self-referential-struct",
+            "dynamic-memory",
+            "CO3",
+            "syllabus",
+            "Level1"
+          ]
+        },
+        {
+          "id": "LINKEDLIST_L2_a",
+          "level": 2,
+          "variant": "a",
+          "category": "practice",
+          "co_mapping": [
+            "CO3"
+          ],
+          "title": "Insert and delete nodes in a singly linked list",
+          "concept_under_test": "linked list insertion at head/tail/position, node deletion, pointer relinking",
+          "prerequisite_topics": [
+            "LINKEDLIST"
+          ],
+          "function_prototypes": [
+            "Node* insert_at_head(Node *head, int data);",
+            "Node* insert_after(Node *head, int pos, int data);",
+            "Node* delete_node(Node *head, int data);",
+            "void traverse(Node *head);"
+          ],
+          "problem_statement": "Using the Node typedef from the previous exercise, implement:\n- insert_at_head: inserts a new node at the front, returns new head.\n- insert_after(pos): inserts after the node at 1-based position pos.\n- delete_node(data): removes the first node with the given data value; does nothing if not found.\n\nBuild a list [1,2,3], insert 0 at head, insert 99 after position 2, delete node with value 2. Print after each operation.",
+          "sample_input": "(none — hardcoded demo)",
+          "sample_output": "After insert at head: 0 -> 1 -> 2 -> 3 -> NULL\nAfter insert after pos 2: 0 -> 1 -> 99 -> 2 -> 3 -> NULL\nAfter delete 2: 0 -> 1 -> 99 -> 3 -> NULL",
+          "test_cases": [
+            {
+              "label": "full demo",
+              "input": "",
+              "expected_output": "After insert at head: 0 -> 1 -> 2 -> 3 -> NULL\nAfter insert after pos 2: 0 -> 1 -> 99 -> 2 -> 3 -> NULL\nAfter delete 2: 0 -> 1 -> 99 -> 3 -> NULL"
+            }
+          ],
+          "constraints": [
+            "insert_at_head must return the new head",
+            "delete_node must correctly handle deleting the head node",
+            "delete_node must handle the case where data is not found"
+          ],
+          "forbidden_patterns": [],
+          "mental_model_checkpoints": [
+            "Can draw the pointer relinking for insert_after at position 2",
+            "Can trace delete_node for the head node vs. a middle node vs. a node not in the list"
+          ],
+          "common_mistakes": [
+            {
+              "mistake": "delete_node for head node: frees head but returns old head — main now has dangling pointer",
+              "socratic_probe": "When you delete the head node, what must you return to main so it can update its head pointer?"
+            },
+            {
+              "mistake": "insert_after does not check for position beyond list length",
+              "socratic_probe": "What happens in your code if pos is larger than the number of nodes?"
+            }
+          ],
+          "style_requirements": [
+            "Function comment block required for each function"
+          ],
+          "grading_notes": "Head deletion and not-found handling are the critical robustness cases.",
+          "estimated_time_minutes": 75,
+          "tags": [
+            "linked-list",
+            "insert",
+            "delete",
+            "CO3",
+            "syllabus",
+            "Level2"
+          ]
+        }
+      ]
+    },
+    "STRING": {
+      "name": "String Handling",
+      "category": "practice",
+      "acp_unit": 4,
+      "syllabus_unit": 40,
+      "co_mapping": [
+        "CO4"
+      ],
+      "description": "ACP Unit 4 — char arrays, null terminator, basic string operations.",
+      "exercises": [
+        {
+          "id": "STRING_L1_a",
+          "level": 1,
+          "variant": "a",
+          "category": "practice",
+          "co_mapping": [
+            "CO4"
+          ],
+          "title": "Reverse a string in-place",
+          "concept_under_test": "char array, string traversal, null terminator, strlen",
+          "prerequisite_topics": [
+            "ARRAY"
+          ],
+          "problem_statement": "Read a word (no spaces, <= 99 chars). Reverse it in-place and print.",
+          "sample_input": "hello",
+          "sample_output": "olleh",
+          "test_cases": [
+            {
+              "label": "hello",
+              "input": "hello",
+              "expected_output": "olleh"
+            },
+            {
+              "label": "single",
+              "input": "a",
+              "expected_output": "a"
+            },
+            {
+              "label": "palindrome",
+              "input": "madam",
+              "expected_output": "madam"
+            }
+          ],
+          "constraints": [
+            "Use a char array (not a string library reverse)",
+            "In-place reversal"
+          ],
+          "forbidden_patterns": [
+            "strrev"
+          ],
+          "mental_model_checkpoints": [
+            "Can state what strlen returns for 'hello'",
+            "Can identify the null terminator and explain why the swap loop stops before it"
+          ],
+          "common_mistakes": [
+            {
+              "mistake": "Includes the null terminator in the swap loop",
+              "socratic_probe": "What is stored at str[strlen(str)]? What happens if you swap that with the first character?"
+            }
+          ],
+          "style_requirements": [],
+          "grading_notes": "",
+          "estimated_time_minutes": 20,
+          "tags": [
+            "strings",
+            "reversal",
+            "CO4",
+            "syllabus",
+            "Level1"
+          ]
+        }
+      ]
+    },
+    "STROP": {
+      "name": "String Operations with User-Defined Functions",
+      "category": "practice",
+      "acp_unit": 4,
+      "syllabus_unit": 41,
+      "co_mapping": [
+        "CO4"
+      ],
+      "description": "ACP Unit 4 — User-defined string functions and pointer-based string manipulation. Additional practice beyond the lab programs.",
+      "exercises": [
+        {
+          "id": "STROP_L1_a",
+          "level": 1,
+          "variant": "a",
+          "category": "practice",
+          "co_mapping": [
+            "CO4"
+          ],
+          "title": "String length without strlen",
+          "concept_under_test": "char pointer traversal, null terminator detection, user-defined string function",
+          "prerequisite_topics": [
+            "STRING",
+            "PTR"
+          ],
+          "function_prototypes": [
+            "int my_strlen(const char *str);"
+          ],
+          "problem_statement": "Write a function int my_strlen(const char *str) that returns the length of a string without using strlen(). Count characters until the null terminator. Read a string and print its length.",
+          "sample_input": "hello",
+          "sample_output": "Length: 5",
+          "test_cases": [
+            {
+              "label": "hello",
+              "input": "hello",
+              "expected_output": "Length: 5"
+            },
+            {
+              "label": "single",
+              "input": "A",
+              "expected_output": "Length: 1"
+            },
+            {
+              "label": "empty",
+              "input": "",
+              "expected_output": "Length: 0"
+            }
+          ],
+          "constraints": [
+            "Do not use strlen() or any other string library function",
+            "Use pointer arithmetic (not array subscript) inside my_strlen"
+          ],
+          "forbidden_patterns": [
+            "strlen"
+          ],
+          "mental_model_checkpoints": [
+            "Can state the null terminator's ASCII value and how to detect it",
+            "Can trace my_strlen for 'hi': which pointer values are visited?"
+          ],
+          "common_mistakes": [
+            {
+              "mistake": "Counts the null terminator as part of the length",
+              "socratic_probe": "What does strlen('hello') return — 5 or 6? Does your function agree?"
+            }
+          ],
+          "style_requirements": [
+            "Function comment block required"
+          ],
+          "grading_notes": "",
+          "estimated_time_minutes": 20,
+          "tags": [
+            "strings",
+            "pointers",
+            "user-defined",
+            "CO4",
+            "syllabus",
+            "Level1"
+          ]
+        },
+        {
+          "id": "STROP_L1_b",
+          "level": 1,
+          "variant": "b",
+          "category": "practice",
+          "co_mapping": [
+            "CO4"
+          ],
+          "title": "Count vowels and consonants in a string",
+          "concept_under_test": "char pointer traversal, character classification, user-defined function",
+          "prerequisite_topics": [
+            "STRING",
+            "COND"
+          ],
+          "function_prototypes": [
+            "void count_vowels_consonants(const char *str, int *vowels, int *consonants);"
+          ],
+          "problem_statement": "Write a function void count_vowels_consonants(const char *str, int *vowels, int *consonants) that counts vowels (a,e,i,o,u — both cases) and consonants (other alphabetic characters) in a string. Spaces and punctuation are ignored.",
+          "sample_input": "Hello World",
+          "sample_output": "Vowels: 3\nConsonants: 7",
+          "test_cases": [
+            {
+              "label": "Hello World",
+              "input": "Hello World",
+              "expected_output": "Vowels: 3\nConsonants: 7"
+            },
+            {
+              "label": "all vowels",
+              "input": "aeiou",
+              "expected_output": "Vowels: 5\nConsonants: 0"
+            },
+            {
+              "label": "with digits",
+              "input": "abc123",
+              "expected_output": "Vowels: 1\nConsonants: 2"
+            }
+          ],
+          "constraints": [
+            "Handle both upper and lower case",
+            "Digits and punctuation are not counted as vowels or consonants",
+            "Use pointer output parameters for vowels and consonants counts"
+          ],
+          "forbidden_patterns": [],
+          "mental_model_checkpoints": [
+            "Can list the vowel characters (both cases) that need to be checked",
+            "Can explain how to use isalpha() from <ctype.h> to exclude non-letters"
+          ],
+          "common_mistakes": [
+            {
+              "mistake": "Counts space and punctuation as consonants",
+              "socratic_probe": "Is a space character alphabetic? What does isalpha(' ') return? Should it be counted?"
+            }
+          ],
+          "style_requirements": [
+            "Function comment block required"
+          ],
+          "grading_notes": "",
+          "estimated_time_minutes": 25,
+          "tags": [
+            "strings",
+            "character-classification",
+            "CO4",
+            "syllabus",
+            "Level1"
+          ]
+        },
+        {
+          "id": "STROP_L2_a",
+          "level": 2,
+          "variant": "a",
+          "category": "practice",
+          "co_mapping": [
+            "CO4"
+          ],
+          "title": "String copy using pointer arithmetic",
+          "concept_under_test": "pointer-based string copy, null terminator, user-defined strcpy equivalent",
+          "prerequisite_topics": [
+            "STRING",
+            "PTR"
+          ],
+          "function_prototypes": [
+            "void my_strcpy(char *dest, const char *src);"
+          ],
+          "problem_statement": "Write a function void my_strcpy(char *dest, const char *src) that copies the string src to dest without using strcpy(). Use pointer arithmetic (not subscript). Read a source string, copy it, and print the copy.",
+          "sample_input": "Programming",
+          "sample_output": "Copy: Programming",
+          "test_cases": [
+            {
+              "label": "standard",
+              "input": "Programming",
+              "expected_output": "Copy: Programming"
+            },
+            {
+              "label": "single char",
+              "input": "X",
+              "expected_output": "Copy: X"
+            },
+            {
+              "label": "spaces",
+              "input": "hello world",
+              "expected_output": "Copy: hello world"
+            }
+          ],
+          "constraints": [
+            "Do not use strcpy() or memcpy()",
+            "Use pointer notation inside my_strcpy (not dest[i])",
+            "Null terminator must be explicitly copied"
+          ],
+          "forbidden_patterns": [
+            "strcpy",
+            "memcpy"
+          ],
+          "mental_model_checkpoints": [
+            "Can trace the pointer values of dest and src for 'hi' after each character copy",
+            "Can state why the null terminator must be explicitly written after the loop"
+          ],
+          "common_mistakes": [
+            {
+              "mistake": "Loop copies characters but stops before null terminator — dest is not null-terminated",
+              "socratic_probe": "Your loop stops when *src == '\\0'. Has that null terminator been written to *dest at that point?"
+            }
+          ],
+          "style_requirements": [
+            "Function comment block required"
+          ],
+          "grading_notes": "",
+          "estimated_time_minutes": 30,
+          "tags": [
+            "strings",
+            "pointers",
+            "user-defined",
+            "CO4",
+            "syllabus",
+            "Level2"
+          ]
+        }
+      ]
+    },
+    "FILE": {
+      "name": "File I/O",
+      "category": "practice",
+      "acp_unit": 5,
+      "syllabus_unit": 50,
+      "co_mapping": [
+        "CO5"
+      ],
+      "description": "ACP Unit 5 — fopen, fclose, fprintf, fscanf, fwrite, fread, feof, ferror, file modes. Additional practice beyond the lab programs.",
+      "exercises": [
+        {
+          "id": "FILE_L1_a",
+          "level": 1,
+          "variant": "a",
+          "category": "practice",
+          "co_mapping": [
+            "CO5"
+          ],
+          "title": "Write and read back integers from a text file",
+          "concept_under_test": "fopen, fclose, fprintf, fscanf, FILE pointer",
+          "prerequisite_topics": [
+            "LOOP",
+            "IO"
+          ],
+          "problem_statement": "Read 5 integers from the user. Write them to a file 'numbers.txt' using fprintf. Then re-open the file, read them back with fscanf, and print their sum.",
+          "sample_input": "10 20 30 40 50",
+          "sample_output": "Sum from file: 150",
+          "test_cases": [
+            {
+              "label": "standard 5 ints",
+              "input": "10 20 30 40 50",
+              "expected_output": "Sum from file: 150"
+            }
+          ],
+          "constraints": [
+            "Must use FILE pointer",
+            "Must close the file before re-opening",
+            "Check fopen return value for NULL"
+          ],
+          "forbidden_patterns": [],
+          "mental_model_checkpoints": [
+            "Can explain what fopen returns on failure",
+            "Can state why the file must be closed before reading back"
+          ],
+          "common_mistakes": [
+            {
+              "mistake": "No NULL check on fopen — crashes if file can't be created",
+              "socratic_probe": "What does fopen return if it cannot create the file? What happens if your program continues to use that value?"
+            }
+          ],
+          "style_requirements": [
+            "NULL check on fopen with appropriate error message"
+          ],
+          "grading_notes": "",
+          "estimated_time_minutes": 35,
+          "tags": [
+            "file-io",
+            "fopen",
+            "CO5",
+            "syllabus",
+            "Level1"
+          ]
+        },
+        {
+          "id": "FILE_L2_a",
+          "level": 2,
+          "variant": "a",
+          "category": "practice",
+          "co_mapping": [
+            "CO5"
+          ],
+          "title": "Read a file line by line using fgets with feof and ferror",
+          "concept_under_test": "fgets, feof, ferror, error handling in file I/O",
+          "prerequisite_topics": [
+            "FILE"
+          ],
+          "function_prototypes": [
+            "int count_lines(const char *filename);",
+            "void print_lines(const char *filename);"
+          ],
+          "problem_statement": "Write a program that reads a text file 'input.txt' line by line using fgets(), counts the total number of lines, and prints each line with its line number. Use feof() to detect end-of-file and ferror() to detect read errors. Create 'input.txt' by first writing 3 lines with fprintf.",
+          "sample_input": "Line one content\nLine two content\nLine three content",
+          "sample_output": "1: Line one content\n2: Line two content\n3: Line three content\nTotal lines: 3",
+          "test_cases": [
+            {
+              "label": "3 lines",
+              "input": "Line one content\nLine two content\nLine three content",
+              "expected_output": "1: Line one content\n2: Line two content\n3: Line three content\nTotal lines: 3"
+            }
+          ],
+          "constraints": [
+            "Use fgets() for reading (not fscanf or fread)",
+            "Check ferror() after the read loop to detect I/O errors",
+            "Handle fopen failure with an error message"
+          ],
+          "forbidden_patterns": [
+            "fscanf",
+            "fread"
+          ],
+          "mental_model_checkpoints": [
+            "Can explain the difference between feof() returning true vs. fgets() returning NULL",
+            "Can state what fgets() stores when it reads a line — including the newline character"
+          ],
+          "common_mistakes": [
+            {
+              "mistake": "Checks feof() before fgets() — classic off-by-one that reads last line twice",
+              "socratic_probe": "When does feof() return true — before the failed read or after it? What does that mean for your loop structure?"
+            },
+            {
+              "mistake": "fgets() includes the newline in the buffer — prints extra blank lines",
+              "socratic_probe": "What character does fgets() store as the second-to-last character for a typical line? How do you strip it before printing?"
+            }
+          ],
+          "style_requirements": [
+            "NULL check on fopen",
+            "ferror() checked after loop"
+          ],
+          "grading_notes": "The feof-after-read pattern (not before) is mandatory for correctness.",
+          "estimated_time_minutes": 45,
+          "tags": [
+            "file-io",
+            "fgets",
+            "feof",
+            "ferror",
+            "CO5",
+            "syllabus",
+            "Level2"
+          ]
+        }
+      ]
+    }
+  }
+}

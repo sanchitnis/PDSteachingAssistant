@@ -1,0 +1,105 @@
+[
+  {
+    "program_no": "1",
+    "program_details": "Write a modular C program to read n float values from the user, store them in an array and find the maximum value and its index. (array, passing arrays to functions, for loop, if statement)",
+    "function_prototypes": [
+      "void input(int n, float arr[n]);",
+      "int find_max_index(int n, float arr[n]);",
+      "void output(float arr[], int max_index);"
+    ],
+    "co": "1"
+  },
+  {
+    "program_no": "2",
+    "program_details": "Write a C program to compare areas of three rectangles and find the largest using functions and structure. (else-if ladder)\ntypedef struct {\nchar name[50];\nfloat length;\nfloat width;\nfloat area;\n} Rectangle;",
+    "function_prototypes": [
+      "Rectangle input();",
+      "float calculate_area(Rectangle rect);",
+      "void compare_areas (Rectangle r1, Rectangle r2, Rectangle r3);"
+    ],
+    "co": "1"
+  },
+  {
+    "program_no": "3",
+    "program_details": "Write a C program using array of structures and functions to:\nAccept the number of rectangles.\ni.\nFor each rectangle, accept its length and width.\nii.\nCalculate and display the area of each rectangle.\niii.\nDetermine and display the rectangle with the largest area. (array of structures, for loop, if statement)\ntypedef struct {\nfloat length;\nfloat width;\nfloat area;\n} Rectangle;",
+    "function_prototypes": [
+      "void input (int n, Rectangle rects[n]);",
+      "void calculate_area(int n, Rectangle rects[n]);",
+      "int find LargestArea(int n, Rectangle rects[n]);",
+      "void output(int largestIndex, Rectangle rects []);"
+    ],
+    "co": "2"
+  },
+  {
+    "program_no": "4",
+    "program_details": "Write a modular C program to create a structure Flight with flight_number, destination, and available_seats. Create an array of 4 flights. Write a program that takes a destination name from the user and checks if a flight is available to that location, displaying the flight number if found.",
+    "function_prototypes": [
+      "void readFlights(int n, Flight_t f[]);",
+      "void search By Destination(int n, Flight_t f[], char searchDest[]);"
+    ],
+    "co": "2"
+  },
+  {
+    "program_no": "5",
+    "program_details": "Write a program to swap two integer arrays.",
+    "function_prototypes": [
+      "void read_array(int n, int arr[]);",
+      "void print_array(int n, int arr[]);",
+      "void swap_array(int n, int a[n], int b[n]);"
+    ],
+    "co": "3"
+  },
+  {
+    "program_no": "6",
+    "program_details": "Develop a modular C program to manage an integer array using dynamic memory allocation. You must implement specific functions to allocate, initialize, display, and safely deallocate memory. This task ensures proficiency in preventing memory leaks and managing dangling pointers.",
+    "function_prototypes": [
+      "int* create_array(int n);",
+      "void initialize_array(int *arr, int n);",
+      "void print_array(int *arr, int n);",
+      "void delete_array(int **arr);"
+    ],
+    "co": "3"
+  },
+  {
+    "program_no": "7",
+    "program_details": "Write a C program to compare two strings using user-defined functions. The program should return:\n0 if both strings are equal\n1 if the first string is lexicographically greater\n-1 if the second string is lexicographically greater",
+    "function_prototypes": [
+      "void inputStrings(char str1[], char str2[]);",
+      "int compareStrings(char str1[], char str2[]);",
+      "void output(int result);"
+    ],
+    "co": "4"
+  },
+  {
+    "program_no": "8",
+    "program_details": "Write a C program to concatenate two strings using user-defined functions. The program should accept two strings from the user and pass them to a function that performs the concatenation. (strings, while/do while)",
+    "function_prototypes": [
+      "void input(char *str);",
+      "void concatenate_strings(char *str1, char *str2);",
+      "void display(char *str);"
+    ],
+    "co": "4"
+  },
+  {
+    "program_no": "9",
+    "program_details": "Write a modular C program to perform the following tasks using file handling functions:\ni. Read the details of n students from the user and store them in an array of structures.\nii. Write the array of structures to a text (ASCII) file using fprintf().\niii. Read the data back from the ASCII file into a second array using fscanf() and display it.\niv. Display the array of structures.",
+    "function_prototypes": [
+      "void inputStudents (Student students[], int n);",
+      "void writeToTextFile(Student students[], int n, const char *filename);",
+      "int readFromTextFile(Student students [], const char *filename);",
+      "void printStudents (Student students[], int n);"
+    ],
+    "co": "5"
+  },
+  {
+    "program_no": "10",
+    "program_details": "Write a modular C program to perform the following tasks using file handling functions:\ni. Read the details of n students from the user and store them in an array of structures\nii. Write the array of structures to a binary file using fwrite().\niii. Read the binary file into a second array of structures using fread().\niv. Display the array of structures.",
+    "function_prototypes": [
+      "void inputStudents (Student students[], int n);",
+      "void writeToBinary File (Student students[], int n, const char *filename);",
+      "int readFromBinaryFile(Student students[], const char *filename);",
+      "void printStudents (Student students[], int n);"
+    ],
+    "co": "5"
+  }
+]

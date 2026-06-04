@@ -1,0 +1,56 @@
+{
+  "agent_version": "2.0",
+  "institution": "REVA University",
+  "department": "School of Computer Science and Engineering",
+  "course": "Advanced C Programming with Generative AI",
+  "academic_year": "2025-26",
+  "scaffolding": {
+    "max_help_tiers": 5,
+    "metacognitive_prompt_always": true,
+    "style_after_logic": true,
+    "never_give_direct_answer": true
+  },
+  "grading": {
+    "total_marks": 10,
+    "dimensions": {
+      "correctness": 4,
+      "style": 2,
+      "robustness": 2,
+      "documentation": 1,
+      "efficiency": 1
+    },
+    "promotion_threshold": 7,
+    "remediation_threshold": 4
+  },
+  "progress": {
+    "min_score_to_advance": 7,
+    "max_variants_per_level": 5
+  },
+  "compiler": {
+    "command": "gcc",
+    "flags": ["-Wall", "-Wextra", "-Wpedantic", "-std=c99"],
+    "style_tool": "cppcheck"
+  },
+  "paths": {
+    "student_data":   "student_data/",
+    "progress":       "student_data/progress/",
+    "sessions":       "student_data/sessions/",
+    "exercises":      "exercises/",
+    "library":        "exercises/library.json",
+    "lab_programs":   "exercises/lab_programs.json",
+    "prerequisites":  "exercises/prerequisites.json",
+    "practice":       "exercises/practice.json",
+    "advanced":       "exercises/advanced.json"
+  },
+  "read_only_dirs": [
+    "agents/",
+    "config/",
+    "docs/",
+    "exercises/",
+    "rubrics/",
+    "scripts/"
+  ],
+  "student_writable_dirs": [
+    "student_data/"
+  ]
+}

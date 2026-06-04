@@ -1,0 +1,122 @@
+#!/usr/bin/env python3
+"""
+Usage: python3 make_template.py <output_filepath> <exercise_id> <student_id>
+
+Searches exercises/library.json then exercises/lab_programs.json for the
+exercise record and writes a populated .c template to <output_filepath>.
+
+Called from next.sh.
+"""
+
+import sys
+import json
+import datetime
+from pathlib import Path
+
+
+LEVEL_NAMES = {
+    "1": "Foundational",
+    "2": "Applied",
+    "3": "Integrative",
+}
+
+
+def main() -> None:
+    if len(sys.argv) != 4:
+        sys.exit("Usage: make_template.py <output_filepath> <exercise_id> <student_id>")
+
+    output_path  = Path(sys.argv[1])
+    exercise_id  = sys.argv[2]
+    student_id   = sys.argv[3]
+
+    # Derive paths relative to this script's location
+    script_dir   = Path(__file__).parent
+    project_root = script_dir.parent
+
+    # Search library.json first, then lab_programs.json
+    EXERCISE_FILES = [
+        project_root / "exercises" / "library.json",
+        project_root / "exercises" / "lab_programs.json",
+    ]
+
+    lib = None
+    ex  = None
+    for lib_path in EXERCISE_FILES:
+        if not lib_path.exists():
+            continue
+        candidate = json.loads(lib_path.read_text(encoding="utf-8"))
+        topic_data = candidate.get("topics", {}).get(topic)
+        if topic_data is None:
+            continue
+        found = next((e for e in topic_data.get("exercises", []) if e["id"] == exercise_id), None)
+        if found:
+            lib = candidate
+            ex  = found
+            break
+
+    if lib is None or ex is None:
+        sys.exit(f"ERROR: Exercise '{exercise_id}' not found in library.json or lab_programs.json")
+
+    topic_name   = lib["topics"][topic]["name"]
+    problem      = ex["problem_statement"]
+    sample_in    = ex.get("sample_input", "(none)")
+    sample_out   = ex.get("sample_output", "(none)")
+    constraints  = "\n".join(
+        f" *   - {c}" for c in ex.get("constraints", [])
+    ) or " *   (none)"
+    filename     = output_path.name
+    today        = datetime.date.today().isoformat()
+
+    content = f"""\
+/*
+ * ============================================================
+ * REVA University \u2014 C Programming Practice
+ * ============================================================
+ * Exercise ID   : {exercise_id}
+ * Topic         : {topic_name}
+ * Level         : {level_num} ({level_name})
+ * Student       : {student_id}
+ * Date Assigned : {today}
+ * ============================================================
+ *
+ * PROBLEM STATEMENT:
+ * {problem}
+ *
+ * SAMPLE INPUT:
+ *   {sample_in}
+ *
+ * SAMPLE OUTPUT:
+ *   {sample_out}
+ *
+ * CONSTRAINTS:
+{constraints}
+ *
+ * HELP:  ./scripts/help.sh {filename}
+ * GRADE: ./scripts/grade.sh {filename}
+ * ============================================================
+ */
+
+#include <stdio.h>
+
+/*
+ * Function : main
+ * Purpose  : Entry point \u2014 implement your solution here.
+ * Params   : none
+ * Returns  : 0 on success
+ */
+int main(void) {{
+    /* TODO: Write your solution below.
+     * Follow the REVA C Coding Style Guide (docs/coding_style_guide.md).
+     */
+
+    return 0;
+}}
+"""
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(content, encoding="utf-8")
+    print(f"Template written: {output_path}")
+
+
+if __name__ == "__main__":
+    main()

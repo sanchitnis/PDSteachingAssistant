@@ -1,0 +1,886 @@
+{
+  "schema_version": "1.2",
+  "file_type": "prerequisites",
+  "last_updated": "2026-06-04",
+  "description": "Foundation/bridging exercises assumed from the prior C course. Available on demand when students need to review fundamentals before tackling ACP syllabus topics.",
+  "institution": "REVA University",
+  "department": "School of Computer Science and Engineering",
+  "course": "Advanced C Programming with Generative AI",
+  "co_descriptions": {
+    "CO1": "Develop modular and reusable code using functions (call by value and call by reference), arrays and structures.",
+    "CO2": "Apply modular programming to manage complex data collections using Arrays of Structures.",
+    "CO3": "Develop modular and reusable code using pointers and dynamic memory allocation.",
+    "CO4": "Develop modular and reusable code utilizing Strings by implementing user-defined logic for processing text-based data.",
+    "CO5": "Develop a modular application for file handling in C.",
+    "CO6": "Leverage generative AI to design and build a mini-project application."
+  },
+  "topics": {
+    "INTRO": {
+      "name": "Introduction to C",
+      "category": "prerequisite",
+      "acp_unit": null,
+      "syllabus_unit": 1,
+      "co_mapping": [],
+      "description": "Program structure, printf, scanf, compilation. Assumed known from prior course.",
+      "exercises": [
+        {
+          "id": "INTRO_L1_a",
+          "level": 1,
+          "variant": "a",
+          "category": "prerequisite",
+          "co_mapping": [],
+          "title": "Hello, World",
+          "concept_under_test": "printf, program structure, compilation",
+          "prerequisite_topics": [],
+          "problem_statement": "Write a C program that prints 'Hello, World!' followed by a newline.",
+          "sample_input": "(none)",
+          "sample_output": "Hello, World!",
+          "test_cases": [
+            {
+              "label": "standard output",
+              "input": "",
+              "expected_output": "Hello, World!"
+            }
+          ],
+          "constraints": [
+            "Use printf",
+            "main must return int"
+          ],
+          "forbidden_patterns": [],
+          "mental_model_checkpoints": [
+            "Can explain what #include <stdio.h> does",
+            "Can state what printf returns"
+          ],
+          "common_mistakes": [
+            {
+              "mistake": "Missing newline in printf",
+              "socratic_probe": "What does your output look like if the shell prompt appears on the same line as your output?"
+            }
+          ],
+          "style_requirements": [
+            "return 0 in main"
+          ],
+          "grading_notes": "Simplest possible exercise — full marks requires correct output AND correct main signature.",
+          "estimated_time_minutes": 5,
+          "tags": [
+            "intro",
+            "output",
+            "prerequisite",
+            "Level1"
+          ]
+        },
+        {
+          "id": "INTRO_L2_a",
+          "level": 2,
+          "variant": "a",
+          "category": "prerequisite",
+          "co_mapping": [],
+          "title": "Fahrenheit to Celsius converter",
+          "concept_under_test": "arithmetic expressions, float I/O, type casting",
+          "prerequisite_topics": [
+            "INTRO",
+            "DTYPES"
+          ],
+          "problem_statement": "Read a temperature in Fahrenheit (floating-point). Convert and print it in Celsius to 2 decimal places. Formula: C = (F - 32) * 5 / 9",
+          "sample_input": "98.6",
+          "sample_output": "37.00",
+          "test_cases": [
+            {
+              "label": "body temperature",
+              "input": "98.6",
+              "expected_output": "37.00"
+            },
+            {
+              "label": "freezing point",
+              "input": "32.0",
+              "expected_output": "0.00"
+            },
+            {
+              "label": "boiling point",
+              "input": "212.0",
+              "expected_output": "100.00"
+            }
+          ],
+          "constraints": [
+            "Use float or double",
+            "Use %.2f format specifier"
+          ],
+          "forbidden_patterns": [],
+          "mental_model_checkpoints": [
+            "Can explain integer division pitfall: 5/9 = 0 in C",
+            "Can state difference between 5/9 and 5.0/9"
+          ],
+          "common_mistakes": [
+            {
+              "mistake": "Integer division 5/9 gives 0",
+              "socratic_probe": "What does 5/9 evaluate to in C when both operands are int? How could you force floating-point division?"
+            }
+          ],
+          "style_requirements": [
+            "Meaningful variable names (not just f and c)"
+          ],
+          "grading_notes": "Integer division is the key teaching point.",
+          "estimated_time_minutes": 20,
+          "tags": [
+            "intro",
+            "arithmetic",
+            "float",
+            "prerequisite",
+            "Level2"
+          ]
+        }
+      ]
+    },
+    "DTYPES": {
+      "name": "Data Types and Variables",
+      "category": "prerequisite",
+      "acp_unit": null,
+      "syllabus_unit": 2,
+      "co_mapping": [],
+      "description": "Primitive types, sizeof, limits. Assumed known from prior course.",
+      "exercises": [
+        {
+          "id": "DTYPES_L1_a",
+          "level": 1,
+          "variant": "a",
+          "category": "prerequisite",
+          "co_mapping": [],
+          "title": "Integer overflow demonstration",
+          "concept_under_test": "int size, overflow, limits.h",
+          "prerequisite_topics": [
+            "INTRO"
+          ],
+          "problem_statement": "Print the maximum value of int on this system using INT_MAX from <limits.h>. Then print INT_MAX + 1 and observe overflow.",
+          "sample_input": "(none)",
+          "sample_output": "INT_MAX = 2147483647\nINT_MAX + 1 = -2147483648",
+          "test_cases": [
+            {
+              "label": "overflow demonstration",
+              "input": "",
+              "expected_output": "INT_MAX = 2147483647\nINT_MAX + 1 = -2147483648"
+            }
+          ],
+          "constraints": [
+            "Include <limits.h>",
+            "Use int, not long long"
+          ],
+          "forbidden_patterns": [
+            "hardcoded 2147483647"
+          ],
+          "mental_model_checkpoints": [
+            "Can explain why adding 1 to INT_MAX wraps to a negative number",
+            "Can state the width of int in bits on a 32-bit system"
+          ],
+          "common_mistakes": [
+            {
+              "mistake": "Hardcoding the value instead of using INT_MAX",
+              "socratic_probe": "What would happen to your program if it ran on a 16-bit system where int is 16 bits? Would your hardcoded value still be correct?"
+            }
+          ],
+          "style_requirements": [],
+          "grading_notes": "The goal is understanding overflow, not just printing.",
+          "estimated_time_minutes": 10,
+          "tags": [
+            "dtypes",
+            "overflow",
+            "prerequisite",
+            "Level1"
+          ]
+        }
+      ]
+    },
+    "OPS": {
+      "name": "Operators and Expressions",
+      "category": "prerequisite",
+      "acp_unit": null,
+      "syllabus_unit": 3,
+      "co_mapping": [],
+      "description": "Arithmetic, relational, logical, bitwise operators. Assumed known from prior course.",
+      "exercises": [
+        {
+          "id": "OPS_L1_a",
+          "level": 1,
+          "variant": "a",
+          "category": "prerequisite",
+          "co_mapping": [],
+          "title": "Bitwise operations on two integers",
+          "concept_under_test": "bitwise AND, OR, XOR, NOT, left/right shift",
+          "prerequisite_topics": [
+            "DTYPES"
+          ],
+          "problem_statement": "Read two non-negative integers A and B. Print: A AND B, A OR B, A XOR B, NOT A (bitwise), A left-shifted by 1, B right-shifted by 1.",
+          "sample_input": "12 10",
+          "sample_output": "AND: 8\nOR: 14\nXOR: 6\nNOT A: -13\nA<<1: 24\nB>>1: 5",
+          "test_cases": [
+            {
+              "label": "12 and 10",
+              "input": "12 10",
+              "expected_output": "AND: 8\nOR: 14\nXOR: 6\nNOT A: -13\nA<<1: 24\nB>>1: 5"
+            }
+          ],
+          "constraints": [
+            "Use int",
+            "Print each result on its own line with the label shown"
+          ],
+          "forbidden_patterns": [],
+          "mental_model_checkpoints": [
+            "Can convert 12 and 10 to binary and trace AND manually",
+            "Can explain why ~12 gives -13 (two's complement)"
+          ],
+          "common_mistakes": [
+            {
+              "mistake": "Confusing & (bitwise) with && (logical)",
+              "socratic_probe": "What is the difference between & and && in C? What does each one return?"
+            }
+          ],
+          "style_requirements": [],
+          "grading_notes": "",
+          "estimated_time_minutes": 20,
+          "tags": [
+            "ops",
+            "bitwise",
+            "prerequisite",
+            "Level1"
+          ]
+        }
+      ]
+    },
+    "IO": {
+      "name": "Input and Output",
+      "category": "prerequisite",
+      "acp_unit": null,
+      "syllabus_unit": 4,
+      "co_mapping": [],
+      "description": "scanf/printf format specifiers. Assumed known from prior course.",
+      "exercises": [
+        {
+          "id": "IO_L1_a",
+          "level": 1,
+          "variant": "a",
+          "category": "prerequisite",
+          "co_mapping": [],
+          "title": "Read and echo three values of different types",
+          "concept_under_test": "scanf format specifiers, printf format specifiers, mixed types",
+          "prerequisite_topics": [
+            "DTYPES"
+          ],
+          "problem_statement": "Read an int, a float, and a char (in that order, space-separated). Print them back on one line in the same order, with the float to 2 decimal places.",
+          "sample_input": "42 3.14 X",
+          "sample_output": "42 3.14 X",
+          "test_cases": [
+            {
+              "label": "typical",
+              "input": "42 3.14 X",
+              "expected_output": "42 3.14 X"
+            },
+            {
+              "label": "negative float",
+              "input": "-7 -1.50 Z",
+              "expected_output": "-7 -1.50 Z"
+            }
+          ],
+          "constraints": [
+            "One scanf call per variable",
+            "Use %d, %f, %c appropriately"
+          ],
+          "forbidden_patterns": [],
+          "mental_model_checkpoints": [
+            "Can state what & does in scanf(&n)",
+            "Can explain why %f reads float but %lf reads double"
+          ],
+          "common_mistakes": [
+            {
+              "mistake": "Using %d for float or %f for int",
+              "socratic_probe": "What does the format specifier tell scanf? What happens if the specifier doesn't match the variable's type?"
+            }
+          ],
+          "style_requirements": [],
+          "grading_notes": "",
+          "estimated_time_minutes": 15,
+          "tags": [
+            "io",
+            "scanf",
+            "printf",
+            "prerequisite",
+            "Level1"
+          ]
+        }
+      ]
+    },
+    "COND": {
+      "name": "Conditional Statements",
+      "category": "prerequisite",
+      "acp_unit": null,
+      "syllabus_unit": 5,
+      "co_mapping": [],
+      "description": "if-else, switch. Assumed known from prior course.",
+      "exercises": [
+        {
+          "id": "COND_L1_a",
+          "level": 1,
+          "variant": "a",
+          "category": "prerequisite",
+          "co_mapping": [],
+          "title": "Grade letter from percentage",
+          "concept_under_test": "if-else if-else chain, comparison operators",
+          "prerequisite_topics": [
+            "IO"
+          ],
+          "problem_statement": "Read an integer percentage (0–100). Print the letter grade: A (>=90), B (>=80), C (>=70), D (>=60), F (<60).",
+          "sample_input": "85",
+          "sample_output": "B",
+          "test_cases": [
+            {
+              "label": "B grade",
+              "input": "85",
+              "expected_output": "B"
+            },
+            {
+              "label": "A boundary",
+              "input": "90",
+              "expected_output": "A"
+            },
+            {
+              "label": "F grade",
+              "input": "55",
+              "expected_output": "F"
+            },
+            {
+              "label": "perfect score",
+              "input": "100",
+              "expected_output": "A"
+            }
+          ],
+          "constraints": [
+            "Use if-else if-else (not switch)",
+            "Do not use lookup tables"
+          ],
+          "forbidden_patterns": [],
+          "mental_model_checkpoints": [
+            "Can state what happens when percentage=90 reaches the first condition",
+            "Can explain why order of conditions matters"
+          ],
+          "common_mistakes": [
+            {
+              "mistake": "Reversed condition order causes wrong grade for boundary values",
+              "socratic_probe": "Trace your code for input 90. Which branch does it enter first? Is that the correct one?"
+            }
+          ],
+          "style_requirements": [],
+          "grading_notes": "",
+          "estimated_time_minutes": 15,
+          "tags": [
+            "cond",
+            "if-else",
+            "prerequisite",
+            "Level1"
+          ]
+        },
+        {
+          "id": "COND_L2_a",
+          "level": 2,
+          "variant": "a",
+          "category": "prerequisite",
+          "co_mapping": [],
+          "title": "Simple calculator with switch",
+          "concept_under_test": "switch statement, fall-through, char input, division by zero",
+          "prerequisite_topics": [
+            "COND"
+          ],
+          "problem_statement": "Read two doubles A and B, then a char operator (+, -, *, /). Print the result to 2 decimal places. If operator is '/' and B is 0, print 'Error: division by zero'.",
+          "sample_input": "10 3 /",
+          "sample_output": "3.33",
+          "test_cases": [
+            {
+              "label": "division",
+              "input": "10.0 3.0 /",
+              "expected_output": "3.33"
+            },
+            {
+              "label": "division by 0",
+              "input": "5.0 0.0 /",
+              "expected_output": "Error: division by zero"
+            },
+            {
+              "label": "addition",
+              "input": "7.5 2.5 +",
+              "expected_output": "10.00"
+            },
+            {
+              "label": "subtraction",
+              "input": "10.0 4.0 -",
+              "expected_output": "6.00"
+            }
+          ],
+          "constraints": [
+            "Use switch for the operator",
+            "Handle division by zero explicitly"
+          ],
+          "forbidden_patterns": [],
+          "mental_model_checkpoints": [
+            "Can explain what happens if you forget a break in switch",
+            "Can explain how to check for 0.0 with floating-point"
+          ],
+          "common_mistakes": [
+            {
+              "mistake": "Missing break causes fall-through to next case",
+              "socratic_probe": "What happens in your switch when the operator is '+' and you're missing the break after the '+' case? Walk through the execution."
+            }
+          ],
+          "style_requirements": [
+            "Default case in switch"
+          ],
+          "grading_notes": "",
+          "estimated_time_minutes": 25,
+          "tags": [
+            "cond",
+            "switch",
+            "prerequisite",
+            "Level2"
+          ]
+        }
+      ]
+    },
+    "LOOP": {
+      "name": "Loops",
+      "category": "prerequisite",
+      "acp_unit": null,
+      "syllabus_unit": 6,
+      "co_mapping": [],
+      "description": "for, while, do-while loops. Assumed known from prior course.",
+      "exercises": [
+        {
+          "id": "LOOP_L1_a",
+          "level": 1,
+          "variant": "a",
+          "category": "prerequisite",
+          "co_mapping": [],
+          "title": "Print first N natural numbers",
+          "concept_under_test": "for loop, initialization, condition, increment",
+          "prerequisite_topics": [
+            "COND"
+          ],
+          "problem_statement": "Read a positive integer N. Print all natural numbers from 1 to N, one per line.",
+          "sample_input": "4",
+          "sample_output": "1\n2\n3\n4",
+          "test_cases": [
+            {
+              "label": "typical (N=4)",
+              "input": "4",
+              "expected_output": "1\n2\n3\n4"
+            },
+            {
+              "label": "minimum (N=1)",
+              "input": "1",
+              "expected_output": "1"
+            },
+            {
+              "label": "larger (N=10)",
+              "input": "10",
+              "expected_output": "1\n2\n3\n4\n5\n6\n7\n8\n9\n10"
+            }
+          ],
+          "constraints": [
+            "Use a for loop",
+            "Use scanf for input"
+          ],
+          "forbidden_patterns": [
+            "hardcoded output"
+          ],
+          "mental_model_checkpoints": [
+            "Can state value of loop variable after each iteration",
+            "Can identify loop termination condition in plain English"
+          ],
+          "common_mistakes": [
+            {
+              "mistake": "Loop starts from 0 instead of 1",
+              "socratic_probe": "What is the very first value your loop variable i has when the loop body first runs?"
+            },
+            {
+              "mistake": "Off-by-one: loop runs to N-1",
+              "socratic_probe": "For N=4, how many times does your loop body execute? Count them."
+            }
+          ],
+          "style_requirements": [],
+          "grading_notes": "",
+          "estimated_time_minutes": 15,
+          "tags": [
+            "loops",
+            "for",
+            "prerequisite",
+            "Level1"
+          ]
+        },
+        {
+          "id": "LOOP_L1_b",
+          "level": 1,
+          "variant": "b",
+          "category": "prerequisite",
+          "co_mapping": [],
+          "title": "Sum of first N natural numbers",
+          "concept_under_test": "for loop, accumulator pattern",
+          "prerequisite_topics": [
+            "COND"
+          ],
+          "problem_statement": "Read a positive integer N. Compute and print the sum 1 + 2 + ... + N.",
+          "sample_input": "5",
+          "sample_output": "15",
+          "test_cases": [
+            {
+              "label": "N=5",
+              "input": "5",
+              "expected_output": "15"
+            },
+            {
+              "label": "N=1",
+              "input": "1",
+              "expected_output": "1"
+            },
+            {
+              "label": "N=10",
+              "input": "10",
+              "expected_output": "55"
+            }
+          ],
+          "constraints": [
+            "Use a for loop",
+            "Use an accumulator variable (not the formula n*(n+1)/2)"
+          ],
+          "forbidden_patterns": [
+            "n*(n+1)/2",
+            "n * (n + 1) / 2"
+          ],
+          "mental_model_checkpoints": [
+            "Can state the value of sum after each iteration for N=3",
+            "Can explain why the accumulator must be initialised to 0 before the loop"
+          ],
+          "common_mistakes": [
+            {
+              "mistake": "Accumulator not initialised to 0",
+              "socratic_probe": "What value does a local int variable have in C before you assign it? Is that a safe assumption for a sum accumulator?"
+            }
+          ],
+          "style_requirements": [],
+          "grading_notes": "",
+          "estimated_time_minutes": 15,
+          "tags": [
+            "loops",
+            "for",
+            "accumulator",
+            "prerequisite",
+            "Level1"
+          ]
+        },
+        {
+          "id": "LOOP_L1_c",
+          "level": 1,
+          "variant": "c",
+          "category": "prerequisite",
+          "co_mapping": [],
+          "title": "Count the digits of a number",
+          "concept_under_test": "while loop, integer division as loop engine",
+          "prerequisite_topics": [
+            "COND"
+          ],
+          "problem_statement": "Read a positive integer N. Print the number of digits it has.",
+          "sample_input": "12345",
+          "sample_output": "5",
+          "test_cases": [
+            {
+              "label": "5-digit number",
+              "input": "12345",
+              "expected_output": "5"
+            },
+            {
+              "label": "single digit",
+              "input": "7",
+              "expected_output": "1"
+            },
+            {
+              "label": "10",
+              "input": "10",
+              "expected_output": "2"
+            }
+          ],
+          "constraints": [
+            "Use a while loop",
+            "Use integer division (no string conversion, no log10)"
+          ],
+          "forbidden_patterns": [
+            "log10",
+            "sprintf",
+            "strlen"
+          ],
+          "mental_model_checkpoints": [
+            "Can state what N/10 does to the number each iteration",
+            "Can explain the loop termination condition"
+          ],
+          "common_mistakes": [
+            {
+              "mistake": "Loop condition is N > 0 but counter starts at 0 — misses one digit",
+              "socratic_probe": "Trace your loop for N=7. How many times does the loop body run? Should it run once or zero times?"
+            }
+          ],
+          "style_requirements": [],
+          "grading_notes": "",
+          "estimated_time_minutes": 15,
+          "tags": [
+            "loops",
+            "while",
+            "prerequisite",
+            "Level1"
+          ]
+        },
+        {
+          "id": "LOOP_L2_a",
+          "level": 2,
+          "variant": "a",
+          "category": "prerequisite",
+          "co_mapping": [],
+          "title": "Sum of digits of an integer",
+          "concept_under_test": "while loop, modulo operator, handling negative numbers",
+          "prerequisite_topics": [
+            "LOOP"
+          ],
+          "problem_statement": "Read an integer N (may be negative). Compute and print the sum of its digits. For N = -123, the answer is 6.",
+          "sample_input": "-123",
+          "sample_output": "6",
+          "test_cases": [
+            {
+              "label": "negative",
+              "input": "-123",
+              "expected_output": "6"
+            },
+            {
+              "label": "zero",
+              "input": "0",
+              "expected_output": "0"
+            },
+            {
+              "label": "positive",
+              "input": "456",
+              "expected_output": "15"
+            }
+          ],
+          "constraints": [
+            "Handle negative numbers",
+            "Use a while loop",
+            "Do not convert to string"
+          ],
+          "forbidden_patterns": [
+            "sprintf",
+            "strlen",
+            "recursion"
+          ],
+          "mental_model_checkpoints": [
+            "Can explain what N % 10 gives for N = 123",
+            "Can explain what N / 10 does to the number each iteration",
+            "Can handle N = 0 as an edge case"
+          ],
+          "common_mistakes": [
+            {
+              "mistake": "Fails for N=0 (loop never executes)",
+              "socratic_probe": "What is the value of N before your while loop starts when input is 0? Does your condition allow the loop to run even once?"
+            },
+            {
+              "mistake": "Fails for negative N (modulo is negative in C)",
+              "socratic_probe": "What does -123 % 10 evaluate to in C? Is that what you expected for digit extraction?"
+            }
+          ],
+          "style_requirements": [],
+          "grading_notes": "Negative modulo behaviour is the key teaching point.",
+          "estimated_time_minutes": 25,
+          "tags": [
+            "loops",
+            "while",
+            "modulo",
+            "prerequisite",
+            "Level2"
+          ]
+        },
+        {
+          "id": "LOOP_L2_b",
+          "level": 2,
+          "variant": "b",
+          "category": "prerequisite",
+          "co_mapping": [],
+          "title": "Check if a number is prime",
+          "concept_under_test": "while/for loop, trial division, early exit with break",
+          "prerequisite_topics": [
+            "LOOP"
+          ],
+          "problem_statement": "Read a positive integer N (N >= 2). Print 'Prime' if it is prime, 'Not prime' otherwise.",
+          "sample_input": "17",
+          "sample_output": "Prime",
+          "test_cases": [
+            {
+              "label": "prime 17",
+              "input": "17",
+              "expected_output": "Prime"
+            },
+            {
+              "label": "not prime 15",
+              "input": "15",
+              "expected_output": "Not prime"
+            },
+            {
+              "label": "prime 2",
+              "input": "2",
+              "expected_output": "Prime"
+            },
+            {
+              "label": "not prime 4",
+              "input": "4",
+              "expected_output": "Not prime"
+            }
+          ],
+          "constraints": [
+            "Only check divisors up to sqrt(N)",
+            "Use a flag variable or early break"
+          ],
+          "forbidden_patterns": [],
+          "mental_model_checkpoints": [
+            "Can explain why checking up to sqrt(N) is sufficient",
+            "Can trace what happens for N=4: does 2 divide 4?"
+          ],
+          "common_mistakes": [
+            {
+              "mistake": "Loops from 2 to N-1 (inefficient but correct)",
+              "socratic_probe": "If you find that 4 divides 16, do you need to keep checking 5, 6, 7? What is the highest divisor you ever need to check?"
+            },
+            {
+              "mistake": "Marks 2 as not prime",
+              "socratic_probe": "Trace your code for N=2. What does your loop do — does it enter at all? What does your flag start as?"
+            }
+          ],
+          "style_requirements": [],
+          "grading_notes": "Efficiency: trial division up to sqrt(N) is required for full marks.",
+          "estimated_time_minutes": 25,
+          "tags": [
+            "loops",
+            "prime",
+            "prerequisite",
+            "Level2"
+          ]
+        },
+        {
+          "id": "LOOP_L3_a",
+          "level": 3,
+          "variant": "a",
+          "category": "prerequisite",
+          "co_mapping": [],
+          "title": "Pascal's Triangle (first N rows)",
+          "concept_under_test": "nested loops, 2D array accumulation, combinatorial thinking",
+          "prerequisite_topics": [
+            "LOOP",
+            "ARRAY"
+          ],
+          "problem_statement": "Read N (N <= 15). Print the first N rows of Pascal's Triangle. Each row's values are separated by a single space.",
+          "sample_input": "4",
+          "sample_output": "1\n1 1\n1 2 1\n1 3 3 1",
+          "test_cases": [
+            {
+              "label": "4 rows",
+              "input": "4",
+              "expected_output": "1\n1 1\n1 2 1\n1 3 3 1"
+            },
+            {
+              "label": "1 row",
+              "input": "1",
+              "expected_output": "1"
+            }
+          ],
+          "constraints": [
+            "N <= 15",
+            "Store triangle in a 2D array",
+            "No factorial function"
+          ],
+          "forbidden_patterns": [
+            "factorial",
+            "nCr"
+          ],
+          "mental_model_checkpoints": [
+            "Can state the relationship between triangle[i][j] and the two elements above it",
+            "Can identify the boundary conditions for first and last element in each row"
+          ],
+          "common_mistakes": [
+            {
+              "mistake": "Array not initialised — garbage values appear",
+              "socratic_probe": "What is the value of triangle[2][1] after your array declaration but before your loops run?"
+            }
+          ],
+          "style_requirements": [],
+          "grading_notes": "2D array initialisation to 0 is required. Boundary conditions for first/last element per row must be explicit.",
+          "estimated_time_minutes": 45,
+          "tags": [
+            "loops",
+            "2D-array",
+            "nested",
+            "prerequisite",
+            "Level3"
+          ]
+        }
+      ]
+    },
+    "JUMP": {
+      "name": "Jump Statements",
+      "category": "prerequisite",
+      "acp_unit": null,
+      "syllabus_unit": 7,
+      "co_mapping": [],
+      "description": "break, continue, goto. Assumed known from prior course.",
+      "exercises": [
+        {
+          "id": "JUMP_L1_a",
+          "level": 1,
+          "variant": "a",
+          "category": "prerequisite",
+          "co_mapping": [],
+          "title": "Print numbers skipping multiples of 3",
+          "concept_under_test": "continue statement",
+          "prerequisite_topics": [
+            "LOOP"
+          ],
+          "problem_statement": "Read N. Print all integers from 1 to N, skipping any that are divisible by 3. Use the continue statement.",
+          "sample_input": "7",
+          "sample_output": "1\n2\n4\n5\n7",
+          "test_cases": [
+            {
+              "label": "N=7",
+              "input": "7",
+              "expected_output": "1\n2\n4\n5\n7"
+            },
+            {
+              "label": "N=3",
+              "input": "3",
+              "expected_output": "1\n2"
+            }
+          ],
+          "constraints": [
+            "Must use continue (not a conditional printf)"
+          ],
+          "forbidden_patterns": [],
+          "mental_model_checkpoints": [
+            "Can explain what continue does versus break",
+            "Can trace loop for N=6 step by step"
+          ],
+          "common_mistakes": [
+            {
+              "mistake": "Using break instead of continue",
+              "socratic_probe": "What does break do when the loop variable equals 3? What does continue do? Which one do you want here?"
+            }
+          ],
+          "style_requirements": [],
+          "grading_notes": "",
+          "estimated_time_minutes": 15,
+          "tags": [
+            "jump",
+            "continue",
+            "prerequisite",
+            "Level1"
+          ]
+        }
+      ]
+    }
+  }
+}

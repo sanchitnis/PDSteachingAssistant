@@ -1,0 +1,271 @@
+{
+  "schema_version": "1.2",
+  "file_type": "advanced",
+  "last_updated": "2026-06-04",
+  "description": "Beyond-syllabus enrichment exercises for fast finishers. Topics not assessed in the ACP exam (recursion, unions, enums, random file access). Unlocked after CO1-CO5 are at Level 3.",
+  "institution": "REVA University",
+  "department": "School of Computer Science and Engineering",
+  "course": "Advanced C Programming with Generative AI",
+  "co_descriptions": {
+    "CO1": "Develop modular and reusable code using functions (call by value and call by reference), arrays and structures.",
+    "CO2": "Apply modular programming to manage complex data collections using Arrays of Structures.",
+    "CO3": "Develop modular and reusable code using pointers and dynamic memory allocation.",
+    "CO4": "Develop modular and reusable code utilizing Strings by implementing user-defined logic for processing text-based data.",
+    "CO5": "Develop a modular application for file handling in C.",
+    "CO6": "Leverage generative AI to design and build a mini-project application."
+  },
+  "topics": {
+    "RECUR": {
+      "name": "Recursion",
+      "category": "advanced",
+      "acp_unit": null,
+      "syllabus_unit": 90,
+      "co_mapping": [],
+      "description": "Recursive algorithms — not in the ACP syllabus. For advanced learners who have completed all CO1–CO5 topics.",
+      "exercises": [
+        {
+          "id": "RECUR_L1_a",
+          "level": 1,
+          "variant": "a",
+          "category": "advanced",
+          "co_mapping": [],
+          "title": "Recursive factorial",
+          "concept_under_test": "recursion, base case, recursive case, call stack",
+          "prerequisite_topics": [
+            "FUNC"
+          ],
+          "problem_statement": "Write a recursive function long long factorial(int n) that returns n! (0 <= n <= 20). Identify and implement the base case explicitly.",
+          "sample_input": "6",
+          "sample_output": "720",
+          "test_cases": [
+            {
+              "label": "6!",
+              "input": "6",
+              "expected_output": "720"
+            },
+            {
+              "label": "0!",
+              "input": "0",
+              "expected_output": "1"
+            },
+            {
+              "label": "1!",
+              "input": "1",
+              "expected_output": "1"
+            }
+          ],
+          "constraints": [
+            "Must be recursive (no loop in factorial)",
+            "Must have an explicit base case with a comment"
+          ],
+          "forbidden_patterns": [
+            "for (",
+            "while ("
+          ],
+          "mental_model_checkpoints": [
+            "Can trace the call stack for n=3: factorial(3) → factorial(2) → factorial(1) → factorial(0)",
+            "Can explain what happens without a base case"
+          ],
+          "common_mistakes": [
+            {
+              "mistake": "Missing or wrong base case — infinite recursion",
+              "socratic_probe": "When does your function stop calling itself? What is the smallest input that goes straight to a return value without another recursive call?"
+            }
+          ],
+          "style_requirements": [
+            "Comment identifying base case and recursive case"
+          ],
+          "grading_notes": "",
+          "estimated_time_minutes": 25,
+          "tags": [
+            "recursion",
+            "base-case",
+            "advanced",
+            "Level1"
+          ]
+        }
+      ]
+    },
+    "UNION": {
+      "name": "Unions",
+      "category": "advanced",
+      "acp_unit": null,
+      "syllabus_unit": 91,
+      "co_mapping": [],
+      "description": "Unions — not in the ACP syllabus. For advanced learners.",
+      "exercises": [
+        {
+          "id": "UNION_L1_a",
+          "level": 1,
+          "variant": "a",
+          "category": "advanced",
+          "co_mapping": [],
+          "title": "Union memory sharing demonstration",
+          "concept_under_test": "union definition, shared memory, sizeof union",
+          "prerequisite_topics": [
+            "STRUCT"
+          ],
+          "problem_statement": "Define a union Data with members: int i, float f, char str[20]. Print the size of the union. Store an int 65 in i, then read and print the value of str[0] (expect 'A'). Explain in a comment why this works.",
+          "sample_input": "(none)",
+          "sample_output": "Size of union: 20\nAs char: A",
+          "test_cases": [
+            {
+              "label": "standard",
+              "input": "",
+              "expected_output": "Size of union: 20\nAs char: A"
+            }
+          ],
+          "constraints": [
+            "Must print sizeof the union",
+            "Must demonstrate value overlap via int and char member"
+          ],
+          "forbidden_patterns": [],
+          "mental_model_checkpoints": [
+            "Can explain why sizeof(union Data) == 20 (not 20 + 4 + 4)",
+            "Can explain why storing 65 in i makes str[0] == 'A' (ASCII)"
+          ],
+          "common_mistakes": [
+            {
+              "mistake": "Confuses union with struct sizing",
+              "socratic_probe": "If a struct has an int and a char[20], what is sizeof(struct)? If a union has the same members, what is sizeof(union)? Why the difference?"
+            }
+          ],
+          "style_requirements": [
+            "Comment explaining memory overlap"
+          ],
+          "grading_notes": "",
+          "estimated_time_minutes": 25,
+          "tags": [
+            "unions",
+            "memory",
+            "advanced",
+            "Level1"
+          ]
+        }
+      ]
+    },
+    "ENUM": {
+      "name": "Enumerations",
+      "category": "advanced",
+      "acp_unit": null,
+      "syllabus_unit": 92,
+      "co_mapping": [],
+      "description": "Enumerations — not in the ACP syllabus. For advanced learners.",
+      "exercises": [
+        {
+          "id": "ENUM_L1_a",
+          "level": 1,
+          "variant": "a",
+          "category": "advanced",
+          "co_mapping": [],
+          "title": "Days of the week with enum",
+          "concept_under_test": "enum definition, enum values, switch on enum",
+          "prerequisite_topics": [
+            "COND"
+          ],
+          "problem_statement": "Define an enum Day (MON=1 through SUN=7). Read an integer 1-7. Use a switch to print the full day name. For invalid input, print 'Invalid day'.",
+          "sample_input": "3",
+          "sample_output": "Wednesday",
+          "test_cases": [
+            {
+              "label": "Wednesday",
+              "input": "3",
+              "expected_output": "Wednesday"
+            },
+            {
+              "label": "Sunday",
+              "input": "7",
+              "expected_output": "Sunday"
+            },
+            {
+              "label": "invalid",
+              "input": "9",
+              "expected_output": "Invalid day"
+            }
+          ],
+          "constraints": [
+            "Must use enum (not plain int constants)",
+            "Must use switch"
+          ],
+          "forbidden_patterns": [],
+          "mental_model_checkpoints": [
+            "Can state what value MON has and what WED has",
+            "Can explain why enum values can be used in switch"
+          ],
+          "common_mistakes": [
+            {
+              "mistake": "Forgets default case in switch",
+              "socratic_probe": "What happens in your switch if the user enters 9? What should happen?"
+            }
+          ],
+          "style_requirements": [],
+          "grading_notes": "",
+          "estimated_time_minutes": 20,
+          "tags": [
+            "enum",
+            "switch",
+            "advanced",
+            "Level1"
+          ]
+        }
+      ]
+    },
+    "FSEEK": {
+      "name": "Random File Access",
+      "category": "advanced",
+      "acp_unit": null,
+      "syllabus_unit": 93,
+      "co_mapping": [],
+      "description": "fseek, ftell, rewind — not in the ACP syllabus. For advanced learners who want to explore random file access.",
+      "exercises": [
+        {
+          "id": "FSEEK_L1_a",
+          "level": 1,
+          "variant": "a",
+          "category": "advanced",
+          "co_mapping": [],
+          "title": "File size and reverse print using fseek and ftell",
+          "concept_under_test": "fseek, ftell, SEEK_END, SEEK_SET, random access",
+          "prerequisite_topics": [
+            "FILE"
+          ],
+          "problem_statement": "Write a program that opens an existing text file 'sample.txt' (create it first with fprintf). Use fseek(fp, 0, SEEK_END) and ftell(fp) to determine its size. Then use fseek to navigate to specific byte positions and print the file size in bytes.",
+          "sample_input": "Hello, World!\nSecond line.",
+          "sample_output": "File size: 26 bytes\nLast character: .",
+          "test_cases": [
+            {
+              "label": "two lines",
+              "input": "Hello, World!\nSecond line.",
+              "expected_output": "File size: 26 bytes\nLast character: ."
+            }
+          ],
+          "constraints": [
+            "Use fseek and ftell (not stat or platform APIs)",
+            "Check fopen for NULL"
+          ],
+          "forbidden_patterns": [],
+          "mental_model_checkpoints": [
+            "Can explain what SEEK_END means as the origin for fseek",
+            "Can state what ftell returns — byte offset from start of file"
+          ],
+          "common_mistakes": [
+            {
+              "mistake": "Does not rewind before reading content after seeking to end",
+              "socratic_probe": "After fseek(fp, 0, SEEK_END), where is the file position? Can you read from that position?"
+            }
+          ],
+          "style_requirements": [],
+          "grading_notes": "",
+          "estimated_time_minutes": 35,
+          "tags": [
+            "file-io",
+            "fseek",
+            "ftell",
+            "advanced",
+            "Level1"
+          ]
+        }
+      ]
+    }
+  }
+}

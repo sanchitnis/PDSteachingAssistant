@@ -1,0 +1,529 @@
+{
+  "schema_version": "1.2",
+  "file_type": "lab_programs",
+  "last_updated": "2026-06-04",
+  "description": "10 mandatory lab programs for the ACP course. All students must complete every program. Each program maps to an ACP Course Outcome (CO) and is graded on the 10-point rubric.",
+  "institution": "REVA University",
+  "department": "School of Computer Science and Engineering",
+  "course": "Advanced C Programming with Generative AI",
+
+  "topics": {
+
+    "FUNC_MOD": {
+      "name": "Modular Programming with Functions",
+      "acp_unit": 1,
+      "syllabus_unit": 10,
+      "category": "lab_program",
+      "co_mapping": ["CO1"],
+      "description": "Functions, call by value, call by reference, passing arrays and structures to functions.",
+      "exercises": [
+        {
+          "id": "FUNC_MOD_LAB_P1",
+          "lab_program_no": 1,
+          "level": 2,
+          "variant": "a",
+          "title": "Find maximum value and its index in a float array",
+          "co_mapping": ["CO1"],
+          "concept_under_test": "modular design, passing arrays to functions, for loop, if statement",
+          "prerequisite_topics": ["ARRAY", "FUNC"],
+          "function_prototypes": [
+            "void input(int n, float arr[n]);",
+            "int find_max_index(int n, float arr[n]);",
+            "void output(float arr[], int max_index);"
+          ],
+          "problem_statement": "Write a modular C program to read n float values from the user, store them in an array, find the maximum value and its index, and display the result. Each logical task (input, processing, output) must be a separate function.",
+          "sample_input": "5\n3.5 1.2 4.8 2.7 0.9",
+          "sample_output": "Maximum value: 4.80\nIndex: 2",
+          "test_cases": [
+            { "label": "standard 5 floats",   "input": "5\n3.5 1.2 4.8 2.7 0.9", "expected_output": "Maximum value: 4.80\nIndex: 2" },
+            { "label": "single element",      "input": "1\n7.5",                   "expected_output": "Maximum value: 7.50\nIndex: 0" },
+            { "label": "all equal",           "input": "3\n2.0 2.0 2.0",           "expected_output": "Maximum value: 2.00\nIndex: 0" },
+            { "label": "maximum at end",      "input": "4\n1.1 2.2 3.3 9.9",       "expected_output": "Maximum value: 9.90\nIndex: 3" }
+          ],
+          "constraints": [
+            "Must have at least 3 functions: input(), find_max_index(), output()",
+            "Array must be passed to functions (not global)",
+            "n must be read from the user (not hardcoded)"
+          ],
+          "forbidden_patterns": ["hardcoded n", "global array"],
+          "mental_model_checkpoints": [
+            "Can explain how an array decays to a pointer when passed to a function",
+            "Can state why the function needs both the array and its size n",
+            "Can trace find_max_index() for the first two elements to verify logic"
+          ],
+          "common_mistakes": [
+            { "mistake": "Comparing arr[i] > arr[max_index] but initialising max_index to 0 — correct initialisation but wrong for edge case of all equal", "socratic_probe": "If all values are equal, what index does your function return? Is that the expected first occurrence?" },
+            { "mistake": "Not passing n to find_max_index — function doesn't know array bounds", "socratic_probe": "Inside find_max_index, how does the function know when to stop iterating if n is not passed?" }
+          ],
+          "style_requirements": [
+            "Function comment block required for each function",
+            "Meaningful variable names"
+          ],
+          "grading_notes": "Modular decomposition is the primary criterion. Output format must match exactly.",
+          "estimated_time_minutes": 45,
+          "tags": ["functions", "arrays", "modular", "CO1", "lab", "Level2"]
+        },
+        {
+          "id": "FUNC_MOD_LAB_P2",
+          "lab_program_no": 2,
+          "level": 2,
+          "variant": "b",
+          "title": "Compare areas of three rectangles using functions and structure",
+          "co_mapping": ["CO1"],
+          "concept_under_test": "struct definition, struct as function parameter, call by value, else-if ladder",
+          "prerequisite_topics": ["STRUCT", "FUNC"],
+          "function_prototypes": [
+            "Rectangle input();",
+            "float calculate_area(Rectangle rect);",
+            "void compare_areas(Rectangle r1, Rectangle r2, Rectangle r3);"
+          ],
+          "problem_statement": "Write a C program to compare areas of three rectangles and find the largest using functions and a structure. Define the following typedef:\n\ntypedef struct {\n    char name[50];\n    float length;\n    float width;\n    float area;\n} Rectangle;\n\nEach rectangle is read using input(), its area computed by calculate_area(), and the largest identified by compare_areas() using an else-if ladder.",
+          "sample_input": "Rect1\n5.0\n3.0\nRect2\n4.0\n6.0\nRect3\n2.0\n8.0",
+          "sample_output": "Area of Rect1: 15.00\nArea of Rect2: 24.00\nArea of Rect3: 16.00\nLargest rectangle: Rect2 with area 24.00",
+          "test_cases": [
+            { "label": "standard",    "input": "Rect1\n5.0\n3.0\nRect2\n4.0\n6.0\nRect3\n2.0\n8.0", "expected_output": "Area of Rect1: 15.00\nArea of Rect2: 24.00\nArea of Rect3: 16.00\nLargest rectangle: Rect2 with area 24.00" },
+            { "label": "r3 largest", "input": "A\n1.0\n1.0\nB\n2.0\n2.0\nC\n5.0\n5.0",             "expected_output": "Area of A: 1.00\nArea of B: 4.00\nArea of C: 25.00\nLargest rectangle: C with area 25.00" }
+          ],
+          "constraints": [
+            "Use typedef struct as specified",
+            "calculate_area() must take Rectangle by value (call by value)",
+            "compare_areas() must use an else-if ladder (not a loop)"
+          ],
+          "forbidden_patterns": ["global struct", "pointer to rectangle in calculate_area"],
+          "mental_model_checkpoints": [
+            "Can explain what happens to the struct copy when passed by value to calculate_area()",
+            "Can state why area is a field in Rectangle rather than a local variable in main"
+          ],
+          "common_mistakes": [
+            { "mistake": "Sets area inside calculate_area but struct is passed by value — the change is not reflected in main", "socratic_probe": "When you call calculate_area(rect), does the function receive rect itself or a copy? If it modifies rect.area inside, does that change the original in main?" },
+            { "mistake": "Else-if ladder has wrong condition order", "socratic_probe": "If Rect1 and Rect2 have equal areas, which branch does your else-if enter? Is Rect1 or Rect2 reported as largest? Is that what the spec requires?" }
+          ],
+          "style_requirements": [
+            "Function comment block required for each function",
+            "typedef must be declared before main"
+          ],
+          "grading_notes": "Call-by-value for structs is the key teaching point. Calculate_area should return the area, not modify the struct.",
+          "estimated_time_minutes": 45,
+          "tags": ["struct", "functions", "call-by-value", "CO1", "lab", "Level2"]
+        }
+      ]
+    },
+
+    "ARRAYSTRUCT": {
+      "name": "Array of Structures",
+      "acp_unit": 2,
+      "syllabus_unit": 20,
+      "category": "lab_program",
+      "co_mapping": ["CO2"],
+      "description": "Passing arrays of structures to functions, accessing structure members, modular programs using array of structures.",
+      "exercises": [
+        {
+          "id": "ARRAYSTRUCT_LAB_P3",
+          "lab_program_no": 3,
+          "level": 2,
+          "variant": "a",
+          "title": "Array of Rectangle structures — area and largest",
+          "co_mapping": ["CO2"],
+          "concept_under_test": "array of structures, passing array of structures to functions, for loop",
+          "prerequisite_topics": ["STRUCT", "ARRAY", "FUNC"],
+          "function_prototypes": [
+            "void input(int n, Rectangle rects[n]);",
+            "void calculate_area(int n, Rectangle rects[n]);",
+            "int findLargestArea(int n, Rectangle rects[n]);",
+            "void output(int largestIndex, Rectangle rects[]);"
+          ],
+          "problem_statement": "Write a C program using array of structures and functions to:\ni.  Accept the number of rectangles n from the user.\nii. For each rectangle, accept its length and width.\niii. Calculate and display the area of each rectangle.\niv. Determine and display the rectangle with the largest area.\n\nUse the following typedef:\n\ntypedef struct {\n    float length;\n    float width;\n    float area;\n} Rectangle;",
+          "sample_input": "3\n5.0 3.0\n4.0 6.0\n2.0 8.0",
+          "sample_output": "Rectangle 1: Area = 15.00\nRectangle 2: Area = 24.00\nRectangle 3: Area = 16.00\nLargest rectangle: Rectangle 2 with area 24.00",
+          "test_cases": [
+            { "label": "3 rectangles",  "input": "3\n5.0 3.0\n4.0 6.0\n2.0 8.0",   "expected_output": "Rectangle 1: Area = 15.00\nRectangle 2: Area = 24.00\nRectangle 3: Area = 16.00\nLargest rectangle: Rectangle 2 with area 24.00" },
+            { "label": "single",        "input": "1\n7.0 3.0",                       "expected_output": "Rectangle 1: Area = 21.00\nLargest rectangle: Rectangle 1 with area 21.00" },
+            { "label": "all equal",     "input": "2\n4.0 4.0\n8.0 2.0",             "expected_output": "Rectangle 1: Area = 16.00\nRectangle 2: Area = 16.00\nLargest rectangle: Rectangle 1 with area 16.00" }
+          ],
+          "constraints": [
+            "Array of Rectangle must be declared in main and passed to functions",
+            "calculate_area() fills the area field for all elements",
+            "findLargestArea() returns the index (0-based) of the largest element",
+            "n must be entered by the user"
+          ],
+          "forbidden_patterns": ["global array", "hardcoded n"],
+          "mental_model_checkpoints": [
+            "Can state how to access rects[i].length inside a function",
+            "Can explain why calculate_area must modify the area field (not just return a value)",
+            "Can trace findLargestArea() for the test case showing which comparisons are made"
+          ],
+          "common_mistakes": [
+            { "mistake": "calculate_area passes struct by value — area field update lost after function returns", "socratic_probe": "When rects is passed to calculate_area, is each element passed by value or by reference? What does that mean for the area field you write inside the function?" },
+            { "mistake": "findLargestArea initialises max_idx to -1 and crashes on empty array", "socratic_probe": "What is the safest initial value for max_idx if n is guaranteed to be at least 1?" }
+          ],
+          "style_requirements": [
+            "Function comment block required for each function",
+            "typedef declared before main"
+          ],
+          "grading_notes": "Passing array of structs to functions is the core concept. Array elements are passed by reference (pointer to first element).",
+          "estimated_time_minutes": 60,
+          "tags": ["array-of-structs", "functions", "CO2", "lab", "Level2"]
+        },
+        {
+          "id": "ARRAYSTRUCT_LAB_P4",
+          "lab_program_no": 4,
+          "level": 2,
+          "variant": "b",
+          "title": "Flight search by destination using array of structures",
+          "co_mapping": ["CO2"],
+          "concept_under_test": "array of structures, string comparison, search function, passing array of structs",
+          "prerequisite_topics": ["STRUCT", "ARRAY", "STRING", "FUNC"],
+          "function_prototypes": [
+            "void readFlights(int n, Flight_t f[]);",
+            "void searchByDestination(int n, Flight_t f[], char searchDest[]);"
+          ],
+          "problem_statement": "Write a modular C program to manage flight records. Create a structure Flight with fields: flight_number (char[10]), destination (char[50]), available_seats (int). Create an array of 4 flights. Read flight details from the user, then accept a destination name and search for a matching flight, displaying the flight number if found.\n\ntypedef struct {\n    char flight_number[10];\n    char destination[50];\n    int available_seats;\n} Flight_t;",
+          "sample_input": "AI101 Delhi 50\nAI202 Mumbai 30\nAI303 Bangalore 20\nAI404 Chennai 10\nMumbai",
+          "sample_output": "Flight found: AI202 to Mumbai with 30 available seats",
+          "test_cases": [
+            { "label": "found",     "input": "AI101 Delhi 50\nAI202 Mumbai 30\nAI303 Bangalore 20\nAI404 Chennai 10\nMumbai",    "expected_output": "Flight found: AI202 to Mumbai with 30 available seats" },
+            { "label": "not found", "input": "AI101 Delhi 50\nAI202 Mumbai 30\nAI303 Bangalore 20\nAI404 Chennai 10\nHyderabad", "expected_output": "No flight found to Hyderabad"                              }
+          ],
+          "constraints": [
+            "Array size is fixed at 4",
+            "Use strcmp() for destination comparison",
+            "searchByDestination() must print the result (not return it)"
+          ],
+          "forbidden_patterns": ["== for string comparison", "global array"],
+          "mental_model_checkpoints": [
+            "Can explain why == cannot be used to compare strings in C",
+            "Can state what strcmp returns for equal strings vs. different strings",
+            "Can trace searchByDestination for 'Mumbai' showing which comparisons are made"
+          ],
+          "common_mistakes": [
+            { "mistake": "Using == to compare strings instead of strcmp()", "socratic_probe": "What does f[i].destination == searchDest compare in C? What do the two sides of == hold when destination is a char array?" },
+            { "mistake": "Loop continues after finding match — prints multiple results", "socratic_probe": "Once a matching flight is found, should the function continue checking remaining flights? What happens if two flights serve the same destination?" }
+          ],
+          "style_requirements": [
+            "Function comment block required for each function",
+            "#include <string.h> required for strcmp"
+          ],
+          "grading_notes": "String comparison with strcmp is the key correctness point. Early exit on match is required for efficiency marks.",
+          "estimated_time_minutes": 60,
+          "tags": ["array-of-structs", "string-search", "CO2", "lab", "Level2"]
+        }
+      ]
+    },
+
+    "PTR": {
+      "name": "Pointers",
+      "acp_unit": 3,
+      "syllabus_unit": 30,
+      "category": "lab_program",
+      "co_mapping": ["CO3"],
+      "description": "Pointer operations, passing arrays by reference, swap using pointers.",
+      "exercises": [
+        {
+          "id": "PTR_LAB_P5",
+          "lab_program_no": 5,
+          "level": 2,
+          "variant": "c",
+          "title": "Swap two integer arrays using pointers",
+          "co_mapping": ["CO3"],
+          "concept_under_test": "passing arrays to functions by reference, pointer parameters, element-wise swap",
+          "prerequisite_topics": ["PTR", "ARRAY", "FUNC"],
+          "function_prototypes": [
+            "void read_array(int n, int arr[]);",
+            "void print_array(int n, int arr[]);",
+            "void swap_array(int n, int a[n], int b[n]);"
+          ],
+          "problem_statement": "Write a program to swap two integer arrays of the same size n element by element. The swap must be done inside a function using pointer parameters. After the swap, print both arrays.",
+          "sample_input": "3\n1 2 3\n4 5 6",
+          "sample_output": "Array A after swap: 4 5 6\nArray B after swap: 1 2 3",
+          "test_cases": [
+            { "label": "size 3",     "input": "3\n1 2 3\n4 5 6",       "expected_output": "Array A after swap: 4 5 6\nArray B after swap: 1 2 3"     },
+            { "label": "size 1",     "input": "1\n10\n20",              "expected_output": "Array A after swap: 20\nArray B after swap: 10"            },
+            { "label": "equal vals", "input": "2\n5 5\n5 5",            "expected_output": "Array A after swap: 5 5\nArray B after swap: 5 5"           }
+          ],
+          "constraints": [
+            "swap_array() must perform the swap without creating a third full-size array",
+            "A temporary single int variable for element swap is allowed",
+            "Use pointer notation inside swap_array (a[i] or *(a+i) both acceptable)"
+          ],
+          "forbidden_patterns": ["memcpy", "global array"],
+          "mental_model_checkpoints": [
+            "Can explain why arrays passed to swap_array() are modifiable (they decay to pointers)",
+            "Can trace the swap of a[0] and b[0] step by step using a temp variable"
+          ],
+          "common_mistakes": [
+            { "mistake": "Tries to swap the array pointers themselves instead of elements — no visible change", "socratic_probe": "If you swap the pointer variables a and b inside the function, does that change what main's arrays contain? Why not?" },
+            { "mistake": "Creates a full second array as buffer — unnecessary", "socratic_probe": "To swap two integers, how many temporary storage locations do you need? Does that change when swapping element by element?" }
+          ],
+          "style_requirements": [
+            "Function comment block required for each function"
+          ],
+          "grading_notes": "Element-wise swap with a single temp variable is required. Robustness: n=1 and equal arrays must work.",
+          "estimated_time_minutes": 45,
+          "tags": ["pointers", "arrays", "swap", "CO3", "lab", "Level2"]
+        }
+      ]
+    },
+
+    "DYNMEM": {
+      "name": "Dynamic Memory Allocation",
+      "acp_unit": 3,
+      "syllabus_unit": 31,
+      "category": "lab_program",
+      "co_mapping": ["CO3"],
+      "description": "malloc, calloc, realloc, free, dangling pointer prevention, memory leak avoidance.",
+      "exercises": [
+        {
+          "id": "DYNMEM_LAB_P6",
+          "lab_program_no": 6,
+          "level": 2,
+          "variant": "b",
+          "title": "Manage a dynamic integer array — create, initialise, display, safely delete",
+          "co_mapping": ["CO3"],
+          "concept_under_test": "malloc, NULL check, free, dangling pointer prevention via double pointer",
+          "prerequisite_topics": ["PTR", "DYNMEM"],
+          "function_prototypes": [
+            "int* create_array(int n);",
+            "void initialize_array(int *arr, int n);",
+            "void print_array(int *arr, int n);",
+            "void delete_array(int **arr);"
+          ],
+          "problem_statement": "Develop a modular C program to manage an integer array using dynamic memory allocation. Implement:\n- create_array(n): allocates n ints with malloc, checks for NULL, returns pointer.\n- initialize_array(arr, n): fills array with values 1..n.\n- print_array(arr, n): prints all elements.\n- delete_array(&arr): frees memory and sets pointer to NULL to prevent dangling access.\n\nDemonstrate that arr is NULL after delete_array.",
+          "sample_input": "5",
+          "sample_output": "Array: 1 2 3 4 5\nArray successfully deleted. Pointer is now NULL.",
+          "test_cases": [
+            { "label": "n=5",   "input": "5", "expected_output": "Array: 1 2 3 4 5\nArray successfully deleted. Pointer is now NULL." },
+            { "label": "n=1",   "input": "1", "expected_output": "Array: 1\nArray successfully deleted. Pointer is now NULL."   }
+          ],
+          "constraints": [
+            "create_array() must return NULL if malloc fails and print an error",
+            "delete_array() must take int** (pointer to pointer) and set *arr = NULL after free",
+            "No fixed-size arrays anywhere in the program"
+          ],
+          "forbidden_patterns": ["int arr[", "int a[100]"],
+          "mental_model_checkpoints": [
+            "Can explain why delete_array takes int** instead of int*",
+            "Can state what a dangling pointer is and how setting to NULL prevents accidental use",
+            "Can explain what happens if you call free() twice on the same pointer"
+          ],
+          "common_mistakes": [
+            { "mistake": "delete_array takes int* — sets local copy to NULL, original in main unchanged", "socratic_probe": "After your delete_array returns, is the pointer in main set to NULL? How would you verify? What would you need to pass to the function to modify main's pointer?" },
+            { "mistake": "No NULL check after malloc", "socratic_probe": "What does malloc return if the system has no memory left? What does your program do with that return value?" }
+          ],
+          "style_requirements": [
+            "Function comment block required for each function",
+            "NULL check on malloc mandatory"
+          ],
+          "grading_notes": "Double-pointer parameter in delete_array is the key teaching point. NULL check is required for robustness marks.",
+          "estimated_time_minutes": 60,
+          "tags": ["dynamic-memory", "malloc", "free", "dangling-pointer", "CO3", "lab", "Level2"]
+        }
+      ]
+    },
+
+    "STROP": {
+      "name": "String Operations with User-Defined Functions",
+      "acp_unit": 4,
+      "syllabus_unit": 40,
+      "category": "lab_program",
+      "co_mapping": ["CO4"],
+      "description": "Reading and manipulating strings using user-defined functions and pointers, without relying on library functions.",
+      "exercises": [
+        {
+          "id": "STROP_LAB_P7",
+          "lab_program_no": 7,
+          "level": 2,
+          "variant": "a",
+          "title": "Compare two strings using a user-defined function",
+          "co_mapping": ["CO4"],
+          "concept_under_test": "char array traversal, lexicographic comparison, user-defined string functions",
+          "prerequisite_topics": ["STRING", "FUNC"],
+          "function_prototypes": [
+            "void inputStrings(char str1[], char str2[]);",
+            "int compareStrings(char str1[], char str2[]);",
+            "void output(int result);"
+          ],
+          "problem_statement": "Write a C program to compare two strings using a user-defined function — do not use strcmp(). The compareStrings() function must return:\n   0  if both strings are equal\n   1  if the first string is lexicographically greater\n  -1  if the second string is lexicographically greater",
+          "sample_input": "banana\napple",
+          "sample_output": "First string is greater",
+          "test_cases": [
+            { "label": "equal",          "input": "hello\nhello",   "expected_output": "Strings are equal"       },
+            { "label": "first greater",  "input": "banana\napple",  "expected_output": "First string is greater"  },
+            { "label": "second greater", "input": "apple\nbanana",  "expected_output": "Second string is greater" },
+            { "label": "prefix shorter", "input": "app\napple",     "expected_output": "Second string is greater" }
+          ],
+          "constraints": [
+            "Do not use strcmp(), strncmp(), or any other string library comparison function",
+            "compareStrings() must traverse character by character",
+            "Handle strings of different lengths correctly"
+          ],
+          "forbidden_patterns": ["strcmp", "strncmp", "strcoll"],
+          "mental_model_checkpoints": [
+            "Can explain what lexicographic comparison means (character by character, using ASCII values)",
+            "Can state what compareStrings should return when 'app' is compared to 'apple'",
+            "Can trace the loop for 'hello' vs 'hello' showing all comparisons"
+          ],
+          "common_mistakes": [
+            { "mistake": "Stops at end of shorter string without checking if longer string continues", "socratic_probe": "Your loop exits when str1[i] == '\\0'. If str2 still has characters remaining, which string is greater? Does your return statement handle that case?" },
+            { "mistake": "Returns ASCII difference instead of -1/0/1", "socratic_probe": "What does your function return for 'b' vs 'a'? The spec requires -1, 0, or 1 — is your return value always in that set?" }
+          ],
+          "style_requirements": [
+            "Function comment block required for each function",
+            "No string library functions"
+          ],
+          "grading_notes": "Handling unequal-length strings is the edge case. Return values must be exactly -1, 0, or 1.",
+          "estimated_time_minutes": 45,
+          "tags": ["strings", "user-defined-functions", "CO4", "lab", "Level2"]
+        },
+        {
+          "id": "STROP_LAB_P8",
+          "lab_program_no": 8,
+          "level": 2,
+          "variant": "b",
+          "title": "Concatenate two strings using a user-defined function",
+          "co_mapping": ["CO4"],
+          "concept_under_test": "char pointer traversal, null terminator, string concatenation without strcat, while/do-while",
+          "prerequisite_topics": ["STRING", "PTR", "FUNC"],
+          "function_prototypes": [
+            "void input(char *str);",
+            "void concatenate_strings(char *str1, char *str2);",
+            "void display(char *str);"
+          ],
+          "problem_statement": "Write a C program to concatenate two strings using a user-defined function — do not use strcat(). The concatenate_strings() function appends str2 to the end of str1. str1 must be declared large enough to hold both strings. Use pointer notation and while or do-while loops.",
+          "sample_input": "Hello, \nWorld!",
+          "sample_output": "Concatenated string: Hello, World!",
+          "test_cases": [
+            { "label": "standard",     "input": "Hello, \nWorld!",   "expected_output": "Concatenated string: Hello, World!"   },
+            { "label": "empty second", "input": "Test\n",             "expected_output": "Concatenated string: Test"            },
+            { "label": "empty first",  "input": "\nSuffix",           "expected_output": "Concatenated string: Suffix"          }
+          ],
+          "constraints": [
+            "Do not use strcat() or strncat()",
+            "str1 must be declared with enough capacity (e.g., char str1[200])",
+            "Use while or do-while loop (not for)",
+            "Use pointer notation inside concatenate_strings()"
+          ],
+          "forbidden_patterns": ["strcat", "strncat"],
+          "mental_model_checkpoints": [
+            "Can explain how to advance str1 to point to its own null terminator before appending",
+            "Can state why the null terminator must be written at the end of the concatenated result",
+            "Can trace the pointer movements for str1 = 'Hi' and str2 = '!'"
+          ],
+          "common_mistakes": [
+            { "mistake": "Writes str2 over str1 from the beginning instead of from str1's null terminator", "socratic_probe": "Where should the first character of str2 be placed in str1's buffer? How do you find that position?" },
+            { "mistake": "Forgets to write '\\0' at the end of the concatenated string", "socratic_probe": "After copying all of str2's characters into str1, what does the next byte in str1's buffer contain? Is that a valid string terminator?" }
+          ],
+          "style_requirements": [
+            "Function comment block required for each function",
+            "Pointer notation mandatory inside concatenate_strings"
+          ],
+          "grading_notes": "Advancing past str1's null terminator before copying is the core pointer operation. Null terminator at end is required for correctness.",
+          "estimated_time_minutes": 45,
+          "tags": ["strings", "pointers", "user-defined-functions", "CO4", "lab", "Level2"]
+        }
+      ]
+    },
+
+    "FILE": {
+      "name": "File Handling",
+      "acp_unit": 5,
+      "syllabus_unit": 50,
+      "category": "lab_program",
+      "co_mapping": ["CO5"],
+      "description": "File handling with text and binary files: fopen, fclose, fprintf, fscanf, fwrite, fread, feof, ferror.",
+      "exercises": [
+        {
+          "id": "FILE_LAB_P9",
+          "lab_program_no": 9,
+          "level": 2,
+          "variant": "a",
+          "title": "Student records in a text file using fprintf and fscanf",
+          "co_mapping": ["CO5"],
+          "concept_under_test": "fprintf, fscanf, fopen (text mode), fclose, struct array with file I/O",
+          "prerequisite_topics": ["FILE", "ARRAYSTRUCT"],
+          "function_prototypes": [
+            "void inputStudents(Student students[], int n);",
+            "void writeToTextFile(Student students[], int n, const char *filename);",
+            "int readFromTextFile(Student students[], const char *filename);",
+            "void printStudents(Student students[], int n);"
+          ],
+          "problem_statement": "Write a modular C program to perform the following tasks using file handling:\ni.  Read the details of n students (name, roll_no, gpa) from the user and store them in an array of structures.\nii. Write the array of structures to a text (ASCII) file using fprintf().\niii. Read the data back from the ASCII file into a second array using fscanf() and display it.\n\ntypedef struct {\n    char name[50];\n    int roll_no;\n    float gpa;\n} Student;",
+          "sample_input": "2\nAlice 1001 8.50\nBob 1002 9.10",
+          "sample_output": "Data written to file successfully.\nData read back from file:\nAlice 1001 8.50\nBob 1002 9.10",
+          "test_cases": [
+            { "label": "2 students", "input": "2\nAlice 1001 8.50\nBob 1002 9.10", "expected_output": "Data written to file successfully.\nData read back from file:\nAlice 1001 8.50\nBob 1002 9.10" }
+          ],
+          "constraints": [
+            "Must check fopen return value for NULL in both write and read functions",
+            "Must close the file in the write function before the read function opens it",
+            "writeToTextFile() must use fprintf()",
+            "readFromTextFile() must use fscanf() and return number of records read"
+          ],
+          "forbidden_patterns": ["fwrite", "fread"],
+          "mental_model_checkpoints": [
+            "Can explain the difference between fopen modes 'w', 'r', and 'a'",
+            "Can state why the file must be closed before being re-opened for reading",
+            "Can explain what happens if fopen returns NULL and the program continues"
+          ],
+          "common_mistakes": [
+            { "mistake": "Opens the file for writing in main and passes FILE* — correct approach but students often don't close before read", "socratic_probe": "After writeToTextFile() finishes, is the file closed? If the OS has buffered writes, will all data be in the file before fscanf reads it?" },
+            { "mistake": "No NULL check on fopen — program crashes on permission error", "socratic_probe": "What does fopen return if the file cannot be created (e.g., no disk space)? What is the next line of your program — is it safe to call fprintf with that value?" }
+          ],
+          "style_requirements": [
+            "Function comment block required for each function",
+            "NULL checks on fopen in every function that opens a file"
+          ],
+          "grading_notes": "NULL check is required for robustness marks. File close before read-back is required for correctness.",
+          "estimated_time_minutes": 60,
+          "tags": ["file-io", "fprintf", "fscanf", "struct", "CO5", "lab", "Level2"]
+        },
+        {
+          "id": "FILE_LAB_P10",
+          "lab_program_no": 10,
+          "level": 2,
+          "variant": "b",
+          "title": "Student records in a binary file using fwrite and fread",
+          "co_mapping": ["CO5"],
+          "concept_under_test": "fwrite, fread, fopen (binary mode), sizeof struct, binary vs text file",
+          "prerequisite_topics": ["FILE", "ARRAYSTRUCT"],
+          "function_prototypes": [
+            "void inputStudents(Student students[], int n);",
+            "void writeToBinaryFile(Student students[], int n, const char *filename);",
+            "int readFromBinaryFile(Student students[], const char *filename);",
+            "void printStudents(Student students[], int n);"
+          ],
+          "problem_statement": "Write a modular C program to perform the following tasks using binary file handling:\ni.  Read the details of n students (name, roll_no, gpa) from the user and store them in an array of structures.\nii. Write the array of structures to a binary file using fwrite().\niii. Read the binary file into a second array of structures using fread().\niv. Display the array of structures.\n\nUse the same Student typedef as Program 9.",
+          "sample_input": "2\nAlice 1001 8.50\nBob 1002 9.10",
+          "sample_output": "Data written to binary file successfully.\nData read back from binary file:\nAlice 1001 8.50\nBob 1002 9.10",
+          "test_cases": [
+            { "label": "2 students", "input": "2\nAlice 1001 8.50\nBob 1002 9.10", "expected_output": "Data written to binary file successfully.\nData read back from binary file:\nAlice 1001 8.50\nBob 1002 9.10" }
+          ],
+          "constraints": [
+            "Must open files in binary mode: 'wb' for writing, 'rb' for reading",
+            "fwrite() must write the entire array in one call: fwrite(students, sizeof(Student), n, fp)",
+            "fread() must read back all records and return the number of records read",
+            "NULL check on fopen in both functions"
+          ],
+          "forbidden_patterns": ["fprintf", "fscanf", "fopen(\"w\")", "fopen(\"r\")"],
+          "mental_model_checkpoints": [
+            "Can explain the difference between 'w' (text) and 'wb' (binary) mode",
+            "Can state what fwrite's return value represents",
+            "Can explain why binary files are not human-readable but are faster for structured data"
+          ],
+          "common_mistakes": [
+            { "mistake": "Uses 'w' instead of 'wb' — on Windows, text mode converts newlines and corrupts binary data", "socratic_probe": "What does fopen mode 'w' do to newline characters on Windows? Why does that matter when writing struct data that may contain arbitrary byte patterns?" },
+            { "mistake": "Calls fwrite element by element in a loop instead of one call for the whole array", "socratic_probe": "fwrite(students, sizeof(Student), n, fp) writes n elements at once. What does your version write per call? Is the result the same in the file?" }
+          ],
+          "style_requirements": [
+            "Function comment block required for each function",
+            "NULL checks on fopen mandatory",
+            "Binary mode must be used ('wb'/'rb')"
+          ],
+          "grading_notes": "Binary mode is mandatory — text mode will cause data corruption on some platforms. fwrite called on the whole array is the idiomatic approach.",
+          "estimated_time_minutes": 60,
+          "tags": ["file-io", "fwrite", "fread", "binary-file", "CO5", "lab", "Level2"]
+        }
+      ]
+    }
+
+  }
+}
