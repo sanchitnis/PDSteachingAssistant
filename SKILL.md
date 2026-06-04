@@ -17,19 +17,19 @@ description: >
 
 ## Step 1 — Identify the Request Type
 
-Inspect the **first non-blank line** of the student's message:
+Check the student's message or the content of the attached files (specifically `student_data/help_context.txt` or `student_data/grade_context.txt`):
 
-| First line | Request type | Action |
+| Presence of string | Request type | Action |
 |---|---|---|
-| `---REVA-TUTOR-CONTEXT---` | **HELP** | Read `agents/help_agent.md` → follow its instructions |
-| `---REVA-TUTOR-GRADE-CONTEXT---` | **GRADE** | Read `agents/grade_agent.md` → follow its instructions |
-| Anything else | **Unclear** | See §3 below |
+| `---REVA-TUTOR-CONTEXT---` (or attached `help_context.txt`) | **HELP** | Read `agents/help_agent.md` → follow its instructions |
+| `---REVA-TUTOR-GRADE-CONTEXT---` (or attached `grade_context.txt`) | **GRADE** | Read `agents/grade_agent.md` → follow its instructions |
+| Neither is present | **Unclear** | See Step 3 below |
 
 ---
 
 ## Step 2 — Read and Follow the Specialist Agent
 
-Use the `view_file` tool to read the appropriate file.  
+Use the `view_file` tool to read the appropriate agent file based on Step 1:  
 **Do not respond to the student before reading it.**
 
 ```

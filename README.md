@@ -64,6 +64,13 @@ See **`docs/how_to_use.md`** for the full guide. The recommended workflow is:
 2. **Get Exercise**: Run VS Code task **`REVA: Next Exercise`** and input your Student ID. This creates your exercise file under `student_data/` (e.g. `student_data/INTRO_L1_a_raj22cs045.c`).
 3. **Get Help**: Open your active exercise `.c` file and run VS Code task **`REVA: Get Help`**. In your agent chat, attach the file `student_data/help_context.txt` (type `@help_context.txt` or click `+`) and ask for support.
 4. **Submit for Grading**: Run VS Code task **`REVA: Grade My Code`** with the exercise file open. Attach the generated file `student_data/grade_context.txt` in your chat and ask the agent to grade your code.
+
+---
+
+## Agent Architecture
+
+```
+Student attaches context file
           │
           ▼
     SKILL.md (router)
