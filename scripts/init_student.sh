@@ -25,11 +25,11 @@ fi
 GRADE=""
 if [ -t 0 ]; then
     while [ -z "$GRADE" ]; do
-        echo -n "Enter your 1st sem C Programming grade (A/B/C/D/F): "
+        echo -n "Enter your 1st sem C Programming grade (O/A+/A/B+/B/C+/C/F): "
         read -r GRADE
         GRADE=$(echo "$GRADE" | tr '[:lower:]' '[:upper:]' | xargs)
-        if [[ ! "$GRADE" =~ ^[A-DF]$ ]]; then
-            echo "Invalid grade. Please enter A, B, C, D, or F."
+        if [[ ! "$GRADE" =~ ^(O|A\+|A|B\+|B|C\+|C|F)$ ]]; then
+            echo "Invalid grade. Please enter O, A+, A, B+, B, C+, C, or F."
             GRADE=""
         fi
     done
@@ -39,9 +39,9 @@ else
 fi
 
 UNLOCK_PREREQS="false"
-if [[ "$GRADE" == "C" || "$GRADE" == "D" || "$GRADE" == "F" ]]; then
+if [[ "$GRADE" == "C+" || "$GRADE" == "C" || "$GRADE" == "F" ]]; then
     UNLOCK_PREREQS="true"
-    echo "⚠️  Grade indicates catch-up is needed. Unlocking prerequisite topics first!"
+    echo "⚠️  Grade ($GRADE) indicates catch-up is needed. Unlocking prerequisite topics first!"
 fi
 
 FUNC_ASSIGNED="1"
