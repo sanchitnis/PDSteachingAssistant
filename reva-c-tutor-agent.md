@@ -134,7 +134,7 @@ reva-c-tutor/
     └── coding_style_guide.md
 ```
 
-**Key architectural decision**: No LLM API calls are made by any shell script. All scripts are pure bash/Python using local tools (`gcc`, `cppcheck`, `jq`). The LLM is the *reasoning layer*; the scripts are the *data layer*.
+**Key architectural decision**: No LLM API calls are made by any script. All scripts are pure Python 3 using local tools (`gcc`, `cppcheck`). The LLM is the *reasoning layer*; the scripts are the *data layer*.
 
 **Token-efficient loading**: The master `SKILL.md` routes to `agents/help_agent.md` or `agents/grade_agent.md` selectively. Only the relevant specialist is loaded per invocation. This spec file is never loaded during normal operation — it is the design reference.
 
@@ -818,7 +818,7 @@ All scripts are in `scripts/` and contain no LLM calls. They are the data layer 
 | **Reads** | `exercises/prerequisites.json`, `exercises/practice.json`, `exercises/advanced.json` (problem statement, constraints, sample I/O, CO mapping) and `exercises/lab_programs.json` (for lab program exercises) |
 | **Writes** | The `.c` file specified by `filename` |
 | **Template content** | Comment header with exercise metadata + problem statement + empty `main()` with `#include <stdio.h>` |
-| **Called by** | `next.sh` |
+| **Called by** | `next.py` |
 | **Dependencies** | Python 3 standard library only (`json`, `datetime`, `pathlib`) |
 
 ---
@@ -868,14 +868,15 @@ reva-c-tutor/
 │   └── rubric_master.md             ← Full rubric (mirrors §11)
 │
 ├── scripts/
-│   ├── parse_exercise_filename.sh
-│   ├── compile_check.sh
-│   ├── check_style.sh
+│   ├── parse_exercise_filename.py
+│   ├── compile_check.py
+│   ├── check_style.py
 │   ├── make_template.py
-│   ├── next.sh
-│   ├── help.sh
-│   ├── grade.sh
-│   └── init_student.sh
+│   ├── next.py
+│   ├── help.py
+│   ├── grade.py
+│   ├── init_student.py
+│   └── split_library.py
 │
 ├── config/
 │   └── agent_config.json
@@ -920,7 +921,7 @@ The VS Code tasks file registers the four student-facing tasks (Get Help, Grade 
 
 | Phase | Feature | Rationale |
 |---|---|---|
-| v2.1 | **Lab program support in next.sh**: `next.sh --lab` assigns the next unsubmitted lab program from `lab_programs.json` | Unified workflow for both mandatory and optional exercises |
+| v2.1 | **Lab program support in next.py**: `next.py --lab` assigns the next unsubmitted lab program from `lab_programs.json` | Unified workflow for both mandatory and optional exercises |
 | v2.2 | **CO progress summary**: grade agent appends per-CO progress summary to session log | Faculty can assess attainment against each CO |
 | v2.3 | **Misconception database**: track which common mistakes recur per student and surface targeted review exercises | Personalised remediation |
 | v2.4 | **Faculty dashboard**: aggregated view of class performance per topic/CO/level; flags students who have requested 5+ helps on the same exercise | Instructor oversight and early intervention |

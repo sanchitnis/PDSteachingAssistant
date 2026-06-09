@@ -44,28 +44,49 @@ To install ACPTeachingAssistant on your computer, follow these simple steps:
 
 ## Getting Started
 
-The recommended workflow uses VS Code Tasks. To run any task, press `Ctrl+Shift+P` (Windows/Linux) or `Cmd+Shift+P` (macOS), type **Tasks: Run Task**, and select the task. You can also set a keyboard shortcut of your choice for **Tasks: Run Task**.
+You can interact with REVA C Tutor in three ways: **Antigravity CLI / 2.0 (Automated)**, **VS Code Tasks**, or **Terminal (Manual)**.
 
-### 1. Register Yourself (Once)
-Run the task **`REVA: Register Student`**. Follow the prompts to enter your Student ID, Full Name, Section, and your 1st semester C Programming grade. This creates your progress file and determines if you need catch-up exercises.
+### Option A: Antigravity CLI / Antigravity 2.0 (Automated & Recommended)
+If you are using Antigravity CLI or Antigravity 2.0, the agent has command execution and file reading capabilities. You can simply ask the agent to perform the actions for you:
 
-### 2. Get Your First Exercise
-Run the task **`REVA: Next Exercise`**. This creates a `.c` file in the `student_data/` folder (e.g., `student_data/INTRO_L1_a_raj22cs045.c`). Open this file to see your assignment.
+1. **Register**: Ask the agent: *"Register student: ID <id>, Name <Name>, Section <Section>, Grade <Grade>"*. The agent will run the setup and configure your profile.
+2. **Get Next Exercise**: Ask the agent: *"Give me my next exercise"* or *"assign next"*. The agent will assign it and create the template `.c` file.
+3. **Get Help**: When stuck on an exercise, ask the agent: *"I need help with my C file"*. The agent will automatically extract the context and guide you Socrates-style.
+4. **Grade Code**: When ready, ask the agent: *"Grade my code"*. The agent will compile, run tests, assess style, and give your scorecard.
 
-### 3. Write and Test Your Code
-Implement your solution in the created `.c` file. Follow the [Coding Style Guide](docs/coding_style_guide.md) strictly, as it affects your grade.
+---
 
-### 4. Get Help (When Stuck)
-If you encounter compiler errors or logical bugs:
-1. Keep your exercise `.c` file open.
-2. Run the task **`REVA: Get Help`**.
-3. Attach the generated `student_data/help_context.txt` to your agent chat (`@help_context.txt`) and ask for guidance.
+### Option B: VS Code Tasks
+Press `Ctrl+Shift+P` (Windows/Linux) or `Cmd+Shift+P` (macOS), type **Tasks: Run Task**, and select the task.
 
-### 5. Submit for Grading
-When you think your solution is ready:
-1. Run the task **`REVA: Grade My Code`**.
-2. Attach the generated `student_data/grade_context.txt` to your chat and ask the agent to grade your code.
-3. If you score **7/10 or higher**, you can move to the next exercise.
+1. **Register**: Run the task **`REVA: Register Student`** and follow the prompt inputs.
+2. **Get Exercise**: Run the task **`REVA: Next Exercise`** to generate your `.c` file in the `student_data/` folder.
+3. **Get Help**: Open your `.c` file, run the task **`REVA: Get Help`**, and attach the generated `student_data/help_context.txt` to your agent chat.
+4. **Grade Code**: Open your `.c` file, run the task **`REVA: Grade My Code`**, and attach the generated `student_data/grade_context.txt` to the agent.
+
+---
+
+### Option C: Terminal / Command Line (Manual)
+Run these commands from the root directory of the repository:
+
+1. **Register**:
+   ```bash
+   python scripts/init_student.py <id> "<Name>" "<Section>" "<1st Sem Grade>"
+   ```
+2. **Get Exercise**:
+   ```bash
+   python scripts/next.py <id>
+   ```
+3. **Get Help**:
+   ```bash
+   python scripts/help.py student_data/<filename>.c
+   ```
+   *(Pasted context or output from `student_data/help_context.txt` goes to the agent chat)*
+4. **Grade Code**:
+   ```bash
+   python scripts/grade.py student_data/<filename>.c
+   ```
+   *(Pasted context or output from `student_data/grade_context.txt` goes to the agent chat)*
 
 ---
 
