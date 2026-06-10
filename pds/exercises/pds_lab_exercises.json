@@ -1,0 +1,630 @@
+{
+  "schema_version": "1.0",
+  "course_code": "B25CS0102",
+  "description": "PDS Lab Exercise Library — Labs 1 to 9 (Lab 10 Mini-Project deferred)",
+  "labs": [
+    {
+      "lab_no": 1,
+      "title": "Writing Basic Python Programs",
+      "co_mapping": ["CO1"],
+      "unit": "I",
+      "bloom_level": "Apply (L3)",
+      "concept_under_test": "Python syntax, variables, arithmetic operators, input/output, and basic mathematical expressions",
+      "problem_statement": "Write a function called `celsius_to_fahrenheit(celsius)` that converts a temperature from Celsius to Fahrenheit using the formula:\n\n    F = (C × 9/5) + 32\n\nThe function must:\n- Accept a single float argument `celsius`\n- Return the result rounded to 2 decimal places\n- Work correctly for positive, negative, and zero inputs\n\nAssign your function to `student_answer`.",
+      "starter_code": "def celsius_to_fahrenheit(celsius):\n    \"\"\"\n    Convert temperature from Celsius to Fahrenheit.\n\n    Args:\n        celsius (float): Temperature in degrees Celsius.\n\n    Returns:\n        float: Temperature in Fahrenheit, rounded to 2 decimal places.\n    \"\"\"\n    # TODO: Write your formula here\n    pass\n\nstudent_answer = celsius_to_fahrenheit",
+      "sample_input": "celsius = 100",
+      "sample_output": "212.0",
+      "test_cases": [
+        {
+          "label": "Boiling point (100°C → 212°F)",
+          "setup_code": "result = student_answer(100)",
+          "assertion": "result == 212.0",
+          "points": 1
+        },
+        {
+          "label": "Freezing point (0°C → 32°F)",
+          "setup_code": "result = student_answer(0)",
+          "assertion": "result == 32.0",
+          "points": 1
+        },
+        {
+          "label": "Body temperature (37°C → 98.6°F)",
+          "setup_code": "result = student_answer(37)",
+          "assertion": "result == 98.6",
+          "points": 1
+        },
+        {
+          "label": "Negative temperature (−40°C → −40°F)",
+          "setup_code": "result = student_answer(-40)",
+          "assertion": "result == -40.0",
+          "points": 1
+        }
+      ],
+      "constraints": [
+        "Use only basic arithmetic operators: *, /, +",
+        "Must use the formula F = (C × 9/5) + 32 — not a lookup table",
+        "Return value must be rounded to 2 decimal places"
+      ],
+      "forbidden_patterns": [
+        "212\\.0",
+        "32\\.0",
+        "98\\.6",
+        "\\-40\\.0"
+      ],
+      "mental_model_checkpoints": [
+        "Can you explain each part of the formula F = (C × 9/5) + 32?",
+        "What Python operator gives you multiplication? Division?",
+        "What does round() do, and what are its two arguments?"
+      ],
+      "common_mistakes": [
+        {
+          "mistake": "Integer division — using 9/5 as 1 in Python 2 style",
+          "socratic_probe": "What is the result of 9/5 in Python 3? Try it in a new cell. Is that what you expected?"
+        },
+        {
+          "mistake": "Wrong order of operations — forgetting parentheses",
+          "socratic_probe": "Does Python evaluate multiplication before addition automatically? What does your formula produce for celsius=0?"
+        },
+        {
+          "mistake": "Not rounding the result",
+          "socratic_probe": "The problem says 'rounded to 2 decimal places'. What Python built-in function does that?"
+        }
+      ],
+      "grading_notes": "Check that the formula is actually computed (not hardcoded). Verify round() is used with 2 as second argument. The function should handle floats and negative numbers cleanly.",
+      "estimated_time_minutes": 30
+    },
+
+    {
+      "lab_no": 2,
+      "title": "Implementing Control Structures and Functions",
+      "co_mapping": ["CO1", "CO2"],
+      "unit": "I",
+      "bloom_level": "Apply (L3)",
+      "concept_under_test": "Conditional statements (if/elif/else), loops (for/while), and modular programming with functions",
+      "problem_statement": "Write a function called `classify_number(n)` that:\n- Returns the string `'positive'` if n > 0\n- Returns the string `'negative'` if n < 0\n- Returns the string `'zero'` if n == 0\n\nAlso write a function called `fizzbuzz(n)` that:\n- Returns `'FizzBuzz'` if n is divisible by both 3 and 5\n- Returns `'Fizz'` if n is divisible by 3 only\n- Returns `'Buzz'` if n is divisible by 5 only\n- Returns the string representation of n otherwise\n\nAssign a dict to `student_answer` with keys `'classify'` and `'fizzbuzz'`:\n\n    student_answer = {'classify': classify_number, 'fizzbuzz': fizzbuzz}",
+      "starter_code": "def classify_number(n):\n    \"\"\"\n    Classify an integer as positive, negative, or zero.\n\n    Args:\n        n (int or float): The number to classify.\n\n    Returns:\n        str: 'positive', 'negative', or 'zero'.\n    \"\"\"\n    # TODO: Write your conditional logic here\n    pass\n\n\ndef fizzbuzz(n):\n    \"\"\"\n    Return FizzBuzz classification for a given integer.\n\n    Args:\n        n (int): The number to evaluate.\n\n    Returns:\n        str: 'FizzBuzz', 'Fizz', 'Buzz', or str(n).\n    \"\"\"\n    # TODO: Write your logic here (hint: check divisibility by BOTH 3 and 5 first)\n    pass\n\n\nstudent_answer = {'classify': classify_number, 'fizzbuzz': fizzbuzz}",
+      "sample_input": "n = 15",
+      "sample_output": "fizzbuzz(15) → 'FizzBuzz'",
+      "test_cases": [
+        {
+          "label": "classify_number: positive number",
+          "setup_code": "result = student_answer['classify'](42)",
+          "assertion": "result == 'positive'",
+          "points": 1
+        },
+        {
+          "label": "classify_number: negative number",
+          "setup_code": "result = student_answer['classify'](-7)",
+          "assertion": "result == 'negative'",
+          "points": 1
+        },
+        {
+          "label": "classify_number: zero",
+          "setup_code": "result = student_answer['classify'](0)",
+          "assertion": "result == 'zero'",
+          "points": 1
+        },
+        {
+          "label": "fizzbuzz: divisible by 15 → FizzBuzz",
+          "setup_code": "result = student_answer['fizzbuzz'](15)",
+          "assertion": "result == 'FizzBuzz'",
+          "points": 1
+        },
+        {
+          "label": "fizzbuzz: divisible by 3 → Fizz",
+          "setup_code": "result = student_answer['fizzbuzz'](9)",
+          "assertion": "result == 'Fizz'",
+          "points": 1
+        },
+        {
+          "label": "fizzbuzz: divisible by 5 → Buzz",
+          "setup_code": "result = student_answer['fizzbuzz'](25)",
+          "assertion": "result == 'Buzz'",
+          "points": 1
+        },
+        {
+          "label": "fizzbuzz: not divisible → str(n)",
+          "setup_code": "result = student_answer['fizzbuzz'](7)",
+          "assertion": "result == '7'",
+          "points": 1
+        }
+      ],
+      "constraints": [
+        "Use if/elif/else — do not use match/case",
+        "fizzbuzz must check divisibility by 15 BEFORE checking 3 or 5 separately",
+        "fizzbuzz must return a STRING for all cases — including plain numbers"
+      ],
+      "forbidden_patterns": [
+        "\\[.FizzBuzz.*Fizz.*Buzz",
+        "lookup"
+      ],
+      "mental_model_checkpoints": [
+        "In FizzBuzz, why must you check 'divisible by 15' BEFORE checking 'divisible by 3'?",
+        "What is the % operator and what does it return for even divisors?",
+        "How do you convert an integer to a string in Python?"
+      ],
+      "common_mistakes": [
+        {
+          "mistake": "Checking Fizz before FizzBuzz — 15 incorrectly returns 'Fizz'",
+          "socratic_probe": "What does your function return for n=15? Is 15 divisible by 3? Does your code check that first? What happens then?"
+        },
+        {
+          "mistake": "Returning int instead of str for plain numbers",
+          "socratic_probe": "The problem says 'returns the string representation'. What is the type of your return value for n=7? Is it a string or an int?"
+        }
+      ],
+      "grading_notes": "The FizzBuzz order matters critically — test with 15, 30, 45. Check that plain numbers return string type, not int.",
+      "estimated_time_minutes": 40
+    },
+
+    {
+      "lab_no": 3,
+      "title": "Manipulating Lists, Tuples, Sets, and Dictionaries",
+      "co_mapping": ["CO2"],
+      "unit": "II",
+      "bloom_level": "Analyze (L4)",
+      "concept_under_test": "Python built-in data structures: list operations, tuple immutability, set operations, dictionary manipulation",
+      "problem_statement": "Write a function called `analyze_collection(data)` that accepts a list of numbers and returns a dictionary with the following keys:\n\n- `'sum'`: sum of all numbers (float)\n- `'mean'`: arithmetic mean rounded to 2 decimal places (float)\n- `'max'`: maximum value\n- `'min'`: minimum value\n- `'unique_count'`: number of unique values (use a set)\n- `'sorted_asc'`: list sorted in ascending order\n- `'sorted_desc'`: list sorted in descending order\n\nAssign your function to `student_answer`.",
+      "starter_code": "def analyze_collection(data):\n    \"\"\"\n    Analyze a list of numbers and return summary statistics.\n\n    Args:\n        data (list): A non-empty list of numbers.\n\n    Returns:\n        dict: Dictionary with keys: sum, mean, max, min,\n              unique_count, sorted_asc, sorted_desc.\n    \"\"\"\n    # TODO: Compute each statistic and return a dict\n    # Hint: use set() to find unique values\n    pass\n\n\nstudent_answer = analyze_collection",
+      "sample_input": "[4, 2, 7, 2, 9, 4, 1]",
+      "sample_output": "{'sum': 29, 'mean': 4.14, 'max': 9, 'min': 1, 'unique_count': 5, 'sorted_asc': [1, 2, 2, 4, 4, 7, 9], 'sorted_desc': [9, 7, 4, 4, 2, 2, 1]}",
+      "test_cases": [
+        {
+          "label": "sum of [4,2,7,2,9,4,1]",
+          "setup_code": "result = student_answer([4, 2, 7, 2, 9, 4, 1])",
+          "assertion": "result['sum'] == 29",
+          "points": 1
+        },
+        {
+          "label": "mean of [4,2,7,2,9,4,1] ≈ 4.14",
+          "setup_code": "result = student_answer([4, 2, 7, 2, 9, 4, 1])",
+          "assertion": "result['mean'] == 4.14",
+          "points": 1
+        },
+        {
+          "label": "unique_count uses set (duplicates: 2 and 4)",
+          "setup_code": "result = student_answer([4, 2, 7, 2, 9, 4, 1])",
+          "assertion": "result['unique_count'] == 5",
+          "points": 1
+        },
+        {
+          "label": "sorted_asc is ascending",
+          "setup_code": "result = student_answer([4, 2, 7, 2, 9, 4, 1])",
+          "assertion": "result['sorted_asc'] == sorted([4, 2, 7, 2, 9, 4, 1])",
+          "points": 1
+        },
+        {
+          "label": "sorted_desc is descending",
+          "setup_code": "result = student_answer([4, 2, 7, 2, 9, 4, 1])",
+          "assertion": "result['sorted_desc'] == sorted([4, 2, 7, 2, 9, 4, 1], reverse=True)",
+          "points": 1
+        }
+      ],
+      "constraints": [
+        "Must use set() to compute unique_count — not manual deduplication",
+        "Mean must be rounded to 2 decimal places",
+        "Do not modify the original list — use sorted() which returns a new list"
+      ],
+      "forbidden_patterns": [
+        "unique_count.*=.*5",
+        "sum.*=.*29"
+      ],
+      "mental_model_checkpoints": [
+        "What is the difference between list.sort() and sorted(list)?",
+        "How does set() remove duplicates? What type does it return?",
+        "What happens if you call len(set(data)) on a list with repeated values?"
+      ],
+      "common_mistakes": [
+        {
+          "mistake": "Using list.sort() which modifies in place instead of sorted()",
+          "socratic_probe": "After calling data.sort(), what does the variable 'data' look like? Is this a problem if the caller still uses it?"
+        },
+        {
+          "mistake": "Mean computed as sum(data)/len(data) without rounding",
+          "socratic_probe": "The problem says 'rounded to 2 decimal places'. What is 29/7 in Python? What does round(29/7, 2) give?"
+        }
+      ],
+      "grading_notes": "Verify set() is used for unique_count. Ensure sorted_asc and sorted_desc do not destructively sort the original. Test with a list of all identical numbers.",
+      "estimated_time_minutes": 45
+    },
+
+    {
+      "lab_no": 4,
+      "title": "Reading and Writing Data from Text and CSV Files",
+      "co_mapping": ["CO3"],
+      "unit": "II",
+      "bloom_level": "Apply (L3)",
+      "concept_under_test": "File I/O with Python open(), CSV parsing with csv module or Pandas, and handling structured data from files",
+      "problem_statement": "Write a function called `parse_scores(csv_text)` that:\n- Accepts a CSV-formatted string (with a header row)\n- Returns a dict with:\n  - `'highest_scorer'`: name (str) of the student with the highest score\n  - `'average_score'`: class average rounded to 2 decimal places (float)\n  - `'pass_list'`: list of names of students who scored >= 50\n  - `'fail_list'`: list of names of students who scored < 50\n\nThe CSV format:\n```\nname,score\nArjun Sharma,78\nPriya Nair,45\nRavi Kumar,92\nDivya Rao,38\nMohan Das,67\n```\n\nAssign your function to `student_answer`.",
+      "starter_code": "import csv\nimport io\n\ndef parse_scores(csv_text):\n    \"\"\"\n    Parse a CSV-formatted string of student scores.\n\n    Args:\n        csv_text (str): CSV content with 'name' and 'score' columns.\n\n    Returns:\n        dict: highest_scorer, average_score, pass_list, fail_list.\n    \"\"\"\n    # Hint: use io.StringIO(csv_text) to treat the string like a file\n    # Then use csv.DictReader to parse it row by row\n    pass\n\n\nstudent_answer = parse_scores",
+      "sample_input": "name,score\\nArjun Sharma,78\\nPriya Nair,45\\nRavi Kumar,92\\nDivya Rao,38\\nMohan Das,67",
+      "sample_output": "{'highest_scorer': 'Ravi Kumar', 'average_score': 64.0, 'pass_list': ['Arjun Sharma', 'Ravi Kumar', 'Mohan Das'], 'fail_list': ['Priya Nair', 'Divya Rao']}",
+      "test_cases": [
+        {
+          "label": "highest_scorer is Ravi Kumar (92)",
+          "setup_code": "import io\nCSV = 'name,score\\nArjun Sharma,78\\nPriya Nair,45\\nRavi Kumar,92\\nDivya Rao,38\\nMohan Das,67'\nresult = student_answer(CSV)",
+          "assertion": "result['highest_scorer'] == 'Ravi Kumar'",
+          "points": 1
+        },
+        {
+          "label": "average_score = (78+45+92+38+67)/5 = 64.0",
+          "setup_code": "import io\nCSV = 'name,score\\nArjun Sharma,78\\nPriya Nair,45\\nRavi Kumar,92\\nDivya Rao,38\\nMohan Das,67'\nresult = student_answer(CSV)",
+          "assertion": "result['average_score'] == 64.0",
+          "points": 1
+        },
+        {
+          "label": "pass_list contains students with score >= 50",
+          "setup_code": "import io\nCSV = 'name,score\\nArjun Sharma,78\\nPriya Nair,45\\nRavi Kumar,92\\nDivya Rao,38\\nMohan Das,67'\nresult = student_answer(CSV)",
+          "assertion": "set(result['pass_list']) == {'Arjun Sharma', 'Ravi Kumar', 'Mohan Das'}",
+          "points": 1
+        },
+        {
+          "label": "fail_list contains students with score < 50",
+          "setup_code": "import io\nCSV = 'name,score\\nArjun Sharma,78\\nPriya Nair,45\\nRavi Kumar,92\\nDivya Rao,38\\nMohan Das,67'\nresult = student_answer(CSV)",
+          "assertion": "set(result['fail_list']) == {'Priya Nair', 'Divya Rao'}",
+          "points": 1
+        }
+      ],
+      "constraints": [
+        "Use io.StringIO() to treat the CSV string as a file object",
+        "Parse the CSV using csv.DictReader or pandas.read_csv(io.StringIO(...))",
+        "Do not manually split the string with .split('\\n') — use the csv module"
+      ],
+      "forbidden_patterns": [
+        "Ravi Kumar",
+        "64\\.0"
+      ],
+      "mental_model_checkpoints": [
+        "Why do we use io.StringIO() to wrap a string before passing it to csv.DictReader?",
+        "What does csv.DictReader return for each row — a dict, a list, or a string?",
+        "How do you convert a string like '78' to an integer for comparison?"
+      ],
+      "common_mistakes": [
+        {
+          "mistake": "Treating score as string when comparing with 50",
+          "socratic_probe": "When csv.DictReader reads '78', what Python type is it? Can you compare a string with > 50 directly? What happens when you try?"
+        },
+        {
+          "mistake": "Not using io.StringIO, trying to open a file directly",
+          "socratic_probe": "The function receives a string, not a file path. How can you make csv.DictReader read from a string? Think about what file-like objects look like."
+        }
+      ],
+      "grading_notes": "Key check: scores must be converted to int/float. Use of io.StringIO is required. Test with edge case where all students pass or all fail.",
+      "estimated_time_minutes": 50
+    },
+
+    {
+      "lab_no": 5,
+      "title": "Performing Array Operations Using NumPy",
+      "co_mapping": ["CO3", "CO4"],
+      "unit": "II",
+      "bloom_level": "Analyze (L4)",
+      "concept_under_test": "NumPy array creation, reshaping, arithmetic operations, aggregation functions, and broadcasting",
+      "problem_statement": "Write a function called `numpy_ops(data)` that:\n- Accepts a flat Python list of 12 numbers\n- Returns a dict with:\n  - `'array'`: the numpy array created from the list\n  - `'reshaped'`: the array reshaped to (3, 4)\n  - `'mean'`: mean of the entire array (float, rounded to 4 decimal places)\n  - `'std'`: standard deviation (float, rounded to 4 decimal places)\n  - `'normalized'`: array normalized to range [0, 1] — formula: (x - min) / (max - min)\n  - `'row_sums'`: 1D array of sums of each row in the reshaped (3,4) array\n\nAssign your function to `student_answer`.",
+      "starter_code": "import numpy as np\n\ndef numpy_ops(data):\n    \"\"\"\n    Perform NumPy array operations on a list of 12 numbers.\n\n    Args:\n        data (list): A flat list of exactly 12 numeric values.\n\n    Returns:\n        dict: array, reshaped, mean, std, normalized, row_sums.\n    \"\"\"\n    # TODO: Convert to numpy array, then compute each result\n    # Hint for normalization: (arr - arr.min()) / (arr.max() - arr.min())\n    pass\n\n\nstudent_answer = numpy_ops",
+      "sample_input": "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]",
+      "sample_output": "mean=6.5, std=3.4521, row_sums=[10, 26, 42]",
+      "test_cases": [
+        {
+          "label": "array is a numpy ndarray",
+          "setup_code": "import numpy as np\nresult = student_answer(list(range(1, 13)))",
+          "assertion": "isinstance(result['array'], np.ndarray)",
+          "points": 1
+        },
+        {
+          "label": "reshaped has shape (3, 4)",
+          "setup_code": "import numpy as np\nresult = student_answer(list(range(1, 13)))",
+          "assertion": "result['reshaped'].shape == (3, 4)",
+          "points": 1
+        },
+        {
+          "label": "mean of [1..12] = 6.5",
+          "setup_code": "import numpy as np\nresult = student_answer(list(range(1, 13)))",
+          "assertion": "abs(result['mean'] - 6.5) < 0.001",
+          "points": 1
+        },
+        {
+          "label": "normalized values are in [0, 1]",
+          "setup_code": "import numpy as np\nresult = student_answer(list(range(1, 13)))",
+          "assertion": "float(result['normalized'].min()) >= 0.0 and float(result['normalized'].max()) <= 1.0",
+          "points": 1
+        },
+        {
+          "label": "row_sums of reshaped [1..12] = [10, 26, 42]",
+          "setup_code": "import numpy as np\nresult = student_answer(list(range(1, 13)))",
+          "assertion": "list(result['row_sums']) == [10, 26, 42]",
+          "points": 1
+        }
+      ],
+      "constraints": [
+        "Use np.array() for conversion — do not use a list comprehension workaround",
+        "Use .reshape() for the reshaped array",
+        "Use np.sum(axis=1) for row_sums — not a Python loop",
+        "Normalized values must be in range [0.0, 1.0]"
+      ],
+      "forbidden_patterns": [
+        "6\\.5",
+        "\\[10,\\s*26,\\s*42\\]"
+      ],
+      "mental_model_checkpoints": [
+        "What does .reshape(3, 4) do? What constraint must the total number of elements satisfy?",
+        "What is the difference between np.mean() and Python's built-in sum()/len()?",
+        "What does axis=1 mean when passed to np.sum() on a 2D array?"
+      ],
+      "common_mistakes": [
+        {
+          "mistake": "Forgetting to convert list to ndarray before reshape",
+          "socratic_probe": "Can you call .reshape() on a plain Python list? What error do you get? What does np.array() do before you reshape?"
+        },
+        {
+          "mistake": "Using axis=0 instead of axis=1 for row sums",
+          "socratic_probe": "For a (3,4) array, which axis goes across rows and which goes down columns? Try both np.sum(arr, axis=0) and axis=1 and compare the shapes."
+        }
+      ],
+      "grading_notes": "Ensure ndarray type check. axis=1 for row_sums. Normalization formula must be vectorized (not a loop). Test with negative numbers to verify normalization correctness.",
+      "estimated_time_minutes": 50
+    },
+
+    {
+      "lab_no": 6,
+      "title": "Data Manipulation and Cleaning Using Pandas",
+      "co_mapping": ["CO4"],
+      "unit": "II",
+      "bloom_level": "Analyze (L4)",
+      "concept_under_test": "Pandas DataFrame creation, handling missing values, filtering, aggregation, and data type conversion",
+      "problem_statement": "Write a function called `clean_and_analyze(df)` that accepts a Pandas DataFrame with columns: `['name', 'age', 'score', 'city']` — some rows may have missing values (NaN).\n\nYour function must:\n1. Drop rows where `'score'` is NaN\n2. Fill missing `'age'` values with the median age of the remaining rows\n3. Add a new column `'grade'` based on score: A (≥80), B (70–79), C (60–69), D (50–59), F (<50)\n4. Return a dict with:\n   - `'cleaned_df'`: the cleaned DataFrame\n   - `'city_avg_score'`: a Pandas Series with average score per city (rounded to 2 dp)\n   - `'grade_counts'`: a dict of grade → count (e.g. {'A': 2, 'B': 1, ...})\n\nAssign your function to `student_answer`.",
+      "starter_code": "import pandas as pd\nimport numpy as np\n\ndef clean_and_analyze(df):\n    \"\"\"\n    Clean a student DataFrame and compute summary statistics.\n\n    Args:\n        df (pd.DataFrame): DataFrame with columns: name, age, score, city.\n\n    Returns:\n        dict: cleaned_df, city_avg_score, grade_counts.\n    \"\"\"\n    # Step 1: Drop rows where score is NaN\n    # Step 2: Fill missing age with median age\n    # Step 3: Add 'grade' column based on score thresholds\n    # Step 4: Compute city average scores and grade counts\n    pass\n\n\nstudent_answer = clean_and_analyze",
+      "sample_input": "DataFrame with 7 rows, 2 missing scores, 1 missing age",
+      "sample_output": "cleaned_df has 5 rows, 'grade' column present, city averages correct",
+      "test_cases": [
+        {
+          "label": "NaN scores are dropped — cleaned_df has correct row count",
+          "setup_code": "import pandas as pd, numpy as np\ndata = {'name': ['Arjun','Priya','Ravi','Divya','Mohan','Sneha','Kiran'],\n        'age': [20, 21, None, 22, 20, 21, 23],\n        'score': [82, 45, 91, None, 55, None, 73],\n        'city': ['Bengaluru','Mysuru','Bengaluru','Hyderabad','Mysuru','Bengaluru','Hyderabad']}\ndf = pd.DataFrame(data)\nresult = student_answer(df)",
+          "assertion": "len(result['cleaned_df']) == 5",
+          "points": 1
+        },
+        {
+          "label": "Missing age filled with median — no NaN in age column",
+          "setup_code": "import pandas as pd, numpy as np\ndata = {'name': ['Arjun','Priya','Ravi','Divya','Mohan','Sneha','Kiran'],\n        'age': [20, 21, None, 22, 20, 21, 23],\n        'score': [82, 45, 91, None, 55, None, 73],\n        'city': ['Bengaluru','Mysuru','Bengaluru','Hyderabad','Mysuru','Bengaluru','Hyderabad']}\ndf = pd.DataFrame(data)\nresult = student_answer(df)",
+          "assertion": "result['cleaned_df']['age'].isna().sum() == 0",
+          "points": 1
+        },
+        {
+          "label": "Grade column added with correct A/B/C/D/F values",
+          "setup_code": "import pandas as pd, numpy as np\ndata = {'name': ['Arjun','Priya','Ravi','Divya','Mohan','Sneha','Kiran'],\n        'age': [20, 21, None, 22, 20, 21, 23],\n        'score': [82, 45, 91, None, 55, None, 73],\n        'city': ['Bengaluru','Mysuru','Bengaluru','Hyderabad','Mysuru','Bengaluru','Hyderabad']}\ndf = pd.DataFrame(data)\nresult = student_answer(df)",
+          "assertion": "'grade' in result['cleaned_df'].columns and set(result['cleaned_df']['grade']).issubset({'A','B','C','D','F'})",
+          "points": 1
+        },
+        {
+          "label": "grade_counts is a dict with correct total",
+          "setup_code": "import pandas as pd, numpy as np\ndata = {'name': ['Arjun','Priya','Ravi','Divya','Mohan','Sneha','Kiran'],\n        'age': [20, 21, None, 22, 20, 21, 23],\n        'score': [82, 45, 91, None, 55, None, 73],\n        'city': ['Bengaluru','Mysuru','Bengaluru','Hyderabad','Mysuru','Bengaluru','Hyderabad']}\ndf = pd.DataFrame(data)\nresult = student_answer(df)",
+          "assertion": "isinstance(result['grade_counts'], dict) and sum(result['grade_counts'].values()) == 5",
+          "points": 1
+        }
+      ],
+      "constraints": [
+        "Use df.dropna(subset=['score']) — not a manual loop",
+        "Use df['age'].fillna(df['age'].median()) for missing ages",
+        "Add 'grade' using pd.cut() or np.select() — not a Python for loop",
+        "Use groupby().mean() for city averages"
+      ],
+      "forbidden_patterns": [
+        "for.*row.*in.*iterrows",
+        "== 5"
+      ],
+      "mental_model_checkpoints": [
+        "What is the difference between dropna() and fillna()?",
+        "Why should you compute the median AFTER dropping NaN score rows?",
+        "What does groupby('city')['score'].mean() return — a DataFrame or a Series?"
+      ],
+      "common_mistakes": [
+        {
+          "mistake": "Computing median before dropping NaN scores — inflated fill value",
+          "socratic_probe": "If you have NaN in 'score', how does that affect the median of 'age'? Should you compute the median before or after cleaning the rows?"
+        },
+        {
+          "mistake": "Using iterrows() loop instead of vectorized operations",
+          "socratic_probe": "Your code uses iterrows() — can you think of a Pandas method that applies a condition to an entire column at once without a loop?"
+        }
+      ],
+      "grading_notes": "Key: order of operations (drop NaN scores FIRST, then fill age). Verify grade column uses correct thresholds. grade_counts must be a plain dict, not a Series.",
+      "estimated_time_minutes": 55
+    },
+
+    {
+      "lab_no": 7,
+      "title": "Creating Various Plots with Matplotlib and Seaborn",
+      "co_mapping": ["CO5"],
+      "unit": "III",
+      "bloom_level": "Analyze (L4)",
+      "concept_under_test": "Matplotlib and Seaborn for creating line, bar, scatter, and pie charts with proper labels, titles, and legends",
+      "problem_statement": "Write a function called `create_charts(data)` that accepts a dict with keys `'months'` (list of strings) and `'sales'` (list of numbers).\n\nYour function must create a matplotlib figure with **2 subplots** side by side:\n1. **Left subplot**: A bar chart of sales by month with x-label 'Month', y-label 'Sales (₹)', title 'Monthly Sales'\n2. **Right subplot**: A line chart of the same data with x-label 'Month', y-label 'Sales (₹)', title 'Sales Trend', and markers on each point\n\nThe function must:\n- Return the `matplotlib.figure.Figure` object\n- Set a super-title: 'Sales Analysis Dashboard'\n\nAssign your function to `student_answer`.",
+      "starter_code": "import matplotlib.pyplot as plt\nimport matplotlib\n\ndef create_charts(data):\n    \"\"\"\n    Create a 2-subplot sales analysis figure.\n\n    Args:\n        data (dict): {'months': list of str, 'sales': list of numbers}\n\n    Returns:\n        matplotlib.figure.Figure: The generated figure object.\n    \"\"\"\n    months = data['months']\n    sales  = data['sales']\n\n    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))\n\n    # TODO: Create bar chart on ax1\n\n    # TODO: Create line chart on ax2\n\n    fig.suptitle('Sales Analysis Dashboard')\n    plt.tight_layout()\n    return fig\n\n\nstudent_answer = create_charts",
+      "sample_input": "{'months': ['Jan','Feb','Mar','Apr'], 'sales': [15000, 22000, 18000, 27000]}",
+      "sample_output": "A Figure with 2 subplots — bar chart and line chart",
+      "test_cases": [
+        {
+          "label": "Returns a matplotlib Figure object",
+          "setup_code": "import matplotlib; matplotlib.use('Agg')\nimport matplotlib.pyplot as plt\ndata = {'months': ['Jan','Feb','Mar','Apr'], 'sales': [15000, 22000, 18000, 27000]}\nresult = student_answer(data)\nplt.close('all')",
+          "assertion": "hasattr(result, 'get_axes')",
+          "points": 1
+        },
+        {
+          "label": "Figure has exactly 2 subplots",
+          "setup_code": "import matplotlib; matplotlib.use('Agg')\nimport matplotlib.pyplot as plt\ndata = {'months': ['Jan','Feb','Mar','Apr'], 'sales': [15000, 22000, 18000, 27000]}\nresult = student_answer(data)\nplt.close('all')",
+          "assertion": "len(result.get_axes()) == 2",
+          "points": 1
+        },
+        {
+          "label": "Left subplot title is 'Monthly Sales'",
+          "setup_code": "import matplotlib; matplotlib.use('Agg')\nimport matplotlib.pyplot as plt\ndata = {'months': ['Jan','Feb','Mar','Apr'], 'sales': [15000, 22000, 18000, 27000]}\nresult = student_answer(data)\nax1 = result.get_axes()[0]\nplt.close('all')",
+          "assertion": "ax1.get_title() == 'Monthly Sales'",
+          "points": 1
+        },
+        {
+          "label": "Right subplot title is 'Sales Trend'",
+          "setup_code": "import matplotlib; matplotlib.use('Agg')\nimport matplotlib.pyplot as plt\ndata = {'months': ['Jan','Feb','Mar','Apr'], 'sales': [15000, 22000, 18000, 27000]}\nresult = student_answer(data)\nax2 = result.get_axes()[1]\nplt.close('all')",
+          "assertion": "ax2.get_title() == 'Sales Trend'",
+          "points": 1
+        }
+      ],
+      "constraints": [
+        "Use plt.subplots(1, 2) to create side-by-side subplots",
+        "Use ax.bar() for the bar chart and ax.plot() for the line chart",
+        "Both axes must have x-label, y-label, and title set",
+        "Return the Figure object — do not call plt.show()"
+      ],
+      "forbidden_patterns": [
+        "plt\\.show\\(\\)"
+      ],
+      "mental_model_checkpoints": [
+        "What is the difference between plt.figure() and plt.subplots()?",
+        "How do you set a title on a specific subplot axis (not the whole figure)?",
+        "Why should you return the Figure object instead of calling plt.show()?"
+      ],
+      "common_mistakes": [
+        {
+          "mistake": "Calling plt.show() instead of returning the figure",
+          "socratic_probe": "The test checks what your function returns. If you call plt.show() and return nothing, what does Python return by default? Is that a Figure object?"
+        },
+        {
+          "mistake": "Setting title on ax with plt.title() instead of ax.set_title()",
+          "socratic_probe": "When you have two subplots ax1 and ax2, what does plt.title() set the title on? Is it ax1, ax2, or the whole figure?"
+        }
+      ],
+      "grading_notes": "Test with matplotlib Agg backend to avoid display issues. Check both subplot titles exactly. Verify no plt.show() call. Award style marks for clean labels and tight_layout().",
+      "estimated_time_minutes": 55
+    },
+
+    {
+      "lab_no": 8,
+      "title": "Exploratory Data Analysis (EDA) on Sample Datasets",
+      "co_mapping": ["CO5", "CO6"],
+      "unit": "III",
+      "bloom_level": "Evaluate (L5)",
+      "concept_under_test": "EDA pipeline: descriptive statistics, correlation analysis, outlier detection using IQR, and missing value assessment",
+      "problem_statement": "Write a function called `perform_eda(df)` that accepts a Pandas DataFrame with numeric columns and returns a dict with:\n\n- `'shape'`: tuple (rows, cols)\n- `'missing_count'`: total number of NaN values across the entire DataFrame\n- `'describe'`: the DataFrame's `.describe()` output (a DataFrame)\n- `'correlations'`: the correlation matrix (a DataFrame, using Pearson method)\n- `'outlier_cols'`: list of column names that contain at least one outlier (IQR method: value < Q1 - 1.5×IQR or value > Q3 + 1.5×IQR)\n- `'high_corr_pairs'`: list of (col1, col2) tuples where |correlation| > 0.7 (exclude self-correlation)\n\nAssign your function to `student_answer`.",
+      "starter_code": "import pandas as pd\nimport numpy as np\n\ndef perform_eda(df):\n    \"\"\"\n    Perform Exploratory Data Analysis on a numeric DataFrame.\n\n    Args:\n        df (pd.DataFrame): DataFrame with numeric columns.\n\n    Returns:\n        dict: shape, missing_count, describe, correlations,\n              outlier_cols, high_corr_pairs.\n    \"\"\"\n    # Hint for IQR outlier detection:\n    # Q1 = df[col].quantile(0.25)\n    # Q3 = df[col].quantile(0.75)\n    # IQR = Q3 - Q1\n    # outliers exist if any value < Q1 - 1.5*IQR or > Q3 + 1.5*IQR\n    pass\n\n\nstudent_answer = perform_eda",
+      "sample_input": "DataFrame with 3 numeric columns, 1 outlier, some NaN",
+      "sample_output": "{'shape': (10, 3), 'missing_count': 2, 'outlier_cols': ['column_c'], ...}",
+      "test_cases": [
+        {
+          "label": "shape returns correct (rows, cols) tuple",
+          "setup_code": "import pandas as pd, numpy as np\nnp.random.seed(42)\ndf = pd.DataFrame({'a': np.random.normal(50,10,10), 'b': np.random.normal(30,5,10), 'c': np.append(np.random.normal(20,2,9), [200.0])})\ndf.iloc[0, 0] = np.nan\ndf.iloc[3, 1] = np.nan\nresult = student_answer(df)",
+          "assertion": "result['shape'] == (10, 3)",
+          "points": 1
+        },
+        {
+          "label": "missing_count = 2",
+          "setup_code": "import pandas as pd, numpy as np\nnp.random.seed(42)\ndf = pd.DataFrame({'a': np.random.normal(50,10,10), 'b': np.random.normal(30,5,10), 'c': np.append(np.random.normal(20,2,9), [200.0])})\ndf.iloc[0, 0] = np.nan\ndf.iloc[3, 1] = np.nan\nresult = student_answer(df)",
+          "assertion": "result['missing_count'] == 2",
+          "points": 1
+        },
+        {
+          "label": "outlier_cols detects column 'c' (value 200 is an outlier)",
+          "setup_code": "import pandas as pd, numpy as np\nnp.random.seed(42)\ndf = pd.DataFrame({'a': np.random.normal(50,10,10), 'b': np.random.normal(30,5,10), 'c': np.append(np.random.normal(20,2,9), [200.0])})\ndf.iloc[0, 0] = np.nan\ndf.iloc[3, 1] = np.nan\nresult = student_answer(df)",
+          "assertion": "'c' in result['outlier_cols']",
+          "points": 1
+        },
+        {
+          "label": "describe is a Pandas DataFrame",
+          "setup_code": "import pandas as pd, numpy as np\nnp.random.seed(42)\ndf = pd.DataFrame({'a': np.random.normal(50,10,10), 'b': np.random.normal(30,5,10), 'c': np.append(np.random.normal(20,2,9), [200.0])})\nresult = student_answer(df)",
+          "assertion": "isinstance(result['describe'], pd.DataFrame)",
+          "points": 1
+        }
+      ],
+      "constraints": [
+        "Use the IQR method for outlier detection — not z-score",
+        "Compute correlation with df.corr(numeric_only=True)",
+        "high_corr_pairs must exclude self-pairs (col == col)",
+        "outlier_cols must be a list of column name strings"
+      ],
+      "forbidden_patterns": [
+        "outlier_cols.*=.*\\[.c.\\]"
+      ],
+      "mental_model_checkpoints": [
+        "What is the IQR? How do you compute Q1 and Q3 in Pandas?",
+        "Why do we exclude self-correlations when finding high_corr_pairs?",
+        "What is the difference between df.isnull().sum() and df.isnull().sum().sum()?"
+      ],
+      "common_mistakes": [
+        {
+          "mistake": "Using df.isnull().sum() (returns per-column count) instead of .sum().sum() (total)",
+          "socratic_probe": "Your missing_count is a Series, not a number. What does df.isnull().sum() return? How do you get a single total number from it?"
+        },
+        {
+          "mistake": "Checking all pairs twice in high_corr_pairs (A,B and B,A)",
+          "socratic_probe": "Your list has both ('a','b') and ('b','a'). Is the correlation between A and B the same as between B and A? How would you avoid counting the same pair twice?"
+        }
+      ],
+      "grading_notes": "IQR detection must be vectorized per column. Verify high_corr_pairs excludes duplicates. Check that describe returns a proper DataFrame with standard statistical rows.",
+      "estimated_time_minutes": 60
+    },
+
+    {
+      "lab_no": 9,
+      "title": "Building a Simple Predictive Model with Scikit-learn",
+      "co_mapping": ["CO7"],
+      "unit": "IV",
+      "bloom_level": "Evaluate (L5)",
+      "concept_under_test": "Scikit-learn ML pipeline: train/test split, feature scaling, linear regression, model evaluation (R², RMSE)",
+      "problem_statement": "Write a function called `train_linear_model(X, y)` that:\n- Accepts feature matrix `X` (list of lists or 2D numpy array) and target `y` (list or 1D array)\n- Splits data into 80% training / 20% test using `train_test_split(random_state=42)`\n- Scales features using `StandardScaler`\n- Trains a `LinearRegression` model on the scaled training data\n- Returns a dict with:\n  - `'model'`: the trained LinearRegression object\n  - `'scaler'`: the fitted StandardScaler object\n  - `'r2_score'`: R² score on the test set (float, rounded to 4 dp)\n  - `'rmse'`: Root Mean Squared Error on the test set (float, rounded to 4 dp)\n  - `'n_train'`: number of training samples (int)\n  - `'n_test'`: number of test samples (int)\n\nAssign your function to `student_answer`.",
+      "starter_code": "from sklearn.linear_model import LinearRegression\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.metrics import r2_score, mean_squared_error\nimport numpy as np\n\ndef train_linear_model(X, y):\n    \"\"\"\n    Train a LinearRegression model with train/test split and feature scaling.\n\n    Args:\n        X: Feature matrix (n_samples, n_features).\n        y: Target vector (n_samples,).\n\n    Returns:\n        dict: model, scaler, r2_score, rmse, n_train, n_test.\n    \"\"\"\n    # Step 1: Split data 80/20\n    # Step 2: Scale features with StandardScaler (fit on train, transform both)\n    # Step 3: Train LinearRegression\n    # Step 4: Predict on test set and compute R² and RMSE\n    pass\n\n\nstudent_answer = train_linear_model",
+      "sample_input": "X = 100 samples, 2 features; y = linear combination with noise",
+      "sample_output": "model trained, r2_score > 0.7",
+      "test_cases": [
+        {
+          "label": "Returns a trained LinearRegression model",
+          "setup_code": "from sklearn.linear_model import LinearRegression\nimport numpy as np\nnp.random.seed(42)\nX = np.random.randn(100, 2)\ny = 3*X[:,0] + 2*X[:,1] + np.random.randn(100)*0.5\nresult = student_answer(X.tolist(), y.tolist())",
+          "assertion": "isinstance(result['model'], LinearRegression)",
+          "points": 1
+        },
+        {
+          "label": "Data split is 80/20 (n_train=80, n_test=20 for 100 samples)",
+          "setup_code": "from sklearn.linear_model import LinearRegression\nimport numpy as np\nnp.random.seed(42)\nX = np.random.randn(100, 2)\ny = 3*X[:,0] + 2*X[:,1] + np.random.randn(100)*0.5\nresult = student_answer(X.tolist(), y.tolist())",
+          "assertion": "result['n_train'] == 80 and result['n_test'] == 20",
+          "points": 1
+        },
+        {
+          "label": "r2_score on a well-conditioned dataset is > 0.85",
+          "setup_code": "from sklearn.linear_model import LinearRegression\nimport numpy as np\nnp.random.seed(42)\nX = np.random.randn(100, 2)\ny = 3*X[:,0] + 2*X[:,1] + np.random.randn(100)*0.5\nresult = student_answer(X.tolist(), y.tolist())",
+          "assertion": "result['r2_score'] > 0.85",
+          "points": 1
+        },
+        {
+          "label": "Scaler is a fitted StandardScaler",
+          "setup_code": "from sklearn.preprocessing import StandardScaler\nimport numpy as np\nnp.random.seed(42)\nX = np.random.randn(100, 2)\ny = 3*X[:,0] + 2*X[:,1] + np.random.randn(100)*0.5\nresult = student_answer(X.tolist(), y.tolist())",
+          "assertion": "isinstance(result['scaler'], StandardScaler) and hasattr(result['scaler'], 'mean_')",
+          "points": 1
+        }
+      ],
+      "constraints": [
+        "Use train_test_split with test_size=0.2 and random_state=42",
+        "Fit StandardScaler ONLY on training data — then transform both train and test",
+        "Use sklearn's r2_score() and mean_squared_error() functions",
+        "RMSE = sqrt(MSE) — use np.sqrt(mean_squared_error(...))"
+      ],
+      "forbidden_patterns": [
+        "r2_score.*=.*0\\.",
+        "0\\.85"
+      ],
+      "mental_model_checkpoints": [
+        "Why should you fit StandardScaler only on training data, not the whole dataset?",
+        "What is R² and what does a value of 0.9 mean in plain English?",
+        "What is the difference between MSE and RMSE? Which has the same units as y?"
+      ],
+      "common_mistakes": [
+        {
+          "mistake": "Fitting scaler on entire dataset (data leakage)",
+          "socratic_probe": "If you scale using statistics computed from the test set, has the model 'seen' test data before predicting? Why is this a problem?"
+        },
+        {
+          "mistake": "Using mean_squared_error directly as RMSE without sqrt",
+          "socratic_probe": "MSE and RMSE are different. If your y values are in rupees, what are the units of MSE? What about RMSE? Which one is directly comparable to y?"
+        }
+      ],
+      "grading_notes": "Critical: scaler must be fit on X_train only, then transform X_test. Verify hasattr(scaler, 'mean_') to confirm fit. r2_score must be computed on test predictions, not training predictions.",
+      "estimated_time_minutes": 60
+    }
+  ]
+}
